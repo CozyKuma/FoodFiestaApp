@@ -1,6 +1,7 @@
 package com.example.cozykuma.foodinventory;
 
 import java.util.Date;
+import java.util.List;
 
 import org.joda.time.*;
 import org.joda.time.format.DateTimeFormat;
@@ -20,6 +21,7 @@ public class FoodItem {
         OPEN, EXPIRED, NOTIFY, NOT_OPEN, NOT_EXPIRED, NOT_NOTIFY
     }
 
+    private static List<FoodItem> listOfItems;
     private org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy");
     private String itemName;
     private static int countId = 0;
@@ -46,10 +48,25 @@ public class FoodItem {
         this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
         this.notifyMe = true;
         countId++;
-        //System.out.println("Date 1 passed: " + new Date() + "\nDate 2 passed: " + this.dateExpire);
         daysLeft = daysBetween(new Date(), this.dateExpire);
-        //System.out.println("Days Left: " + daysLeft);
         }
+
+    FoodItem(String itemName, Date dateExpire) {
+        this.itemName = itemName;
+        this.itemId = countId;
+        this.expired = false;
+        this.opened = false;
+        this.used = false;
+        this.dateAdded = new Date();
+        this.dateExpire = dateExpire;
+        this.notifyMe = true;
+        countId++;
+        daysLeft = daysBetween(new Date(), this.dateExpire);
+    }
+
+    public static void addItem(String itemName, Date dateExpire) {
+        return;
+    }
 
     public static int daysBetween(Date d1, Date d2) {
         return Days.daysBetween(
