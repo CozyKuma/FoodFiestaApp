@@ -1,11 +1,16 @@
 package com.example.cozykuma.foodinventory;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -54,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AddItemActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         mListView = (ListView) findViewById(R.id.foodlistview);
 
@@ -84,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
         FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, foodList);
         mListView.setAdapter(adapter);
-
     }
 
 }
