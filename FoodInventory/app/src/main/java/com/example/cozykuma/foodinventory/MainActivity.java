@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
-                    
                     Intent intentDash = new Intent(getApplicationContext(), AddItemActivity.class);
                     startActivity(intentDash);
                     return true;
