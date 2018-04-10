@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
+                    
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.foodlistview);
 
         // Create Food Items for test
+
         FoodItem milk = new FoodItem("Milk", "12-04-2018");
         FoodItem meat = new FoodItem("Meat", "14-04-2018");
         FoodItem yoghurt = new FoodItem("Yoghurt", "07-04-2018");
@@ -80,21 +82,29 @@ public class MainActivity extends AppCompatActivity {
         FoodItem juice = new FoodItem("Apple Juice", "22-04-2018");
         FoodItem eggs = new FoodItem("Eggs", "06-06-2018");
 
-        foodList = new ArrayList<FoodItem>();
-        foodList.add(milk);
+        /* FoodItem.addItem("Milk", "12-04-2018");
+        FoodItem.addItem("Meat", "14-04-2018");
+        FoodItem.addItem("Yoghurt", "07-04-2018");
+        FoodItem.addItem("Pickles", "12-07-2018");
+        FoodItem.addItem("Cheese", "17-05-2018");
+        FoodItem.addItem("Apple Juice", "22-04-2018");
+        FoodItem.addItem("Eggs", "06-06-2018"); */
+
+        foodList = FoodItem.getListOfItems();
+        /*foodList.add(milk);
         foodList.add(meat);
         foodList.add(yoghurt);
         foodList.add(pickles);
         foodList.add(cheese);
         foodList.add(juice);
-        foodList.add(eggs);
+        foodList.add(eggs); */
 
-        Collections.sort(foodList, new Comparator<FoodItem>() {
+        /* Collections.sort(foodList, new Comparator<FoodItem>() {
             @Override
             public int compare(FoodItem o1, FoodItem o2) {
                 return o1.getDatesLeft() - o2.getDatesLeft();
             }
-        });
+        }); */
 
         FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, foodList);
         mListView.setAdapter(adapter);
