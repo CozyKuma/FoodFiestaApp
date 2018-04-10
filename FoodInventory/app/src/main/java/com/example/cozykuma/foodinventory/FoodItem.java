@@ -81,6 +81,13 @@ public class FoodItem {
                     return o1.getDatesLeft() - o2.getDatesLeft();
                 }
             });
+        } else if (sort == sortTypes.DATEADDED) {
+            Collections.sort(list, new Comparator<FoodItem>() {
+                @Override
+                public int compare(FoodItem o1, FoodItem o2) {
+                    return daysBetween(o1.getDateAdded(), o2.getDateAdded());
+                }
+            });
         }
         return list;
     }
