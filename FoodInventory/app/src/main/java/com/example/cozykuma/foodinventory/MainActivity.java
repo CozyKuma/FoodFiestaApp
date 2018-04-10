@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     //private static final String TAG = "MainActivity";
     private TextView mTextMessage;
     private ListView mListView;
-    private ArrayList<FoodItem> foodList = new ArrayList<FoodItem>();
+    //private ArrayList<FoodItem> foodList = new ArrayList<FoodItem>();
     private ArrayList<FoodCategory> categoryList;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -35,17 +35,17 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    //mTextMessage.setText(R.string.title_home);
                     Intent intentDash = new Intent(getApplicationContext(), DashboardActivity.class);
                     startActivity(intentDash);
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    //mTextMessage.setText(R.string.title_dashboard);
                     Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intentInv);
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    //mTextMessage.setText(R.string.title_notifications);
                     return true;
             }
             return false;
@@ -77,36 +77,21 @@ public class MainActivity extends AppCompatActivity {
 
         // Create Food Items for test
 
-        FoodItem milk = new FoodItem("Milk", "12-04-2018");
+        /*FoodItem milk = new FoodItem("Milk", "12-04-2018");
         FoodItem meat = new FoodItem("Meat", "14-04-2018");
         FoodItem yoghurt = new FoodItem("Yoghurt", "07-04-2018");
         FoodItem pickles = new FoodItem("Pickles", "12-07-2018");
         FoodItem cheese = new FoodItem("Cheese", "17-05-2018");
         FoodItem juice = new FoodItem("Apple Juice", "22-04-2018");
-        FoodItem eggs = new FoodItem("Eggs", "06-06-2018");
+        FoodItem eggs = new FoodItem("Eggs", "06-06-2018");*/
 
-        foodList = FoodItem.getListOfItems();
-
-        Collections.sort(foodList, new Comparator<FoodItem>() {
-            @Override
-            public int compare(FoodItem o1, FoodItem o2) {
-                return o1.getDatesLeft() - o2.getDatesLeft();
-            }
-        });
-
-        FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, foodList);
+        FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.DAYSLEFT, FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Collections.sort(foodList, new Comparator<FoodItem>() {
-            @Override
-            public int compare(FoodItem o1, FoodItem o2) {
-                return o1.getDatesLeft() - o2.getDatesLeft();
-            }
-        });
     }
 
     @Override

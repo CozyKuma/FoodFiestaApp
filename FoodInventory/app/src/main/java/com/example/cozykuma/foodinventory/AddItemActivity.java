@@ -14,7 +14,7 @@ public class AddItemActivity extends AppCompatActivity {
 
     private String itemName;
     private FoodCategory category;
-    private Date expireDate;
+    private String expireDate;
     private EditText mEditTextName;
     private EditText mEditTextDate;
     private Spinner mSpinner;
@@ -42,9 +42,9 @@ public class AddItemActivity extends AppCompatActivity {
     public void AddItem() {
         itemName = mEditTextName.getText().toString();
         //category = (FoodCategory) mSpinner.getSelectedItem();
-        //expireDate = (Date) mEditTextDate.getText();
+        expireDate = mEditTextDate.getText().toString();
 
-        FoodItem newItem = new FoodItem(itemName, new Date());
+        FoodItem newItem = new FoodItem(itemName, expireDate);
 
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intentInv);

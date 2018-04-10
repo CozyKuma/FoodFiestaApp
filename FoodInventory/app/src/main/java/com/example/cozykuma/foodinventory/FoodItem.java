@@ -1,6 +1,8 @@
 package com.example.cozykuma.foodinventory;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -71,14 +73,16 @@ public class FoodItem {
         return listOfItems;
     }
 
-    public static void addItem(String itemName, Date dateExpire) {
-        FoodItem newFoodItem = new FoodItem(itemName, dateExpire);
-        //listOfItems.add(newFoodItem);
-    }
-
-    public static void addItem(String itemName, String dateExpire) {
-        FoodItem newFoodItem = new FoodItem(itemName, dateExpire);
-        //listOfItems.add(newFoodItem);
+    public static ArrayList<FoodItem> sortList(sortTypes sort, ArrayList<FoodItem> list) {
+        if (sort == sortTypes.DAYSLEFT) {
+            Collections.sort(list, new Comparator<FoodItem>() {
+                @Override
+                public int compare(FoodItem o1, FoodItem o2) {
+                    return o1.getDatesLeft() - o2.getDatesLeft();
+                }
+            });
+        }
+        return list;
     }
 
     public static int daysBetween(Date d1, Date d2) {
