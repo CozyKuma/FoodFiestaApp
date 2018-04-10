@@ -64,8 +64,18 @@ public class FoodItem {
         daysLeft = daysBetween(new Date(), this.dateExpire);
     }
 
+    public static List<FoodItem> getListOfItems() {
+        return listOfItems;
+    }
+
     public static void addItem(String itemName, Date dateExpire) {
-        return;
+        FoodItem newFoodItem = new FoodItem(itemName, dateExpire);
+        //listOfItems.add(newFoodItem);
+    }
+
+    public static void addItem(String itemName, String dateExpire) {
+        FoodItem newFoodItem = new FoodItem(itemName, dateExpire);
+        //listOfItems.add(newFoodItem);
     }
 
     public static int daysBetween(Date d1, Date d2) {
