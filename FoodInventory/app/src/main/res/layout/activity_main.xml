@@ -22,7 +22,6 @@
     <ListView
         android:id="@+id/foodlistview"
         android:layout_width="match_parent"
-        android:layout_height="451dp"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_height="451dp" />
 
 </android.support.constraint.ConstraintLayout>

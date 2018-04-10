@@ -1,7 +1,9 @@
 package com.example.cozykuma.foodinventory;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -28,13 +30,5 @@ public class AddItemActivity extends AppCompatActivity {
         mEditTextDate = (EditText) findViewById(R.id.textDate);
         mSpinner = (Spinner) findViewById(R.id.categorySpinner);
         mButton = (Button) findViewById(R.id.addItemBtn);
-    }
-
-    public void AddItem() {
-        itemName = mEditTextName.getText().toString();
-        category = (FoodCategory) mSpinner.getSelectedItem();
-        expireDate = (Date) mEditTextDate.getText();
-
-        FoodItem newItem = new FoodItem(itemName, expireDate);
     }
 }
