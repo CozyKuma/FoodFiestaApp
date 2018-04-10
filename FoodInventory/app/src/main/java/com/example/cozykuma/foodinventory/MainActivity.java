@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
     //private static final String TAG = "MainActivity";
     private TextView mTextMessage;
     private ListView mListView;
-    private List<FoodItem> foodList;
-    private List<FoodCategory> categoryList;
+    private ArrayList<FoodItem> foodList = new ArrayList<FoodItem>();
+    private ArrayList<FoodCategory> categoryList;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Log.d(TAG, "onCreate: " + "Started.");
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        //mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -85,32 +85,32 @@ public class MainActivity extends AppCompatActivity {
         FoodItem juice = new FoodItem("Apple Juice", "22-04-2018");
         FoodItem eggs = new FoodItem("Eggs", "06-06-2018");
 
-        /* FoodItem.addItem("Milk", "12-04-2018");
-        FoodItem.addItem("Meat", "14-04-2018");
-        FoodItem.addItem("Yoghurt", "07-04-2018");
-        FoodItem.addItem("Pickles", "12-07-2018");
-        FoodItem.addItem("Cheese", "17-05-2018");
-        FoodItem.addItem("Apple Juice", "22-04-2018");
-        FoodItem.addItem("Eggs", "06-06-2018"); */
-
         foodList = FoodItem.getListOfItems();
-        /*foodList.add(milk);
-        foodList.add(meat);
-        foodList.add(yoghurt);
-        foodList.add(pickles);
-        foodList.add(cheese);
-        foodList.add(juice);
-        foodList.add(eggs); */
 
-        /* Collections.sort(foodList, new Comparator<FoodItem>() {
+        Collections.sort(foodList, new Comparator<FoodItem>() {
             @Override
             public int compare(FoodItem o1, FoodItem o2) {
                 return o1.getDatesLeft() - o2.getDatesLeft();
             }
-        }); */
+        });
 
         FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, foodList);
         mListView.setAdapter(adapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Collections.sort(foodList, new Comparator<FoodItem>() {
+            @Override
+            public int compare(FoodItem o1, FoodItem o2) {
+                return o1.getDatesLeft() - o2.getDatesLeft();
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 }
