@@ -15,7 +15,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
 
     //private static final String TAG = "MainActivity";
     private TextView mTextMessage;
