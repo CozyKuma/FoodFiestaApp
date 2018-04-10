@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     //private static final String TAG = "MainActivity";
     private TextView mTextMessage;
     private ListView mListView;
+    private FloatingActionButton mFab;
     private List<FoodItem> foodList;
     private List<FoodCategory> categoryList;
 
@@ -36,13 +37,13 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
-                    Intent intentDash = new Intent(getApplicationContext(), DashboardActivity.class);
-                    startActivity(intentDash);
+                    /*Intent intentDash = new Intent(getApplicationContext(), DashboardActivity.class);
+                    startActivity(intentDash);*/
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
-                    Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intentInv);
+                    /*Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intentInv);*/
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
@@ -60,47 +61,39 @@ public class MainActivity extends AppCompatActivity {
         //Log.d(TAG, "onCreate: " + "Started.");
 
         mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        /*BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener); */
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
+        /*mFab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AddItemActivity.class);
                 startActivity(intent);
             }
-        });
-
+        }); */
 
         mListView = (ListView) findViewById(R.id.foodlistview);
+        foodList = new ArrayList<FoodItem>();
 
         // Create Food Items for test
 
         FoodItem milk = new FoodItem("Milk", "12-04-2018");
         FoodItem meat = new FoodItem("Meat", "14-04-2018");
-        FoodItem yoghurt = new FoodItem("Yoghurt", "07-04-2018");
-        FoodItem pickles = new FoodItem("Pickles", "12-07-2018");
+        FoodItem yoghurt = new FoodItem("Yoghurt", "12-04-2018");
+        FoodItem pickles = new FoodItem("Pickles", "14-07-2018");
         FoodItem cheese = new FoodItem("Cheese", "17-05-2018");
         FoodItem juice = new FoodItem("Apple Juice", "22-04-2018");
         FoodItem eggs = new FoodItem("Eggs", "06-06-2018");
 
-        /* FoodItem.addItem("Milk", "12-04-2018");
-        FoodItem.addItem("Meat", "14-04-2018");
-        FoodItem.addItem("Yoghurt", "07-04-2018");
-        FoodItem.addItem("Pickles", "12-07-2018");
-        FoodItem.addItem("Cheese", "17-05-2018");
-        FoodItem.addItem("Apple Juice", "22-04-2018");
-        FoodItem.addItem("Eggs", "06-06-2018"); */
-
-        foodList = FoodItem.getListOfItems();
-        /*foodList.add(milk);
+        //foodList = FoodItem.getListOfItems();
+        foodList.add(milk);
         foodList.add(meat);
         foodList.add(yoghurt);
         foodList.add(pickles);
         foodList.add(cheese);
         foodList.add(juice);
-        foodList.add(eggs); */
+        foodList.add(eggs);
 
         /* Collections.sort(foodList, new Comparator<FoodItem>() {
             @Override

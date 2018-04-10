@@ -49,6 +49,7 @@ public class FoodItem {
         this.notifyMe = true;
         countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
+        listOfItems.add(this);
         }
 
     FoodItem(String itemName, Date dateExpire) {
@@ -62,21 +63,22 @@ public class FoodItem {
         this.notifyMe = true;
         countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
+        listOfItems.add(this);
     }
 
     public static List<FoodItem> getListOfItems() {
         return listOfItems;
     }
 
-    public static void addItem(String itemName, Date dateExpire) {
+    /*public static void addItem(String itemName, Date dateExpire) {
         FoodItem newFoodItem = new FoodItem(itemName, dateExpire);
         //listOfItems.add(newFoodItem);
-    }
+    } */
 
-    public static void addItem(String itemName, String dateExpire) {
+    /*public static void addItem(String itemName, String dateExpire) {
         FoodItem newFoodItem = new FoodItem(itemName, dateExpire);
         //listOfItems.add(newFoodItem);
-    }
+    }*/
 
     public static int daysBetween(Date d1, Date d2) {
         return Days.daysBetween(
