@@ -1,5 +1,6 @@
 package com.example.cozykuma.foodinventory;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class FoodItem {
         OPEN, EXPIRED, NOTIFY, NOT_OPEN, NOT_EXPIRED, NOT_NOTIFY
     }
 
-    private static List<FoodItem> listOfItems;
+    private static ArrayList<FoodItem> listOfItems = new ArrayList<FoodItem>();
     private org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy");
     private String itemName;
     private static int countId = 0;
@@ -49,6 +50,7 @@ public class FoodItem {
         this.notifyMe = true;
         countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
+        listOfItems.add(this);
         }
 
     FoodItem(String itemName, Date dateExpire) {
@@ -62,9 +64,10 @@ public class FoodItem {
         this.notifyMe = true;
         countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
+        listOfItems.add(this);
     }
 
-    public static List<FoodItem> getListOfItems() {
+    public static ArrayList<FoodItem> getListOfItems() {
         return listOfItems;
     }
 
