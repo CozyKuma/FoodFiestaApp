@@ -72,6 +72,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        FoodItem item1 = new FoodItem("Item1", "24-04-2018");
+        FoodItem item2 = new FoodItem("Item2", "24-04-2018");
+        FoodItem item3 = new FoodItem("Item3", "24-04-2018");
+        FoodItem item4 = new FoodItem("Item4", "24-04-2018");
+        FoodItem item5 = new FoodItem("Item5", "24-04-2018");
+        FoodItem item6 = new FoodItem("Item6", "24-04-2018");
+        FoodItem item7 = new FoodItem("Item7", "24-04-2018");
+        FoodItem item8 = new FoodItem("Item8", "24-04-2018");
+        FoodItem item9 = new FoodItem("Item9", "24-04-2018");
+        FoodItem item10 = new FoodItem("Item10", "24-04-2018");
+        FoodItem item11 = new FoodItem("Item11", "24-04-2018");
+        FoodItem item12 = new FoodItem("Item12", "24-04-2018");
+        FoodItem item13 = new FoodItem("Item13", "24-04-2018");
+        FoodItem item14 = new FoodItem("Item14", "24-04-2018");
+        FoodItem item15 = new FoodItem("Item15","24-04-2018");
 
         mListView = (ListView) findViewById(R.id.foodlistview);
 
