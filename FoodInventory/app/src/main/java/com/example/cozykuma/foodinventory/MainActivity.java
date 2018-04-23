@@ -75,15 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
         mListView = (ListView) findViewById(R.id.foodlistview);
 
-        // Create Food Items for test
-
-        /*FoodItem milk = new FoodItem("Milk", "12-04-2018");
-        FoodItem meat = new FoodItem("Meat", "14-04-2018");
-        FoodItem yoghurt = new FoodItem("Yoghurt", "07-04-2018");
-        FoodItem pickles = new FoodItem("Pickles", "12-07-2018");
-        FoodItem cheese = new FoodItem("Cheese", "17-05-2018");
-        FoodItem juice = new FoodItem("Apple Juice", "22-04-2018");
-        FoodItem eggs = new FoodItem("Eggs", "06-06-2018");*/
 
         FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.DAYSLEFT, FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);

@@ -39,6 +39,7 @@ public class FoodItem {
     private boolean notifyMe;
     private FoodCategory category;
     private int daysLeft;
+    private int amountLeft;
 
     FoodItem(String itemName, String dateExpire) {
         this.itemName = itemName;
@@ -50,6 +51,7 @@ public class FoodItem {
         //System.out.println(dtf.parseDateTime(dateExpire));
         this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
         this.notifyMe = true;
+        this.amountLeft = 100;
         countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
@@ -64,6 +66,7 @@ public class FoodItem {
         this.dateAdded = new Date();
         this.dateExpire = dateExpire;
         this.notifyMe = true;
+        this.amountLeft = 100;
         countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
