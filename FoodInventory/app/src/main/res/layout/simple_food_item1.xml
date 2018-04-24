@@ -11,7 +11,7 @@
         android:id="@+id/catImage"
         android:padding="5dp"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="45dp"
         android:layout_gravity="center"
         android:layout_weight="80"
         app:srcCompat="@mipmap/ic_launcher" />
@@ -27,7 +27,7 @@
         <TextView
             android:id="@+id/name"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="72dp"
             android:layout_weight="1"
             android:gravity="center"
             android:textAlignment="center"
@@ -36,7 +36,7 @@
         <TextView
             android:id="@+id/daysleft"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="72dp"
             android:layout_weight="1"
             android:text="DaysLeft"
             android:gravity="center"
