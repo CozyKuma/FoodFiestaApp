@@ -14,10 +14,10 @@ public class FoodCategory {
     private String categoryName;
     private int id;
     private Image image;
-    private Date datePreset;
-    private ArrayList<FoodCategory> foodCategories = new ArrayList<FoodCategory>();
+    private int datePreset;
+    private static ArrayList<FoodCategory> foodCategories = new ArrayList<>();
 
-    public FoodCategory(String categoryName, int id, Image image, Date datePreset) {
+    public FoodCategory(String categoryName, int id, Image image, int datePreset) {
         this.categoryName = categoryName;
         this.id = id;
         this.image = image;
@@ -25,8 +25,21 @@ public class FoodCategory {
         foodCategories.add(this);
     }
 
+    public FoodCategory(String categoryName, int id,  int datePreset) {
+        this.categoryName = categoryName;
+        this.id = id;
+        this.datePreset = datePreset;
+        foodCategories.add(this);
+    }
+
+
+
     public String getCategoryName() {
         return categoryName;
+    }
+
+    public static ArrayList<FoodCategory> getCategoryList() {
+        return foodCategories;
     }
 
     public void setCategoryName(String categoryName) {
@@ -49,11 +62,16 @@ public class FoodCategory {
         this.image = image;
     }
 
-    public Date getDatePreset() {
+    public int getDatePreset() {
         return datePreset;
     }
 
-    public void setDatePreset(Date datePreset) {
+    public void setDatePreset(int datePreset) {
         this.datePreset = datePreset;
+    }
+
+    @Override
+    public String toString() {
+        return categoryName;
     }
 }

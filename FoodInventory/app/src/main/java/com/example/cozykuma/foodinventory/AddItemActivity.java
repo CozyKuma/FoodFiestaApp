@@ -39,12 +39,15 @@ public class AddItemActivity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<FoodCategory> adapter;
+        ArrayAdapter<FoodCategory> adapter = new ArrayAdapter<FoodCategory>(getApplicationContext(), android.R.layout.simple_spinner_item, FoodCategory.getCategoryList());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mSpinner.setAdapter(adapter);
     }
 
     public void AddItem() {
         itemName = mEditTextName.getText().toString();
-        //category = (FoodCategory) mSpinner.getSelectedItem();
+        category = (FoodCategory) mSpinner.getSelectedItem();
         expireDate = mEditTextDate.getText().toString();
 
         FoodItem newItem = new FoodItem(itemName, expireDate);
