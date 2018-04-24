@@ -2,6 +2,7 @@ package com.example.cozykuma.foodinventory;
 
 import android.media.Image;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -14,12 +15,14 @@ public class FoodCategory {
     private int id;
     private Image image;
     private Date datePreset;
+    private ArrayList<FoodCategory> foodCategories = new ArrayList<FoodCategory>();
 
     public FoodCategory(String categoryName, int id, Image image, Date datePreset) {
         this.categoryName = categoryName;
         this.id = id;
         this.image = image;
         this.datePreset = datePreset;
+        foodCategories.add(this);
     }
 
     public String getCategoryName() {

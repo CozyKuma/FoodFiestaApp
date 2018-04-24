@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton floatyBoii = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        floatyBoii.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AddItemActivity.class);
@@ -72,18 +72,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        FoodItem item1 = new FoodItem("Item1", "24-04-2018");
+        FoodItem item2 = new FoodItem("Item2", "24-04-2018");
+        FoodItem item3 = new FoodItem("Item3", "24-04-2018");
+        FoodItem item4 = new FoodItem("Item4", "24-04-2018");
+        FoodItem item5 = new FoodItem("Item5", "24-04-2018");
+        FoodItem item6 = new FoodItem("Item6", "24-04-2018");
+        FoodItem item7 = new FoodItem("Item7", "24-04-2018");
+        FoodItem item8 = new FoodItem("Item8", "24-04-2018");
+        FoodItem item9 = new FoodItem("Item9", "24-04-2018");
+        FoodItem item10 = new FoodItem("Item10", "24-04-2018");
+        FoodItem item11 = new FoodItem("Item11", "24-04-2018");
+        FoodItem item12 = new FoodItem("Item12", "24-04-2018");
+        FoodItem item13 = new FoodItem("Item13", "24-04-2018");
+        FoodItem item14 = new FoodItem("Item14", "24-04-2018");
+        FoodItem item15 = new FoodItem("Item15","24-04-2018");
 
         mListView = (ListView) findViewById(R.id.foodlistview);
 
-        // Create Food Items for test
-
-        /*FoodItem milk = new FoodItem("Milk", "12-04-2018");
-        FoodItem meat = new FoodItem("Meat", "14-04-2018");
-        FoodItem yoghurt = new FoodItem("Yoghurt", "07-04-2018");
-        FoodItem pickles = new FoodItem("Pickles", "12-07-2018");
-        FoodItem cheese = new FoodItem("Cheese", "17-05-2018");
-        FoodItem juice = new FoodItem("Apple Juice", "22-04-2018");
-        FoodItem eggs = new FoodItem("Eggs", "06-06-2018");*/
 
         FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.DAYSLEFT, FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
