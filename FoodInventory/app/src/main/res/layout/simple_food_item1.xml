@@ -9,11 +9,12 @@
 
     <ImageView
         android:id="@+id/catImage"
-        android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
         android:layout_weight="80"
+        android:padding="5dp"
         app:srcCompat="@mipmap/ic_launcher" />
 
 
@@ -24,23 +25,50 @@
         android:weightSum="2"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="72dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:text="Name" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:text="Name"
+                android:textAlignment="viewStart"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp"
+                android:typeface="normal" />
+
+            <TextView
+                android:id="@+id/Category"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto"
+                android:text="Category"
+                android:textAlignment="viewStart"
+                android:textSize="14sp"
+                android:typeface="normal" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/daysleft"
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:layout_weight="1"
-            android:text="DaysLeft"
+            android:fontFamily="@font/roboto"
             android:gravity="center"
-            android:textAlignment="center" />
+            android:text="DaysLeft"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:typeface="normal" />
     </LinearLayout>
 
 </LinearLayout>

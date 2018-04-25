@@ -32,6 +32,7 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
     static class ViewHolder {
         TextView name;
         TextView daysLeft;
+        TextView Category;
     }
 
 
