@@ -17,7 +17,7 @@ import org.joda.time.format.DateTimeFormat;
 public class FoodItem {
 
     enum sortTypes {
-        DAYSLEFT, DATEADDED, NAME
+        DAYSLEFT, DATEADDED, NAME, PROGRESS
     }
 
     enum filterTypes {
@@ -28,7 +28,7 @@ public class FoodItem {
     private org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy");
     private String itemName;
     private static int countId = 0;
-    static private String sortType = "Expire Date";
+    private static sortTypes sortType = sortTypes.DAYSLEFT;
     private int itemId;
     private Date dateAdded;
     private Date dateExpire;
@@ -77,14 +77,14 @@ public class FoodItem {
     }
 
     public static ArrayList<FoodItem> sortList(sortTypes sort, ArrayList<FoodItem> list) {
-        if (sort == sortTypes.DAYSLEFT) {
+        if (sortType == sortTypes.DAYSLEFT) {
             Collections.sort(list, new Comparator<FoodItem>() {
                 @Override
                 public int compare(FoodItem o1, FoodItem o2) {
                     return o1.getDatesLeft() - o2.getDatesLeft();
                 }
             });
-        } else if (sort == sortTypes.DATEADDED) {
+        } else if (sortType == sortTypes.DATEADDED) {
             Collections.sort(list, new Comparator<FoodItem>() {
                 @Override
                 public int compare(FoodItem o1, FoodItem o2) {
