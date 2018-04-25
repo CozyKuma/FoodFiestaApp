@@ -72,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        FoodCategory test1 = new FoodCategory("Milk", 1, 7);
+        FoodCategory test2 = new FoodCategory("Meat", 2, 7);
+        FoodCategory test3 = new FoodCategory("Vegetable", 3, 10);
+
         FoodItem item1 = new FoodItem("Item1", "24-04-2018");
         FoodItem item2 = new FoodItem("Item2", "24-04-2015");
         FoodItem item3 = new FoodItem("Item3", "24-12-2018");
