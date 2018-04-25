@@ -108,7 +108,16 @@ public class FoodItem {
                     return daysBetween(o1.getDateAdded(), o2.getDateAdded());
                 }
             });
+        } else if (sortType == sortTypes.CATEGORY){
+            Collections.sort(list, new Comparator<FoodItem>() {
+                @Override
+                public int compare(FoodItem o1, FoodItem o2) {
+                    return 01.getName().compareTo(f2.toString());;
+                }
+            });
         }
+
+
         return list;
     }
 

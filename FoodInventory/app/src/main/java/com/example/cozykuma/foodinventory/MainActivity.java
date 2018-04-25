@@ -76,22 +76,10 @@ public class MainActivity extends AppCompatActivity {
         FoodCategory test2 = new FoodCategory("Meat", 2, 7);
         FoodCategory test3 = new FoodCategory("Vegetable", 3, 10);
 
-        FoodItem item1 = new FoodItem("Item1", "24-04-2018", test1);
-        FoodItem item2 = new FoodItem("Item2", "24-04-2015");
-        FoodItem item3 = new FoodItem("Item3", "24-12-2018");
-        FoodItem item4 = new FoodItem("Item4", "24-04-2018");
-        FoodItem item5 = new FoodItem("Item5", "24-04-2018");
-        FoodItem item6 = new FoodItem("Item6", "24-04-2016");
-        FoodItem item7 = new FoodItem("Item7", "24-04-2018");
-        FoodItem item8 = new FoodItem("Item8", "25-04-2018");
-        FoodItem item9 = new FoodItem("Item9", "24-04-2018");
-        FoodItem item10 = new FoodItem("Item10", "24-04-2018");
-        FoodItem item11 = new FoodItem("Item11", "24-05-2018");
-        FoodItem item12 = new FoodItem("Item12", "01-04-2018");
-        FoodItem item13 = new FoodItem("Item13", "24-04-2018");
-        FoodItem item14 = new FoodItem("Item14", "24-02-2018");
-        FoodItem item15 = new FoodItem("Item15","24-04-2018");
-
+        FoodItem item1 = new FoodItem("Item1", "24-03-2018", test1);
+        FoodItem item2 = new FoodItem("Item1", "24-04-2019", test2);
+        FoodItem item3 = new FoodItem("Item1", "24-04-2015", test3);
+        FoodItem item4 = new FoodItem("Item1", "24-12-2018", test1);
         mListView = (ListView) findViewById(R.id.foodlistview);
 
 
