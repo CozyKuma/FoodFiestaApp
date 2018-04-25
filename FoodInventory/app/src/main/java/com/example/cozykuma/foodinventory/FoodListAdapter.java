@@ -32,7 +32,7 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
     static class ViewHolder {
         TextView name;
         TextView daysLeft;
-        TextView Category;
+        TextView category;
     }
 
 
@@ -48,12 +48,9 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
         // Set information
         String name = getItem(position).getItemName();
         int days = getItem(position).getDatesLeft();
-<<<<<<< HEAD
-        String daysString = "Expires in \n" + days + " days(s)";
-=======
-        String daysString = days + " days left";
         FoodCategory category = getItem(position).getCategory();
->>>>>>> No-Branch
+        String daysString = "Expires in \n" + days + " days(s)";
+
 
         // Create the view loading function
         final View result;
@@ -67,6 +64,7 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
             holder = new ViewHolder();
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.daysLeft = (TextView) convertView.findViewById(R.id.daysleft);
+            holder.category = (TextView) convertView.findViewById(R.id.category);
             //holder.icon = (ImageView) convertView.findViewById(R.id.listitem_image);
             //holder.progress = (ProgressBar) convertView.findViewById(R.id.progress_spinner);
             result = convertView;
@@ -85,6 +83,7 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
 
         holder.name.setText(name);
         holder.daysLeft.setText(daysString);
+        holder.category.setText(category.getCategoryName());
         //holder.icon
 
         return convertView;
