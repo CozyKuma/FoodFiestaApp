@@ -17,7 +17,7 @@ import org.joda.time.format.DateTimeFormat;
 public class FoodItem {
 
     enum sortTypes {
-        DAYSLEFT, DATEADDED, NAME, PROGRESS
+        DAYSLEFT, DATEADDED, NAME, PROGRESS, CATEGORY
     }
 
     enum filterTypes {
@@ -56,6 +56,23 @@ public class FoodItem {
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
         }
+
+    FoodItem(String itemName, String dateExpire, FoodCategory category) {
+        this.itemName = itemName;
+        this.itemId = countId;
+        this.expired = false;
+        this.opened = false;
+        this.used = false;
+        this.dateAdded = new Date();
+        this.category = category;
+        //System.out.println(dtf.parseDateTime(dateExpire));
+        this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
+        this.notifyMe = true;
+        this.amountLeft = 100;
+        countId++;
+        daysLeft = daysBetween(new Date(), this.dateExpire);
+        listOfItems.add(this);
+    }
 
     FoodItem(String itemName, Date dateExpire) {
         this.itemName = itemName;
@@ -104,6 +121,8 @@ public class FoodItem {
     public String getItemName() {
         return itemName;
     }
+
+    public FoodCategory getCategory() { return category; }
 
     public void setCategory(FoodCategory category) { this.category = category; }
 

@@ -96,7 +96,7 @@ public class AddItemActivity extends AppCompatActivity {
         category = (FoodCategory) mSpinner.getSelectedItem();
         expireDate = mDateView.getText().toString();
 
-        FoodItem newItem = new FoodItem(itemName, expireDate);
+        FoodItem newItem = new FoodItem(itemName, expireDate, category);
 
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intentInv);
