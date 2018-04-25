@@ -48,7 +48,12 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
         // Set information
         String name = getItem(position).getItemName();
         int days = getItem(position).getDatesLeft();
+<<<<<<< HEAD
         String daysString = "Expires in \n" + days + " days(s)";
+=======
+        String daysString = days + " days left";
+        FoodCategory category = getItem(position).getCategory();
+>>>>>>> No-Branch
 
         // Create the view loading function
         final View result;
@@ -80,6 +85,7 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
 
         holder.name.setText(name);
         holder.daysLeft.setText(daysString);
+        //holder.icon
 
         return convertView;
     }
