@@ -32,8 +32,6 @@ public class FoodCategory {
         foodCategories.add(this);
     }
 
-
-
     public String getCategoryName() {
         return categoryName;
     }

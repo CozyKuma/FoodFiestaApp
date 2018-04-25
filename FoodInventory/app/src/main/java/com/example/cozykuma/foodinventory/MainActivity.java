@@ -25,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
     //private static final String TAG = "MainActivity";
     private TextView mTextMessage;
     private ListView mListView;
-    //private ArrayList<FoodItem> foodList = new ArrayList<FoodItem>();
-    private ArrayList<FoodCategory> categoryList;
+    private static boolean isFinished = false;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -34,17 +33,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_list:
                     //mTextMessage.setText(R.string.title_home);
-                    Intent intentDash = new Intent(getApplicationContext(), DashboardActivity.class);
+                    Intent intentDash = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intentDash);
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_shoppinglist:
                     //mTextMessage.setText(R.string.title_dashboard);
                     Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intentInv);
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_settings:
                     //mTextMessage.setText(R.string.title_notifications);
                     return true;
             }
@@ -72,31 +71,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FoodCategory test1 = new FoodCategory("Milk", 1, 7);
-        FoodCategory test2 = new FoodCategory("Meat", 2, 7);
-        FoodCategory test3 = new FoodCategory("Vegetable", 3, 10);
-
-        FoodItem item1 = new FoodItem("Item1", "24-04-2018");
-        FoodItem item2 = new FoodItem("Item2", "24-04-2018");
-        FoodItem item3 = new FoodItem("Item3", "24-04-2018");
-        FoodItem item4 = new FoodItem("Item4", "24-04-2018");
-        FoodItem item5 = new FoodItem("Item5", "24-04-2018");
-        FoodItem item6 = new FoodItem("Item6", "24-04-2018");
-        FoodItem item7 = new FoodItem("Item7", "24-04-2018");
-        FoodItem item8 = new FoodItem("Item8", "24-04-2018");
-        FoodItem item9 = new FoodItem("Item9", "24-04-2018");
-        FoodItem item10 = new FoodItem("Item10", "24-04-2018");
-        FoodItem item11 = new FoodItem("Item11", "24-04-2018");
-        FoodItem item12 = new FoodItem("Item12", "24-04-2018");
-        FoodItem item13 = new FoodItem("Item13", "24-04-2018");
-        FoodItem item14 = new FoodItem("Item14", "24-04-2018");
-        FoodItem item15 = new FoodItem("Item15","24-04-2018");
+        if(!isFinished) {
+            createDefaultCategories();
+            isFinished = true;
+        }
 
         mListView = (ListView) findViewById(R.id.foodlistview);
 
-
         FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.DAYSLEFT, FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
+
     }
 
     @Override
@@ -107,5 +91,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isFinishing()) {
+            isFinished = false;
+        }
+    }
+
+    protected void createDefaultCategories() {
+        FoodCategory milk = new FoodCategory("Milk", 1, 7);
+        FoodCategory meat = new FoodCategory("Meat", 2, 7);
+        FoodCategory vegetable = new FoodCategory("Vegetables", 3, 10);
+        FoodCategory fruit = new FoodCategory("Fruit", 4, 14);
     }
 }
