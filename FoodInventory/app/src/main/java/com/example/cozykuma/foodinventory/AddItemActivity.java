@@ -25,6 +25,7 @@ public class AddItemActivity extends AppCompatActivity {
     private TextView mDateView;
     private Spinner mSpinner;
     private Button mButton;
+    private Button mCancelButton;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
 
@@ -37,11 +38,21 @@ public class AddItemActivity extends AppCompatActivity {
         mDateView = (TextView) findViewById(R.id.dateTextView);
         mSpinner = (Spinner) findViewById(R.id.categorySpinner);
         mButton = (Button) findViewById(R.id.addItemBtn);
+        mCancelButton = (Button) findViewById(R.id.cancelItem);
 
+        // Add Item Button onClickListener
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddItem();
+                addItem();
+            }
+        });
+
+        // Cancel Item Button onClickListener
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelItem();
             }
         });
 
@@ -80,7 +91,7 @@ public class AddItemActivity extends AppCompatActivity {
         };
     }
 
-    public void AddItem() {
+    public void addItem() {
         itemName = mEditTextName.getText().toString();
         category = (FoodCategory) mSpinner.getSelectedItem();
         expireDate = mDateView.getText().toString();
@@ -89,5 +100,9 @@ public class AddItemActivity extends AppCompatActivity {
 
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intentInv);
+    }
+
+    public void cancelItem() {
+        finish();
     }
 }
