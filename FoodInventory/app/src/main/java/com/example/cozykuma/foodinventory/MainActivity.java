@@ -76,14 +76,25 @@ public class MainActivity extends AppCompatActivity {
         FoodCategory test2 = new FoodCategory("Meat", 2, 7);
         FoodCategory test3 = new FoodCategory("Vegetable", 3, 10);
 
-        FoodItem item1 = new FoodItem("Item1", "24-03-2018", test1);
-        FoodItem item2 = new FoodItem("Item1", "24-04-2019", test2);
-        FoodItem item3 = new FoodItem("Item1", "24-04-2015", test3);
-        FoodItem item4 = new FoodItem("Item1", "24-12-2018", test1);
+        FoodItem aitem1 = new FoodItem("CItem1", "24-03-2018", test2);
+        FoodItem citem2 = new FoodItem("AItem1", "1-04-2019", test2);
+        FoodItem bitem3 = new FoodItem("DItem1", "24-04-2015", test3);
+        FoodItem ditem4 = new FoodItem("BItem1", "21-12-2018", test1);
+        FoodItem item1 = new FoodItem("CItem1", "24-03-2018", test1);
+        FoodItem item2 = new FoodItem("ÉItem1", "24-01-2019", test2);
+        FoodItem item3 = new FoodItem("FItem1", "24-04-2015", test3);
+        FoodItem item4 = new FoodItem("GItem1", "24-12-2018", test3);
+        FoodItem item5 = new FoodItem("CItem1e", "24-03-2018", test1);
+        FoodItem item6 = new FoodItem("EItem1", "10-04-2019", test3);
+        FoodItem item7 = new FoodItem("FItem12", "4-04-2015", test2);
+        FoodItem item8 = new FoodItem("GItem1a", "24-12-2018", test1);
+
+
+
         mListView = (ListView) findViewById(R.id.foodlistview);
 
 
-        FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.DAYSLEFT, FoodItem.getListOfItems()));
+        FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.CATEGORY, FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
     }
 

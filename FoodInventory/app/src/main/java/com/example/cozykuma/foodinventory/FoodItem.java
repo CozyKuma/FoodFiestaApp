@@ -28,7 +28,6 @@ public class FoodItem {
     private org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy");
     private String itemName;
     private static int countId = 0;
-    private static sortTypes sortType = sortTypes.DAYSLEFT;
     private int itemId;
     private Date dateAdded;
     private Date dateExpire;
@@ -94,25 +93,32 @@ public class FoodItem {
     }
 
     public static ArrayList<FoodItem> sortList(sortTypes sort, ArrayList<FoodItem> list) {
-        if (sortType == sortTypes.DAYSLEFT) {
+        if (sort == sortTypes.DAYSLEFT) {
             Collections.sort(list, new Comparator<FoodItem>() {
                 @Override
                 public int compare(FoodItem o1, FoodItem o2) {
                     return o1.getDatesLeft() - o2.getDatesLeft();
                 }
             });
-        } else if (sortType == sortTypes.DATEADDED) {
+        } else if (sort == sortTypes.DATEADDED) {
             Collections.sort(list, new Comparator<FoodItem>() {
                 @Override
                 public int compare(FoodItem o1, FoodItem o2) {
                     return daysBetween(o1.getDateAdded(), o2.getDateAdded());
                 }
             });
-        } else if (sortType == sortTypes.CATEGORY){
+        } else if (sort == sortTypes.NAME) {
             Collections.sort(list, new Comparator<FoodItem>() {
                 @Override
                 public int compare(FoodItem o1, FoodItem o2) {
-                    return 01.getName().compareTo(f2.toString());;
+                    return o1.getItemName().compareTo(o2.getItemName());
+                }
+            });
+        } else if (sort == sortTypes.CATEGORY) {
+            Collections.sort(list, new Comparator<FoodItem>() {
+                @Override
+                public int compare(FoodItem o1, FoodItem o2) {
+                    return o1.getItemCategoryName().compareTo(o2.getItemCategoryName());
                 }
             });
         }
@@ -132,6 +138,8 @@ public class FoodItem {
     }
 
     public FoodCategory getCategory() { return category; }
+
+    public String getItemCategoryName() { return category.getCategoryName(); }
 
     public void setCategory(FoodCategory category) { this.category = category; }
 
