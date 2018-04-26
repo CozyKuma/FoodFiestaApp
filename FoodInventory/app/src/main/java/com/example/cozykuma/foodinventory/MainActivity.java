@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private ListView mListView;
     private static boolean isFinished = false;
+    private FoodListAdapter adapter;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         FoodItem.setSortType(FoodItem.sortTypes.NAME);
+                        adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         FoodItem.setSortType(FoodItem.sortTypes.CATEGORY);
+                        adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });
@@ -109,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         FoodItem.setSortType(FoodItem.sortTypes.DAYSLEFT);
+                        adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });
@@ -117,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         FoodItem.setSortType(FoodItem.sortTypes.DATEADDED);
+                        adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });
@@ -125,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         FoodItem.setSortType(FoodItem.sortTypes.PROGRESS);
+                        adapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });
@@ -140,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
         mListView = (ListView) findViewById(R.id.foodlistview);
 
-        FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
+        adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
 
 
