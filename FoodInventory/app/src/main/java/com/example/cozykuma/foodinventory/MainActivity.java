@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+   
+
         FoodCategory test1 = new FoodCategory("Milk", 1, 7);
         FoodCategory test2 = new FoodCategory("Meat", 2, 7);
         FoodCategory test3 = new FoodCategory("Vegetable", 3, 10);
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         FoodItem bitem3 = new FoodItem("DItem1", "24-04-2015", test3);
         FoodItem ditem4 = new FoodItem("BItem1", "21-12-2018", test1);
         FoodItem item1 = new FoodItem("CItem1", "24-03-2018", test1);
-        FoodItem item2 = new FoodItem("ÉItem1", "24-01-2019", test2);
+        FoodItem item2 = new FoodItem("EItem1", "24-01-2019", test2);
         FoodItem item3 = new FoodItem("FItem1", "24-04-2015", test3);
         FoodItem item4 = new FoodItem("GItem1", "24-12-2018", test3);
         FoodItem item5 = new FoodItem("CItem1e", "24-03-2018", test1);
@@ -94,8 +96,11 @@ public class MainActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.foodlistview);
 
 
-        FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.CATEGORY, FoodItem.getListOfItems()));
+        FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.DAYSLEFT, FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
+
+        FoodListAdapter adapterCategory = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.CATEGORY, FoodItem.getListOfItems()));
+        mListView.setAdapter(adapterCategory);
     }
 
     @Override
