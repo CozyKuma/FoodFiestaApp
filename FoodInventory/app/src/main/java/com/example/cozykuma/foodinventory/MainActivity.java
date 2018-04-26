@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 sortName.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        FoodItem.sortList(FoodItem.sortTypes.NAME, FoodItem.getListOfItems());
+                        FoodItem.setSortType(FoodItem.sortTypes.NAME);
                         dialog.dismiss();
                     }
                 });
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 sortCategory.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        FoodItem.sortList(FoodItem.sortTypes.CATEGORY, FoodItem.getListOfItems());
+                        FoodItem.setSortType(FoodItem.sortTypes.CATEGORY);
                         dialog.dismiss();
                     }
                 });
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 sortDaysLeft.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        FoodItem.sortList(FoodItem.sortTypes.DAYSLEFT, FoodItem.getListOfItems());
+                        FoodItem.setSortType(FoodItem.sortTypes.DAYSLEFT);
                         dialog.dismiss();
                     }
                 });
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 sortDateAdded.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        FoodItem.sortList(FoodItem.sortTypes.DATEADDED, FoodItem.getListOfItems());
+                        FoodItem.setSortType(FoodItem.sortTypes.DATEADDED);
                         dialog.dismiss();
                     }
                 });
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 sortProgress.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        FoodItem.sortList(FoodItem.sortTypes.PROGRESS, FoodItem.getListOfItems());
+                        FoodItem.setSortType(FoodItem.sortTypes.PROGRESS);
                         dialog.dismiss();
                     }
                 });

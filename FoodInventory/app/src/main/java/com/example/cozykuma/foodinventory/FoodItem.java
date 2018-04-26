@@ -29,6 +29,7 @@ public class FoodItem {
     private String itemName;
     private static int countId = 0;
     private int itemId;
+    private static sortTypes sortType = sortTypes.DAYSLEFT;
     private Date dateAdded;
     private Date dateExpire;
     private Date dateOpened;
@@ -181,6 +182,10 @@ public class FoodItem {
 
     public static sortTypes getSortType() {
         return sortType;
+    }
+
+    public static void setSortType(sortTypes st) {
+        sortType = st;
     }
 
 }
