@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private ListView mListView;
     private static boolean isFinished = false;
+    FoodListAdapter adapter;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -78,9 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
         mListView = (ListView) findViewById(R.id.foodlistview);
 
-        FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
+        adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
-
     }
 
     @Override
