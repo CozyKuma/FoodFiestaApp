@@ -48,7 +48,6 @@ public class FoodItem {
         this.opened = false;
         this.used = false;
         this.dateAdded = new Date();
-        //System.out.println(dtf.parseDateTime(dateExpire));
         this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
         this.notifyMe = true;
         this.amountLeft = 100;
@@ -65,7 +64,6 @@ public class FoodItem {
         this.used = false;
         this.dateAdded = new Date();
         this.category = category;
-        //System.out.println(dtf.parseDateTime(dateExpire));
         this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
         this.notifyMe = true;
         this.amountLeft = 100;
@@ -164,6 +162,14 @@ public class FoodItem {
 
     public static sortTypes getSortType() {
         return sortType;
+    }
+
+    public static void setSortType(sortTypes st) {
+        sortType = st;
+    }
+
+    public void useAmount(int amountUsed) {
+        this.amountLeft = this.amountLeft - amountUsed;
     }
 
 }
