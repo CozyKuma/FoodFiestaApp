@@ -162,4 +162,8 @@ public class FoodItem {
         return notifyMe;
     }
 
+    public static sortTypes getSortType() {
+        return sortType;
+    }
+
 }
