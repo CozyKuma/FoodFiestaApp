@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,15 +24,18 @@ public class AddItemActivity extends AppCompatActivity {
     private String itemName;
     private FoodCategory category;
     private String expireDate;
+    private boolean notifyMe;
+    private boolean itemOpen;
     private EditText mEditTextName;
     private TextView mDateView;
     private Spinner mSpinner;
     private Button mButton;
     private Button mCancelButton;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private CheckBox mCheckBoxNotify;
+    private CheckBox mCheckBoxOpen;
     private EditText quantityView;
-    private ImageButton addQuantitybtn;
-    private ImageButton removeQuantitybtn;
+
 
 
     @Override
@@ -44,15 +48,28 @@ public class AddItemActivity extends AppCompatActivity {
         mSpinner = (Spinner) findViewById(R.id.categorySpinner);
         mButton = (Button) findViewById(R.id.addItemBtn);
         mCancelButton = (Button) findViewById(R.id.cancelItem);
+        mCheckBoxNotify = (CheckBox) findViewById(R.id.checkBoxNotify);
+        mCheckBoxOpen = (CheckBox) findViewById(R.id.checkBoxOpen);
         quantityView = (EditText) findViewById(R.id.quantityNum);
-        addQuantitybtn = (ImageButton) findViewById(R.id.addQuantity);
-        removeQuantitybtn = (ImageButton) findViewById(R.id.removeQuantity);
+        ImageButton addQuantityBtn = (ImageButton) findViewById(R.id.addQuantity);
+        ImageButton removeQuantityBtn = (ImageButton) findViewById(R.id.removeQuantity);
+
+        if(FoodItem.getNotifySetting()) {
+            mCheckBoxNotify.setChecked(true);
+        } else {
+            mCheckBoxNotify.setChecked(false);
+        }
 
         // Add Item Button onClickListener
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addItem();
+                if(mDateView.getText().toString().isEmpty() || mSpinner.isSelected() || mDateView.getText().toString().equals("Select Date") || mEditTextName.getText().toString().isEmpty()) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Some information seems to be empty, please try again.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    addItem();
+                }
             }
         });
 
@@ -65,13 +82,13 @@ public class AddItemActivity extends AppCompatActivity {
         });
 
         //Add & Remove button onClickListeners
-        addQuantitybtn.setOnClickListener(new View.OnClickListener() {
+        addQuantityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addQuantity();
             }
         });
-        removeQuantitybtn.setOnClickListener(new View.OnClickListener() {
+        removeQuantityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 removeQuantity();
@@ -117,11 +134,13 @@ public class AddItemActivity extends AppCompatActivity {
         itemName = mEditTextName.getText().toString();
         category = (FoodCategory) mSpinner.getSelectedItem();
         expireDate = mDateView.getText().toString();
+        notifyMe = mCheckBoxNotify.isChecked();
+        itemOpen = mCheckBoxOpen.isChecked();
         String quantityText = quantityView.getEditableText().toString();
         int quantity = Integer.parseInt(quantityText);
 
         for(int i=0; i<quantity; i++) {
-            FoodItem newItem = new FoodItem(itemName, expireDate, category);
+            FoodItem newItem = new FoodItem(itemName, expireDate, category, notifyMe, itemOpen);
         }
 
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
