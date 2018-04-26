@@ -47,7 +47,7 @@
         android:layout_marginStart="4dp"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button5"
+        app:layout_constraintStart_toEndOf="@+id/btn_sort"
         tools:layout_editor_absoluteY="0dp"
         tools:text="Edit" />
 
@@ -70,7 +70,7 @@
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
         android:text="Button"
-        app:layout_constraintEnd_toStartOf="@+id/button5"
+        app:layout_constraintEnd_toStartOf="@+id/btn_sort"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="0dp"
         tools:text="Search" />

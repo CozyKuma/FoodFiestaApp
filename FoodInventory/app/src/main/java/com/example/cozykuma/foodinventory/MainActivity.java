@@ -8,6 +8,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -76,27 +77,65 @@ public class MainActivity extends AppCompatActivity {
         sort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FoodItem.sortList(FoodItem.sortTypes.CATEGORY, FoodItem.getListOfItems());
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+                View mView = getLayoutInflater().inflate(R.layout.dialogbox_sort_select, null);
+                Button sortName = (Button) mView.findViewById(R.id.btn_sort_1);
+                Button sortCategory = (Button) mView.findViewById(R.id.btn_sort_2);
+                Button sortDaysLeft = (Button) mView.findViewById(R.id.btn_sort_3);
+                Button sortDateAdded = (Button) mView.findViewById(R.id.btn_sort_4);
+                Button sortProgress = (Button) mView.findViewById(R.id.btn_sort_5);
+
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+
+                sortName.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FoodItem.sortList(FoodItem.sortTypes.NAME, FoodItem.getListOfItems());
+                        dialog.dismiss();
+                    }
+                });
+
+                sortCategory.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FoodItem.sortList(FoodItem.sortTypes.CATEGORY, FoodItem.getListOfItems());
+                        dialog.dismiss();
+                    }
+                });
+
+                sortDaysLeft.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FoodItem.sortList(FoodItem.sortTypes.DAYSLEFT, FoodItem.getListOfItems());
+                        dialog.dismiss();
+                    }
+                });
+
+                sortDateAdded.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FoodItem.sortList(FoodItem.sortTypes.DATEADDED, FoodItem.getListOfItems());
+                        dialog.dismiss();
+                    }
+                });
+
+                sortProgress.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FoodItem.sortList(FoodItem.sortTypes.PROGRESS, FoodItem.getListOfItems());
+                        dialog.dismiss();
+                    }
+                });
+
             }
         });
-   
 
-        FoodCategory test1 = new FoodCategory("Milk", 1, 7);
-        FoodCategory test2 = new FoodCategory("Meat", 2, 7);
-        FoodCategory test3 = new FoodCategory("Vegetable", 3, 10);
-
-        FoodItem aitem1 = new FoodItem("CItem1", "24-03-2018", test2);
-        FoodItem citem2 = new FoodItem("AItem1", "1-04-2019", test2);
-        FoodItem bitem3 = new FoodItem("DItem1", "24-04-2015", test3);
-        FoodItem ditem4 = new FoodItem("BItem1", "21-12-2018", test1);
-        FoodItem item1 = new FoodItem("CItem1", "24-03-2018", test1);
-        FoodItem item2 = new FoodItem("EItem1", "24-01-2019", test2);
-        FoodItem item3 = new FoodItem("FItem1", "24-04-2015", test3);
-        FoodItem item4 = new FoodItem("GItem1", "24-12-2018", test3);
-        FoodItem item5 = new FoodItem("CItem1e", "24-03-2018", test1);
-        FoodItem item6 = new FoodItem("EItem1", "10-04-2019", test3);
-        FoodItem item7 = new FoodItem("FItem12", "4-04-2015", test2);
-        FoodItem item8 = new FoodItem("GItem1a", "24-12-2018", test1);
+        if(!isFinished) {
+            createDefaultCategories();
+            isFinished = true;
+        }
 
 
         mListView = (ListView) findViewById(R.id.foodlistview);
