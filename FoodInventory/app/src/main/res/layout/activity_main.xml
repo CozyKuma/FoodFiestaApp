@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-<<<<<<< HEAD
+
     <Button
         android:id="@+id/btn_edit"
         android:layout_width="125dp"
@@ -74,7 +74,7 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="0dp"
         tools:text="Search" />
-=======
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="0dp"
@@ -90,7 +90,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/navigation"></android.support.design.widget.BottomNavigationView>
->>>>>>> origin/No-Branch
+        app:menu="@menu/navigation"/>
+
 
 </android.support.constraint.ConstraintLayout>

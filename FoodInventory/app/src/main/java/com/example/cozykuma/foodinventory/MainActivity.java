@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -71,7 +72,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
+        Button sort = (Button) findViewById(R.id.btn_sort);
+        sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FoodItem.sortList(FoodItem.sortTypes.CATEGORY, FoodItem.getListOfItems());
+            }
+        });
    
 
         FoodCategory test1 = new FoodCategory("Milk", 1, 7);
@@ -92,23 +99,13 @@ public class MainActivity extends AppCompatActivity {
         FoodItem item8 = new FoodItem("GItem1a", "24-12-2018", test1);
 
 
-=======
-        if(!isFinished) {
-            createDefaultCategories();
-            isFinished = true;
-        }
->>>>>>> origin/No-Branch
-
         mListView = (ListView) findViewById(R.id.foodlistview);
 
         FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.DAYSLEFT, FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
 
-<<<<<<< HEAD
-        FoodListAdapter adapterCategory = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.CATEGORY, FoodItem.getListOfItems()));
-        mListView.setAdapter(adapterCategory);
-=======
->>>>>>> origin/No-Branch
+
+
     }
 
     @Override
