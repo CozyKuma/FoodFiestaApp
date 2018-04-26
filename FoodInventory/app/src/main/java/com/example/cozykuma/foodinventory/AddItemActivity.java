@@ -11,8 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -27,6 +29,9 @@ public class AddItemActivity extends AppCompatActivity {
     private Button mButton;
     private Button mCancelButton;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private EditText quantityView;
+    private ImageButton addQuantitybtn;
+    private ImageButton removeQuantitybtn;
 
 
     @Override
@@ -39,6 +44,9 @@ public class AddItemActivity extends AppCompatActivity {
         mSpinner = (Spinner) findViewById(R.id.categorySpinner);
         mButton = (Button) findViewById(R.id.addItemBtn);
         mCancelButton = (Button) findViewById(R.id.cancelItem);
+        quantityView = (EditText) findViewById(R.id.quantityNum);
+        addQuantitybtn = (ImageButton) findViewById(R.id.addQuantity);
+        removeQuantitybtn = (ImageButton) findViewById(R.id.removeQuantity);
 
         // Add Item Button onClickListener
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +61,20 @@ public class AddItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cancelItem();
+            }
+        });
+
+        //Add & Remove button onClickListeners
+        addQuantitybtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addQuantity();
+            }
+        });
+        removeQuantitybtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeQuantity();
             }
         });
 
@@ -95,8 +117,12 @@ public class AddItemActivity extends AppCompatActivity {
         itemName = mEditTextName.getText().toString();
         category = (FoodCategory) mSpinner.getSelectedItem();
         expireDate = mDateView.getText().toString();
+        String quantityText = quantityView.getEditableText().toString();
+        int quantity = Integer.parseInt(quantityText);
 
-        FoodItem newItem = new FoodItem(itemName, expireDate, category);
+        for(int i=0; i<quantity; i++) {
+            FoodItem newItem = new FoodItem(itemName, expireDate, category);
+        }
 
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intentInv);
@@ -104,5 +130,22 @@ public class AddItemActivity extends AppCompatActivity {
 
     public void cancelItem() {
         finish();
+    }
+
+    public void addQuantity() {
+        int current = Integer.parseInt(quantityView.getEditableText().toString());
+        current += 1;
+        quantityView.setText(String.valueOf(current), TextView.BufferType.EDITABLE);
+    }
+
+    public void removeQuantity() {
+        int current = Integer.parseInt(quantityView.getEditableText().toString());
+        if(current > 1) {
+            current -= 1;
+            quantityView.setText(String.valueOf(current), TextView.BufferType.EDITABLE);
+        } else {
+            Toast toast = Toast.makeText(getApplicationContext(), "You can't reduce the quantity below 1", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 }
