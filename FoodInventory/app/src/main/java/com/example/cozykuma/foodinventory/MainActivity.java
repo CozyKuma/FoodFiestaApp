@@ -25,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
     //private static final String TAG = "MainActivity";
     private TextView mTextMessage;
     private ListView mListView;
-    //private ArrayList<FoodItem> foodList = new ArrayList<FoodItem>();
-    private ArrayList<FoodCategory> categoryList;
+    private static boolean isFinished = false;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -34,17 +33,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_list:
                     //mTextMessage.setText(R.string.title_home);
-                    Intent intentDash = new Intent(getApplicationContext(), DashboardActivity.class);
+                    Intent intentDash = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intentDash);
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_shoppinglist:
                     //mTextMessage.setText(R.string.title_dashboard);
                     Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intentInv);
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_settings:
                     //mTextMessage.setText(R.string.title_notifications);
                     return true;
             }
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+<<<<<<< HEAD
    
 
         FoodCategory test1 = new FoodCategory("Milk", 1, 7);
@@ -92,15 +92,23 @@ public class MainActivity extends AppCompatActivity {
         FoodItem item8 = new FoodItem("GItem1a", "24-12-2018", test1);
 
 
+=======
+        if(!isFinished) {
+            createDefaultCategories();
+            isFinished = true;
+        }
+>>>>>>> origin/No-Branch
 
         mListView = (ListView) findViewById(R.id.foodlistview);
-
 
         FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.DAYSLEFT, FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
 
+<<<<<<< HEAD
         FoodListAdapter adapterCategory = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.CATEGORY, FoodItem.getListOfItems()));
         mListView.setAdapter(adapterCategory);
+=======
+>>>>>>> origin/No-Branch
     }
 
     @Override
@@ -111,5 +119,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isFinishing()) {
+            isFinished = false;
+        }
+    }
+
+    protected void createDefaultCategories() {
+        FoodCategory milk = new FoodCategory("Milk", 1, 7);
+        FoodCategory meat = new FoodCategory("Meat", 2, 7);
+        FoodCategory vegetable = new FoodCategory("Vegetables", 3, 10);
+        FoodCategory fruit = new FoodCategory("Fruit", 4, 14);
     }
 }
