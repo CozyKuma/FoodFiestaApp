@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private ListView mListView;
     private static boolean isFinished = false;
-    FoodListAdapter adapter;
+    public FoodListAdapter adapter;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
