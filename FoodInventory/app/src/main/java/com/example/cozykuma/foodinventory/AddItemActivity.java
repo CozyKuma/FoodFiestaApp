@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,7 +18,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddItemActivity extends AppCompatActivity {
 
@@ -35,6 +40,8 @@ public class AddItemActivity extends AppCompatActivity {
     private CheckBox mCheckBoxNotify;
     private CheckBox mCheckBoxOpen;
     private EditText quantityView;
+    private org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy");
+    private boolean onSelectFlag = false;
 
 
 
@@ -101,6 +108,23 @@ public class AddItemActivity extends AppCompatActivity {
 
         mSpinner.setAdapter(adapter);
 
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(onSelectFlag) {
+                    String dateString = addDatePreset((FoodCategory) adapterView.getItemAtPosition(i));
+                    mDateView.setText(dateString);
+                } else {
+                    onSelectFlag = true;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         // Calendar onClickListener
         mDateView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +150,11 @@ public class AddItemActivity extends AppCompatActivity {
                 month++;
                 String date = dayOfMonth + "-" + month + "-" + year;
                 mDateView.setText(date);
+
+                DateTime jodaDate = new DateTime();
+                jodaDate = jodaDate.withDate(year, month, dayOfMonth);
+
+                toastDaysToExpire(new Date(), jodaDate.toDate());
             }
         };
     }
@@ -165,6 +194,24 @@ public class AddItemActivity extends AppCompatActivity {
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "You can't reduce the quantity below 1", Toast.LENGTH_SHORT);
             toast.show();
+        }
+    }
+
+    public String addDatePreset(FoodCategory category) {
+        Date today = new Date();
+        DateTime jodaToday = new DateTime(today);
+        jodaToday = jodaToday.plusDays(category.getDatePreset());
+        String dateString = jodaToday.getDayOfMonth() + "-" + jodaToday.getMonthOfYear() + "-" + jodaToday.getYear();
+
+        toastDaysToExpire(today, jodaToday.toDate());
+
+        return dateString;
+    }
+
+    public void toastDaysToExpire(Date d1, Date d2) {
+        int daysToExpire = FoodItem.daysBetween(d1, d2);
+        if(daysToExpire > 0) {
+            Toast.makeText(getApplicationContext(), "The item will expire in " + daysToExpire + " days.", Toast.LENGTH_SHORT).show();
         }
     }
 }

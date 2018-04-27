@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void createDefaultCategories() {
+        FoodCategory defaultCat = new FoodCategory("Default", 0, 0);
         FoodCategory milk = new FoodCategory("Milk", 1, 7);
         FoodCategory meat = new FoodCategory("Meat", 2, 7);
         FoodCategory vegetable = new FoodCategory("Vegetables", 3, 10);
