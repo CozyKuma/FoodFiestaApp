@@ -11,16 +11,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable {
 
     //private static final String TAG = "MainActivity";
     private TextView mTextMessage;
@@ -97,7 +99,20 @@ public class MainActivity extends AppCompatActivity {
 
         FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.sortTypes.DAYSLEFT, FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent detailsIntent = new Intent(view.getContext(),ItemDetails.class);
+               // Bundle itemBundle = new Bundle();
+                //itemBundle.putSerializable("List", FoodItem.getListOfItems());
+               // detailsIntent.putExtra("List",FoodItem.getListOfItems());
+                detailsIntent.putExtra("Position",i);
+                startActivity(detailsIntent);
+            }
+        });
     }
+
 
     @Override
     protected void onResume() {

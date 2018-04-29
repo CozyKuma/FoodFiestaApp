@@ -105,7 +105,11 @@ public class FoodItem {
         return itemName;
     }
 
+    public void setItemName(String name) {this.itemName = name;}
+
     public void setCategory(FoodCategory category) { this.category = category; }
+
+    public String getCategory() {return this.category.getCategoryName();}
 
     public int getItemId() {
         return itemId;
