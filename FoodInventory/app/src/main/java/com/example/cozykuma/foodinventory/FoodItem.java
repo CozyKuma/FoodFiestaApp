@@ -138,11 +138,17 @@ public class FoodItem {
         return itemName;
     }
 
-    public FoodCategory getCategory() { return category; }
+    public FoodCategory getCategory() {
+        return category;
+    }
 
-    public String getItemCategoryName() { return category.getCategoryName(); }
+    public String getItemCategoryName() {
+        return category.getCategoryName();
+    }
 
-    public void setCategory(FoodCategory category) { this.category = category; }
+    public void setCategory(FoodCategory category) {
+        this.category = category;
+    }
 
     public int getItemId() {
         return itemId;
@@ -186,6 +192,10 @@ public class FoodItem {
 
     public static void setSortType(sortTypes st) {
         sortType = st;
+    }
+
+    public int getAmountLeft() {
+        return amountLeft;
     }
 
 }

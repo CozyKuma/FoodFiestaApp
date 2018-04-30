@@ -81,7 +81,7 @@
                 android:layout_weight="1"
                 android:indeterminate="false"
                 android:max="100"
-                android:progress="75" />
+                android:progress="10" />
 
             <TextView
                 android:id="@+id/progressValue"

@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.ProgressBar;
 
 import org.w3c.dom.Text;
 
@@ -33,6 +34,8 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
         TextView name;
         TextView daysLeft;
         TextView category;
+        TextView progressValue;
+        ProgressBar progressBar;
     }
 
 
@@ -50,6 +53,9 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
         int days = getItem(position).getDatesLeft();
         FoodCategory category = getItem(position).getCategory();
         String daysString = "Expires in \n" + days + " days(s)";
+        String amountLeft = getItem(position).getAmountLeft() + "%";
+        int intAmountLeft = getItem(position).getAmountLeft();
+
 
 
         // Create the view loading function
@@ -65,6 +71,8 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.daysLeft = (TextView) convertView.findViewById(R.id.daysleft);
             holder.category = (TextView) convertView.findViewById(R.id.category);
+            holder.progressValue = (TextView) convertView.findViewById(R.id.progressValue);
+            holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
             //holder.icon = (ImageView) convertView.findViewById(R.id.listitem_image);
             //holder.progress = (ProgressBar) convertView.findViewById(R.id.progress_spinner);
             result = convertView;
@@ -84,6 +92,8 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
         holder.name.setText(name);
         holder.daysLeft.setText(daysString);
         holder.category.setText(category.getCategoryName());
+        holder.progressValue.setText(amountLeft);
+        holder.progressBar.setProgress(intAmountLeft);
         //holder.icon
 
         return convertView;
