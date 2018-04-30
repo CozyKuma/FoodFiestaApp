@@ -1,6 +1,8 @@
 package com.example.cozykuma.foodinventory;
 
+import android.app.Notification;
 import android.content.Context;
+import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -186,6 +188,10 @@ public class FoodItem {
 
     public static void setSortType(sortTypes st) {
         sortType = st;
+    }
+
+    public int getAmountLeft() {
+        return this.amountLeft;
     }
 
     public void useAmount(int amountUsed) {
