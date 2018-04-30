@@ -2,6 +2,7 @@ package com.example.cozykuma.foodinventory;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -103,9 +104,9 @@ public class MainActivity extends AppCompatActivity {
 
     protected void createDefaultCategories() {
         FoodCategory defaultCat = new FoodCategory("Default", 0, 0);
-        FoodCategory milk = new FoodCategory("Milk", 1, 7);
-        FoodCategory meat = new FoodCategory("Meat", 2, 7);
-        FoodCategory vegetable = new FoodCategory("Vegetables", 3, 10);
-        FoodCategory fruit = new FoodCategory("Fruit", 4, 14);
+        FoodCategory milk = new FoodCategory("Milk", 1, 7, "drawable://" + R.drawable.milk128px);
+        FoodCategory meat = new FoodCategory("Meat", 2, 7, "drawable://" + R.drawable.meat128px);
+        FoodCategory vegetable = new FoodCategory("Vegetables", 3, 10, "drawable://" + R.drawable.vegetables128px);
+        FoodCategory fruit = new FoodCategory("Fruit", 4, 14, "drawable://" + R.drawable.fruit128px);
     }
 }

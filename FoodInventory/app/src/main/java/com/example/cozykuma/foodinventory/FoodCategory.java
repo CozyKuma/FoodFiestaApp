@@ -13,14 +13,14 @@ public class FoodCategory {
 
     private String categoryName;
     private int id;
-    private Image image;
+    private String imgURL;
     private int datePreset;
     private static ArrayList<FoodCategory> foodCategories = new ArrayList<>();
 
-    public FoodCategory(String categoryName, int id, Image image, int datePreset) {
+    public FoodCategory(String categoryName, int id, int datePreset, String image) {
         this.categoryName = categoryName;
         this.id = id;
-        this.image = image;
+        this.imgURL = image;
         this.datePreset = datePreset;
         foodCategories.add(this);
     }
@@ -52,12 +52,12 @@ public class FoodCategory {
         this.id = id;
     }
 
-    public Image getImage() {
-        return image;
+    public String getImage() {
+        return imgURL;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImage(String image) {
+        this.imgURL = image;
     }
 
     public int getDatePreset() {
