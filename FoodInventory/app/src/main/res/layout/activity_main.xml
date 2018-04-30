@@ -43,36 +43,45 @@
         android:id="@+id/btn_edit"
         android:layout_width="125dp"
         android:layout_height="56dp"
+        android:layout_marginBottom="1dp"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="1dp"
         android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/foodlistview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_sort"
-        tools:layout_editor_absoluteY="0dp"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Edit" />
 
     <Button
         android:id="@+id/btn_sort"
         android:layout_width="125dp"
         android:layout_height="56dp"
+        android:layout_marginBottom="1dp"
         android:layout_marginEnd="2dp"
         android:layout_marginStart="2dp"
+        android:layout_marginTop="1dp"
         android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/foodlistview"
         app:layout_constraintEnd_toStartOf="@+id/btn_edit"
         app:layout_constraintStart_toEndOf="@+id/btn_search"
-        tools:layout_editor_absoluteY="0dp"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Sort" />
 
     <Button
         android:id="@+id/btn_search"
         android:layout_width="125dp"
         android:layout_height="56dp"
+        android:layout_marginBottom="1dp"
         android:layout_marginEnd="4dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="1dp"
         android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/foodlistview"
         app:layout_constraintEnd_toStartOf="@+id/btn_sort"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="0dp"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Search" />
 
     <android.support.design.widget.BottomNavigationView
