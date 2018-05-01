@@ -27,8 +27,6 @@ import java.util.List;
 
 public class FoodListAdapter extends ArrayAdapter<FoodItem> {
 
-    //private static final String TAG = "FoodListAdapter";
-
     private Context mContext;
     private int mResource;
     private int lastPosition = -1;

@@ -36,17 +36,14 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_list:
-                    //mTextMessage.setText(R.string.title_home);
-                    Intent intentDash = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intentDash);
-                    return true;
-                case R.id.navigation_shoppinglist:
-                    //mTextMessage.setText(R.string.title_dashboard);
                     Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intentInv);
                     return true;
+                case R.id.navigation_shoppinglist:
+                    Intent intentShoppingList = new Intent(getApplicationContext(), ShoppingList.class);
+                    startActivity(intentShoppingList);
+                    return true;
                 case R.id.navigation_settings:
-                    //mTextMessage.setText(R.string.title_notifications);
                     return true;
             }
             return false;

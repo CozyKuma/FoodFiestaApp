@@ -109,6 +109,22 @@ public class FoodItem {
         listOfItems.add(this);
     }
 
+    FoodItem(String itemName, FoodCategory category) {
+        this.itemName = itemName;
+        this.category = category;
+        this.itemId = countId;
+        this.expired = false;
+        this.opened = false;
+        this.used = false;
+        this.dateAdded = new Date();
+        this.dateExpire = dtf.parseDateTime(addDatePreset(category)).toDate();
+        this.notifyMe = notifySetting;
+        this.amountLeft = 100;
+        countId++;
+        daysLeft = daysBetween(new Date(), this.dateExpire);
+        listOfItems.add(this);
+    }
+
     public static ArrayList<FoodItem> getListOfItems() {
         return listOfItems;
     }
@@ -214,4 +230,12 @@ public class FoodItem {
         toast.show();
     }
 
+    public static String addDatePreset(FoodCategory category) {
+        Date today = new Date();
+        DateTime jodaToday = new DateTime(today);
+        jodaToday = jodaToday.plusDays(category.getDatePreset());
+        String dateString = jodaToday.getDayOfMonth() + "-" + jodaToday.getMonthOfYear() + "-" + jodaToday.getYear();
+
+        return dateString;
+    }
 }

@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddItemActivity" />
->>>>>>> No-Branch
+        >>>>>>> No-Branch
+        <activity android:name=".ShoppingList" />
+        <activity android:name=".AddShoppingItem"></activity>
     </application>
 
 </manifest>
