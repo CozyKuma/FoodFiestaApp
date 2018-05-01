@@ -1,46 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:layout_height="72dp"
+    android:layout_weight="25"
     android:gravity="center"
+    android:orientation="horizontal"
     android:weightSum="100">
-
-    <ImageView
-        android:id="@+id/catImage"
-        android:padding="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_weight="80"
-        app:srcCompat="@mipmap/ic_launcher" />
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="20"
-        android:weightSum="2"
-        android:orientation="horizontal">
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="75"
+        android:orientation="vertical"
+        android:paddingLeft="16dp">
 
-        <TextView
-            android:id="@+id/name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:text="Name" />
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/daysleft"
+            <ImageView
+                android:id="@+id/catImage"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="left|center"
+                android:layout_weight="1"
+                android:baselineAligned="false"
+                app:srcCompat="@mipmap/ic_launcher" />
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_weight="75"
+                android:baselineAligned="false"
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="Name"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="16sp"
+                    android:typeface="normal" />
+
+                <TextView
+                    android:id="@+id/category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:text="Category"
+                    android:textAlignment="viewStart"
+                    android:textSize="14sp"
+                    android:typeface="normal" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:text="DaysLeft"
-            android:gravity="center"
-            android:textAlignment="center" />
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:orientation="horizontal">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="10" />
+
+            <TextView
+                android:id="@+id/progressValue"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:fontFamily="@font/roboto"
+                android:text="ProgressValue"
+                android:textAlignment="viewStart"
+                android:textSize="12sp"
+                android:typeface="normal" />
+        </LinearLayout>
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/daysleft"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="16dp"
+        android:layout_weight="25"
+        android:baselineAligned="false"
+        android:fontFamily="@font/roboto"
+        android:gravity="right|center"
+        android:text="DaysLeft"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:typeface="normal" />
 
 </LinearLayout>

@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ProgressBar;
 
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -34,7 +35,13 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
     static class ViewHolder {
         TextView name;
         TextView daysLeft;
+<<<<<<< HEAD
         ImageView image;
+=======
+        TextView category;
+        TextView progressValue;
+        ProgressBar progressBar;
+>>>>>>> Simon-branch
     }
 
 
@@ -53,9 +60,16 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
         // Set information
         String name = getItem(position).getItemName();
         int days = getItem(position).getDatesLeft();
-        String daysString = days + " days left";
         FoodCategory category = getItem(position).getCategory();
+<<<<<<< HEAD
         String imgURL = getItem(position).getCategory().getImage();
+=======
+        String daysString = "Expires in \n" + days + " days(s)";
+        String amountLeft = getItem(position).getAmountLeft() + "%";
+        int intAmountLeft = getItem(position).getAmountLeft();
+
+
+>>>>>>> Simon-branch
 
         // Create the view loading function
         final View result;
@@ -69,7 +83,14 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
             holder = new ViewHolder();
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.daysLeft = (TextView) convertView.findViewById(R.id.daysleft);
+<<<<<<< HEAD
             holder.image = (ImageView) convertView.findViewById(R.id.catImage);
+=======
+            holder.category = (TextView) convertView.findViewById(R.id.category);
+            holder.progressValue = (TextView) convertView.findViewById(R.id.progressValue);
+            holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
+            //holder.icon = (ImageView) convertView.findViewById(R.id.listitem_image);
+>>>>>>> Simon-branch
             //holder.progress = (ProgressBar) convertView.findViewById(R.id.progress_spinner);
             result = convertView;
 
@@ -98,6 +119,13 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
 
         holder.name.setText(name);
         holder.daysLeft.setText(daysString);
+<<<<<<< HEAD
+=======
+        holder.category.setText(category.getCategoryName());
+        holder.progressValue.setText(amountLeft);
+        holder.progressBar.setProgress(intAmountLeft);
+        //holder.icon
+>>>>>>> Simon-branch
 
         return convertView;
     }

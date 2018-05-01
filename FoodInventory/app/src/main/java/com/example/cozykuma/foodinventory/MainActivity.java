@@ -9,9 +9,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,8 +34,12 @@ public class MainActivity extends AppCompatActivity {
     private List<FoodCategory> categoryList;
 =======
     private static boolean isFinished = false;
+<<<<<<< HEAD
     public FoodListAdapter adapter;
 >>>>>>> No-Branch
+=======
+    private FoodListAdapter adapter;
+>>>>>>> Simon-branch
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -100,11 +106,76 @@ public class MainActivity extends AppCompatActivity {
 =======
         });
 
+        Button sort = (Button) findViewById(R.id.btn_sort);
+        sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+                View mView = getLayoutInflater().inflate(R.layout.dialogbox_sort_select, null);
+                Button sortName = (Button) mView.findViewById(R.id.btn_sort_1);
+                Button sortCategory = (Button) mView.findViewById(R.id.btn_sort_2);
+                Button sortDaysLeft = (Button) mView.findViewById(R.id.btn_sort_3);
+                Button sortDateAdded = (Button) mView.findViewById(R.id.btn_sort_4);
+                Button sortProgress = (Button) mView.findViewById(R.id.btn_sort_5);
+
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+
+                sortName.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FoodItem.setSortType(FoodItem.sortTypes.NAME);
+                        adapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+                });
+
+                sortCategory.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FoodItem.setSortType(FoodItem.sortTypes.CATEGORY);
+                        adapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+                });
+
+                sortDaysLeft.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FoodItem.setSortType(FoodItem.sortTypes.DAYSLEFT);
+                        adapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+                });
+
+                sortDateAdded.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FoodItem.setSortType(FoodItem.sortTypes.DATEADDED);
+                        adapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+                });
+
+                sortProgress.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        FoodItem.setSortType(FoodItem.sortTypes.PROGRESS);
+                        adapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+                });
+
+            }
+        });
+
         if(!isFinished) {
             createDefaultCategories();
             isFinished = true;
         }
 >>>>>>> No-Branch
+
 
         mListView = (ListView) findViewById(R.id.foodlistview);
         foodList = new ArrayList<FoodItem>();
@@ -136,11 +207,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }); */
 
+<<<<<<< HEAD
         FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, foodList);
 =======
         adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
 >>>>>>> No-Branch
         mListView.setAdapter(adapter);
+=======
+        adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
+        mListView.setAdapter(adapter);
+
+
+
+>>>>>>> Simon-branch
     }
 
     @Override

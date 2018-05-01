@@ -33,8 +33,8 @@ public class FoodItem {
     private org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy");
     private String itemName;
     private static int countId = 0;
-    private static sortTypes sortType = sortTypes.DAYSLEFT;
     private int itemId;
+    private static sortTypes sortType = sortTypes.DAYSLEFT;
     private Date dateAdded;
     private Date dateExpire;
     private Date dateOpened;
@@ -141,21 +141,44 @@ public class FoodItem {
     }
 
     public static ArrayList<FoodItem> sortList(sortTypes sort, ArrayList<FoodItem> list) {
-        if (sortType == sortTypes.DAYSLEFT) {
+        if (sort == sortTypes.DAYSLEFT) {
             Collections.sort(list, new Comparator<FoodItem>() {
                 @Override
                 public int compare(FoodItem o1, FoodItem o2) {
                     return o1.getDatesLeft() - o2.getDatesLeft();
                 }
             });
-        } else if (sortType == sortTypes.DATEADDED) {
+        } else if (sort == sortTypes.DATEADDED) {
             Collections.sort(list, new Comparator<FoodItem>() {
                 @Override
                 public int compare(FoodItem o1, FoodItem o2) {
                     return daysBetween(o1.getDateAdded(), o2.getDateAdded());
                 }
             });
+        } else if (sort == sortTypes.NAME) {
+            Collections.sort(list, new Comparator<FoodItem>() {
+                @Override
+                public int compare(FoodItem o1, FoodItem o2) {
+                    return o1.getItemName().compareTo(o2.getItemName());
+                }
+            });
+        } else if (sort == sortTypes.CATEGORY) {
+            Collections.sort(list, new Comparator<FoodItem>() {
+                @Override
+                public int compare(FoodItem o1, FoodItem o2) {
+                    return o1.getItemCategoryName().compareTo(o2.getItemCategoryName());
+                }
+            });
+        } else if (sort == sortTypes.PROGRESS) {
+            Collections.sort(list, new Comparator<FoodItem>() {
+                @Override
+                public int compare(FoodItem o1, FoodItem o2) {
+                    return o1.getAmountLeft() - o2.getAmountLeft();
+                }
+            });
         }
+
+
         return list;
     }
 >>>>>>> No-Branch
@@ -170,9 +193,17 @@ public class FoodItem {
         return itemName;
     }
 
-    public FoodCategory getCategory() { return category; }
+    public FoodCategory getCategory() {
+        return category;
+    }
 
-    public void setCategory(FoodCategory category) { this.category = category; }
+    public String getItemCategoryName() {
+        return category.getCategoryName();
+    }
+
+    public void setCategory(FoodCategory category) {
+        this.category = category;
+    }
 
     public int getItemId() {
         return itemId;
@@ -219,6 +250,7 @@ public class FoodItem {
     }
 
     public int getAmountLeft() {
+<<<<<<< HEAD
         return this.amountLeft;
     }
 
@@ -250,4 +282,9 @@ public class FoodItem {
 
         return dateString;
     }
+=======
+        return amountLeft;
+    }
+
+>>>>>>> Simon-branch
 }
