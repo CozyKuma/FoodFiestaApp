@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -28,7 +29,11 @@ public class ItemDetails extends AppCompatActivity {
     private Spinner mCategoryName;
     private TextView mItemDateText;
     private Button mButton;
+    private CheckBox mCheckBoxNotify;
+    private CheckBox mCheckBoxOpen;
     private Button mCancelButton;
+    private boolean notifyMe;
+    private boolean itemOpen;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
 
@@ -38,12 +43,16 @@ public class ItemDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
 
+
         position = getIntent().getExtras().getInt("Position");
 
         mItemNameText = (TextView) findViewById(R.id.textName);
         mCategoryName = (Spinner)findViewById(R.id.categorySpinner);
         mItemDateText = (TextView)findViewById(R.id.dateTextView);
         mButton = (Button)findViewById(R.id.editItemBtn);
+        mCancelButton = (Button)findViewById(R.id.cancelItem);
+        mCheckBoxNotify = (CheckBox)findViewById(R.id.checkBoxNotify);
+        mCheckBoxOpen = (CheckBox)findViewById(R.id.checkBoxOpen);
 
         ArrayAdapter<FoodCategory> adapter = new ArrayAdapter<FoodCategory>(getApplicationContext(), android.R.layout.simple_spinner_item, FoodCategory.getCategoryList());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -55,6 +64,9 @@ public class ItemDetails extends AppCompatActivity {
         calToString.setTime(FoodItem.getListOfItems().get(position).getDateExpire());
         String dateString = calToString.get(Calendar.DAY_OF_MONTH) + "-" + calToString.get(Calendar.MONTH) + "-" + calToString.get(Calendar.YEAR);
         mItemDateText.setText(dateString);
+
+        mCheckBoxOpen.setChecked(FoodItem.getListOfItems().get(position).isOpened());
+        mCheckBoxNotify.setChecked(FoodItem.getListOfItems().get(position).isNotifyMe());
 
         mItemDateText.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -85,20 +97,39 @@ public class ItemDetails extends AppCompatActivity {
 
 
 
+
+
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 confirm();
             }
         });
-        }
+
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancel();
+            }
+        });
+
+
+
+    }
+
 
     public void confirm() {
         FoodItem.getListOfItems().get(position).setItemName((String) mItemNameText.getText().toString());
         FoodItem.getListOfItems().get(position).setCategory((FoodCategory) mCategoryName.getSelectedItem());
         FoodItem.getListOfItems().get(position).setDateExpire((String) mItemDateText.getText().toString());
+        FoodItem.getListOfItems().get(position).setOpened(mCheckBoxOpen.isChecked());
+        FoodItem.getListOfItems().get(position).setNotifyMe(mCheckBoxNotify.isChecked());
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intentInv);
+    }
+
+    public void cancel(){
+        finish();
     }
 
     //private method of your class

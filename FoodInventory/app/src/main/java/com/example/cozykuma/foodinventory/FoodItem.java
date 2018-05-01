@@ -193,6 +193,10 @@ public class FoodItem {
 
     public void setItemName(String name) {this.itemName = name;}
 
+    public void setOpened(Boolean opened){this.opened = opened;}
+
+    public void setNotifyMe(Boolean notifyMe){this.notifyMe = notifyMe;}
+
     public int getItemId() {
         return itemId;
     }
