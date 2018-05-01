@@ -28,18 +28,11 @@ public class MainActivity extends AppCompatActivity {
     //private static final String TAG = "MainActivity";
     private TextView mTextMessage;
     private ListView mListView;
-<<<<<<< HEAD
     private FloatingActionButton mFab;
     private List<FoodItem> foodList;
     private List<FoodCategory> categoryList;
-=======
     private static boolean isFinished = false;
-<<<<<<< HEAD
-    public FoodListAdapter adapter;
->>>>>>> No-Branch
-=======
     private FoodListAdapter adapter;
->>>>>>> Simon-branch
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -47,21 +40,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-<<<<<<< HEAD
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    /*Intent intentDash = new Intent(getApplicationContext(), DashboardActivity.class);
-                    startActivity(intentDash);*/
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    /*Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intentInv);*/
-=======
                 case R.id.navigation_list:
                     Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intentInv);
->>>>>>> No-Branch
                     return true;
                 case R.id.navigation_shoppinglist:
                     Intent intentShoppingList = new Intent(getApplicationContext(), ShoppingList.class);
@@ -81,29 +62,17 @@ public class MainActivity extends AppCompatActivity {
 
         //Log.d(TAG, "onCreate: " + "Started.");
 
-<<<<<<< HEAD
         mTextMessage = (TextView) findViewById(R.id.message);
-        /*BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener); */
-
-        /*mFab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        mFab.setOnClickListener(new View.OnClickListener() {
-=======
-        //mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         FloatingActionButton floatyBoii = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         floatyBoii.setOnClickListener(new View.OnClickListener() {
->>>>>>> No-Branch
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AddItemActivity.class);
                 startActivity(intent);
             }
-<<<<<<< HEAD
-        }); */
-=======
         });
 
         Button sort = (Button) findViewById(R.id.btn_sort);
@@ -174,53 +143,12 @@ public class MainActivity extends AppCompatActivity {
             createDefaultCategories();
             isFinished = true;
         }
->>>>>>> No-Branch
-
 
         mListView = (ListView) findViewById(R.id.foodlistview);
-        foodList = new ArrayList<FoodItem>();
 
-<<<<<<< HEAD
-        // Create Food Items for test
-
-        FoodItem milk = new FoodItem("Milk", "12-04-2018");
-        FoodItem meat = new FoodItem("Meat", "14-04-2018");
-        FoodItem yoghurt = new FoodItem("Yoghurt", "12-04-2018");
-        FoodItem pickles = new FoodItem("Pickles", "14-07-2018");
-        FoodItem cheese = new FoodItem("Cheese", "17-05-2018");
-        FoodItem juice = new FoodItem("Apple Juice", "22-04-2018");
-        FoodItem eggs = new FoodItem("Eggs", "06-06-2018");
-
-        //foodList = FoodItem.getListOfItems();
-        foodList.add(milk);
-        foodList.add(meat);
-        foodList.add(yoghurt);
-        foodList.add(pickles);
-        foodList.add(cheese);
-        foodList.add(juice);
-        foodList.add(eggs);
-
-        /* Collections.sort(foodList, new Comparator<FoodItem>() {
-            @Override
-            public int compare(FoodItem o1, FoodItem o2) {
-                return o1.getDatesLeft() - o2.getDatesLeft();
-            }
-        }); */
-
-<<<<<<< HEAD
-        FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, foodList);
-=======
-        adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
->>>>>>> No-Branch
-        mListView.setAdapter(adapter);
-=======
         adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
-
-
-
->>>>>>> Simon-branch
-    }
+        }
 
     @Override
     protected void onResume() {

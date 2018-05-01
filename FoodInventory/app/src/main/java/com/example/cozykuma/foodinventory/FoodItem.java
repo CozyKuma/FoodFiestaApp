@@ -125,17 +125,6 @@ public class FoodItem {
         listOfItems.add(this);
     }
 
-<<<<<<< HEAD
-    /*public static void addItem(String itemName, Date dateExpire) {
-        FoodItem newFoodItem = new FoodItem(itemName, dateExpire);
-        //listOfItems.add(newFoodItem);
-    } */
-
-    /*public static void addItem(String itemName, String dateExpire) {
-        FoodItem newFoodItem = new FoodItem(itemName, dateExpire);
-        //listOfItems.add(newFoodItem);
-    }*/
-=======
     public static ArrayList<FoodItem> getListOfItems() {
         return listOfItems;
     }
@@ -178,11 +167,8 @@ public class FoodItem {
             });
         }
 
-
         return list;
     }
->>>>>>> No-Branch
-
     public static int daysBetween(Date d1, Date d2) {
         return Days.daysBetween(
                 new org.joda.time.LocalDate(d1.getTime()),
@@ -250,7 +236,6 @@ public class FoodItem {
     }
 
     public int getAmountLeft() {
-<<<<<<< HEAD
         return this.amountLeft;
     }
 
@@ -282,9 +267,4 @@ public class FoodItem {
 
         return dateString;
     }
-=======
-        return amountLeft;
-    }
-
->>>>>>> Simon-branch
 }

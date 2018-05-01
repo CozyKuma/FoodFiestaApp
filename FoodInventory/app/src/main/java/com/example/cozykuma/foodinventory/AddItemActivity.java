@@ -168,13 +168,9 @@ public class AddItemActivity extends AppCompatActivity {
         String quantityText = quantityView.getEditableText().toString();
         int quantity = Integer.parseInt(quantityText);
 
-<<<<<<< HEAD
-        //FoodItem newItem = new FoodItem(itemName, new Date());
-=======
         for(int i=0; i<quantity; i++) {
             FoodItem newItem = new FoodItem(itemName, expireDate, category, notifyMe, itemOpen);
         }
->>>>>>> No-Branch
 
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intentInv);
