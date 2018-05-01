@@ -13,11 +13,8 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-<<<<<<< HEAD
 import android.widget.Button;
-=======
 import android.widget.AdapterView;
->>>>>>> origin/Emil-Branch
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -151,26 +148,22 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         mListView = (ListView) findViewById(R.id.foodlistview);
 
-        adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
-        mListView.setAdapter(adapter);
-<<<<<<< HEAD
-        }
-=======
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent detailsIntent = new Intent(view.getContext(),ItemDetails.class);
-               // Bundle itemBundle = new Bundle();
+                // Bundle itemBundle = new Bundle();
                 //itemBundle.putSerializable("List", FoodItem.getListOfItems());
-               // detailsIntent.putExtra("List",FoodItem.getListOfItems());
+                // detailsIntent.putExtra("List",FoodItem.getListOfItems());
                 detailsIntent.putExtra("Position",i);
                 startActivity(detailsIntent);
             }
         });
-    }
->>>>>>> origin/Emil-Branch
 
+        adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
+        mListView.setAdapter(adapter);
+        }
 
     @Override
     protected void onResume() {
