@@ -261,6 +261,15 @@ public class FoodItem {
         toast.show();
     }
 
+    public void setDateExpire(Date date) {
+        this.dateExpire = date;
+    }
+
+    public void setDateExpire(String dateString) {
+        Date date = dtf.parseDateTime(dateString).toDate();
+        setDateExpire(date);
+    }
+
     public static String addDatePreset(FoodCategory category) {
         Date today = new Date();
         DateTime jodaToday = new DateTime(today);

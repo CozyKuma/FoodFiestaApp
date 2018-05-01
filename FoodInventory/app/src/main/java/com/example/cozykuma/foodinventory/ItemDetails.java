@@ -14,7 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
+import android.content.Intent;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -96,6 +96,7 @@ public class ItemDetails extends AppCompatActivity {
     public void confirm() {
         FoodItem.getListOfItems().get(position).setItemName((String) mItemNameText.getText().toString());
         FoodItem.getListOfItems().get(position).setCategory((FoodCategory) mCategoryName.getSelectedItem());
+        FoodItem.getListOfItems().get(position).setDateExpire((String) mItemDateText.getText().toString());
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intentInv);
     }
