@@ -2,6 +2,7 @@ package com.example.cozykuma.foodinventory;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -13,20 +14,25 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable {
 
     //private static final String TAG = "MainActivity";
     private TextView mTextMessage;
     private ListView mListView;
+    private FloatingActionButton mFab;
+    private List<FoodItem> foodList;
+    private List<FoodCategory> categoryList;
     private static boolean isFinished = false;
     private FoodListAdapter adapter;
 
@@ -37,17 +43,14 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_list:
-                    //mTextMessage.setText(R.string.title_home);
-                    Intent intentDash = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intentDash);
-                    return true;
-                case R.id.navigation_shoppinglist:
-                    //mTextMessage.setText(R.string.title_dashboard);
                     Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intentInv);
                     return true;
+                case R.id.navigation_shoppinglist:
+                    Intent intentShoppingList = new Intent(getApplicationContext(), ShoppingList.class);
+                    startActivity(intentShoppingList);
+                    return true;
                 case R.id.navigation_settings:
-                    //mTextMessage.setText(R.string.title_notifications);
                     return true;
             }
             return false;
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Log.d(TAG, "onCreate: " + "Started.");
 
-        //mTextMessage = (TextView) findViewById(R.id.message);
+        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -143,15 +146,24 @@ public class MainActivity extends AppCompatActivity {
             isFinished = true;
         }
 
-
         mListView = (ListView) findViewById(R.id.foodlistview);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent detailsIntent = new Intent(view.getContext(),ItemDetails.class);
+                // Bundle itemBundle = new Bundle();
+                //itemBundle.putSerializable("List", FoodItem.getListOfItems());
+                // detailsIntent.putExtra("List",FoodItem.getListOfItems());
+                detailsIntent.putExtra("Position",i);
+                startActivity(detailsIntent);
+            }
+        });
 
         adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
-
-
-
-    }
+        }
 
     @Override
     protected void onResume() {
@@ -172,9 +184,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void createDefaultCategories() {
-        FoodCategory milk = new FoodCategory("Milk", 1, 7);
-        FoodCategory meat = new FoodCategory("Meat", 2, 7);
-        FoodCategory vegetable = new FoodCategory("Vegetables", 3, 10);
-        FoodCategory fruit = new FoodCategory("Fruit", 4, 14);
+        FoodCategory defaultCat = new FoodCategory("Default", 0, 0);
+        FoodCategory milk = new FoodCategory("Milk", 1, 7, "drawable://" + R.drawable.milk128px);
+        FoodCategory meat = new FoodCategory("Meat", 2, 7, "drawable://" + R.drawable.meat128px);
+        FoodCategory vegetable = new FoodCategory("Vegetables", 3, 10, "drawable://" + R.drawable.vegetables128px);
+        FoodCategory fruit = new FoodCategory("Fruit", 4, 14, "drawable://" + R.drawable.fruit128px);
     }
 }
