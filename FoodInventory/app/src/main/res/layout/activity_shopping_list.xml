@@ -2,13 +2,12 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.cozykuma.foodinventory.MainActivity">
+    tools:context=".ShoppingList">
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/floatingActionButton_shoppinglist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -18,26 +17,26 @@
         android:clickable="true"
         android:tint="@android:color/background_light"
         app:backgroundTint="@color/Button_Highlight_Color"
-        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_shoppinglist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.935"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.979"
-    app:srcCompat="@drawable/ic_add_black_24dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.979"
+        app:srcCompat="@drawable/ic_add_black_24dp" />
 
     <ListView
-        android:id="@+id/foodlistview"
+        android:id="@+id/shoppinglist_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_shoppinglist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+        android:id="@+id/navigation_shoppinglist"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"

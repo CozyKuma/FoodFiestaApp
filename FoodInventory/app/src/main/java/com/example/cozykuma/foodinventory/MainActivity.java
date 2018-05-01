@@ -2,6 +2,7 @@ package com.example.cozykuma.foodinventory;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -25,9 +26,14 @@ public class MainActivity extends AppCompatActivity {
     //private static final String TAG = "MainActivity";
     private TextView mTextMessage;
     private ListView mListView;
+<<<<<<< HEAD
     private FloatingActionButton mFab;
     private List<FoodItem> foodList;
     private List<FoodCategory> categoryList;
+=======
+    private static boolean isFinished = false;
+    public FoodListAdapter adapter;
+>>>>>>> No-Branch
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
+<<<<<<< HEAD
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
                     /*Intent intentDash = new Intent(getApplicationContext(), DashboardActivity.class);
@@ -44,9 +51,17 @@ public class MainActivity extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_dashboard);
                     /*Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intentInv);*/
+=======
+                case R.id.navigation_list:
+                    Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intentInv);
+>>>>>>> No-Branch
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                case R.id.navigation_shoppinglist:
+                    Intent intentShoppingList = new Intent(getApplicationContext(), ShoppingList.class);
+                    startActivity(intentShoppingList);
+                    return true;
+                case R.id.navigation_settings:
                     return true;
             }
             return false;
@@ -60,22 +75,41 @@ public class MainActivity extends AppCompatActivity {
 
         //Log.d(TAG, "onCreate: " + "Started.");
 
+<<<<<<< HEAD
         mTextMessage = (TextView) findViewById(R.id.message);
         /*BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener); */
 
         /*mFab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         mFab.setOnClickListener(new View.OnClickListener() {
+=======
+        //mTextMessage = (TextView) findViewById(R.id.message);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        FloatingActionButton floatyBoii = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        floatyBoii.setOnClickListener(new View.OnClickListener() {
+>>>>>>> No-Branch
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AddItemActivity.class);
                 startActivity(intent);
             }
+<<<<<<< HEAD
         }); */
+=======
+        });
+
+        if(!isFinished) {
+            createDefaultCategories();
+            isFinished = true;
+        }
+>>>>>>> No-Branch
 
         mListView = (ListView) findViewById(R.id.foodlistview);
         foodList = new ArrayList<FoodItem>();
 
+<<<<<<< HEAD
         // Create Food Items for test
 
         FoodItem milk = new FoodItem("Milk", "12-04-2018");
@@ -103,7 +137,35 @@ public class MainActivity extends AppCompatActivity {
         }); */
 
         FoodListAdapter adapter = new FoodListAdapter(this, R.layout.simple_food_item1, foodList);
+=======
+        adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
+>>>>>>> No-Branch
         mListView.setAdapter(adapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isFinishing()) {
+            isFinished = false;
+        }
+    }
+
+    protected void createDefaultCategories() {
+        FoodCategory defaultCat = new FoodCategory("Default", 0, 0);
+        FoodCategory milk = new FoodCategory("Milk", 1, 7, "drawable://" + R.drawable.milk128px);
+        FoodCategory meat = new FoodCategory("Meat", 2, 7, "drawable://" + R.drawable.meat128px);
+        FoodCategory vegetable = new FoodCategory("Vegetables", 3, 10, "drawable://" + R.drawable.vegetables128px);
+        FoodCategory fruit = new FoodCategory("Fruit", 4, 14, "drawable://" + R.drawable.fruit128px);
+    }
 }

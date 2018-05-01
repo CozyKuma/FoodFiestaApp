@@ -2,6 +2,7 @@ package com.example.cozykuma.foodinventory;
 
 import android.media.Image;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -12,18 +13,31 @@ public class FoodCategory {
 
     private String categoryName;
     private int id;
-    private Image image;
-    private Date datePreset;
+    private String imgURL;
+    private int datePreset;
+    private static ArrayList<FoodCategory> foodCategories = new ArrayList<>();
 
-    public FoodCategory(String categoryName, int id, Image image, Date datePreset) {
+    public FoodCategory(String categoryName, int id, int datePreset, String image) {
         this.categoryName = categoryName;
         this.id = id;
-        this.image = image;
+        this.imgURL = image;
         this.datePreset = datePreset;
+        foodCategories.add(this);
+    }
+
+    public FoodCategory(String categoryName, int id,  int datePreset) {
+        this.categoryName = categoryName;
+        this.id = id;
+        this.datePreset = datePreset;
+        foodCategories.add(this);
     }
 
     public String getCategoryName() {
         return categoryName;
+    }
+
+    public static ArrayList<FoodCategory> getCategoryList() {
+        return foodCategories;
     }
 
     public void setCategoryName(String categoryName) {
@@ -38,19 +52,24 @@ public class FoodCategory {
         this.id = id;
     }
 
-    public Image getImage() {
-        return image;
+    public String getImage() {
+        return imgURL;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImage(String image) {
+        this.imgURL = image;
     }
 
-    public Date getDatePreset() {
+    public int getDatePreset() {
         return datePreset;
     }
 
-    public void setDatePreset(Date datePreset) {
+    public void setDatePreset(int datePreset) {
         this.datePreset = datePreset;
+    }
+
+    @Override
+    public String toString() {
+        return categoryName;
     }
 }

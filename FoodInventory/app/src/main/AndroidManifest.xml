@@ -19,9 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddItemActivity" />
-        <activity
-            android:name=".DashboardActivity"
-            android:label="@string/title_activity_dashboard"></activity>
+        >>>>>>> No-Branch
+        <activity android:name=".ShoppingList" />
+        <activity android:name=".AddShoppingItem"></activity>
     </application>
 
 </manifest>
