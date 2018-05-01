@@ -50,6 +50,11 @@ public class ItemDetails extends AppCompatActivity {
 
         mCategoryName.setAdapter(adapter);
         mItemNameText.setText(FoodItem.getListOfItems().get(position).getItemName());
+        mCategoryName.setSelection(getIndex(mCategoryName, FoodItem.getListOfItems().get(position).getCategory().toString()));
+        Calendar calToString = Calendar.getInstance();
+        calToString.setTime(FoodItem.getListOfItems().get(position).getDateExpire());
+        String dateString = calToString.get(Calendar.DAY_OF_MONTH) + "-" + calToString.get(Calendar.MONTH) + "-" + calToString.get(Calendar.YEAR);
+        mItemDateText.setText(dateString);
 
         mItemDateText.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -86,11 +91,6 @@ public class ItemDetails extends AppCompatActivity {
                 confirm();
             }
         });
-
-       // categoryName.setSelection(FoodItem.getListOfItems().get(position));
-
-
-        //itemDateText.setText((CharSequence) FoodItem.getListOfItems().get(position).getDateExpire());
         }
 
     public void confirm() {
@@ -98,5 +98,15 @@ public class ItemDetails extends AppCompatActivity {
         FoodItem.getListOfItems().get(position).setCategory((FoodCategory) mCategoryName.getSelectedItem());
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intentInv);
+    }
+
+    //private method of your class
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+        return 0;
     }
 }
