@@ -13,17 +13,22 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+<<<<<<< HEAD
 import android.widget.Button;
+=======
+import android.widget.AdapterView;
+>>>>>>> origin/Emil-Branch
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable {
 
     //private static final String TAG = "MainActivity";
     private TextView mTextMessage;
@@ -148,7 +153,24 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
+<<<<<<< HEAD
         }
+=======
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent detailsIntent = new Intent(view.getContext(),ItemDetails.class);
+               // Bundle itemBundle = new Bundle();
+                //itemBundle.putSerializable("List", FoodItem.getListOfItems());
+               // detailsIntent.putExtra("List",FoodItem.getListOfItems());
+                detailsIntent.putExtra("Position",i);
+                startActivity(detailsIntent);
+            }
+        });
+    }
+>>>>>>> origin/Emil-Branch
+
 
     @Override
     protected void onResume() {

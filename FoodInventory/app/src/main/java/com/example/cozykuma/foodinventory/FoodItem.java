@@ -179,6 +179,7 @@ public class FoodItem {
         return itemName;
     }
 
+<<<<<<< HEAD
     public FoodCategory getCategory() {
         return category;
     }
@@ -190,6 +191,13 @@ public class FoodItem {
     public void setCategory(FoodCategory category) {
         this.category = category;
     }
+=======
+    public void setItemName(String name) {this.itemName = name;}
+
+    public void setCategory(FoodCategory category) { this.category = category; }
+>>>>>>> origin/Emil-Branch
+
+    public String getCategory() {return this.category.getCategoryName();}
 
     public int getItemId() {
         return itemId;

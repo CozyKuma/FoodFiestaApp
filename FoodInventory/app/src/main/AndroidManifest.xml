@@ -19,9 +19,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddItemActivity" />
+<<<<<<< HEAD
         >>>>>>> No-Branch
         <activity android:name=".ShoppingList" />
         <activity android:name=".AddShoppingItem"></activity>
+=======
+        <activity
+            android:name=".DashboardActivity"
+            android:label="@string/title_activity_dashboard" />
+        <activity android:name=".ItemDetails"></activity>
+>>>>>>> origin/Emil-Branch
     </application>
 
 </manifest>
