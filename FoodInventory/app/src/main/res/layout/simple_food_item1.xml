@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="25"
                 android:fontFamily="@font/roboto"
-                android:text="TextView"
+                android:text="ProgressValue"
                 android:textAlignment="viewStart"
                 android:textSize="12sp"
                 android:typeface="normal" />
@@ -101,6 +101,7 @@
         android:id="@+id/daysleft"
         android:layout_width="30dp"
         android:layout_height="match_parent"
+        android:layout_marginRight="16dp"
         android:layout_weight="25"
         android:baselineAligned="false"
         android:fontFamily="@font/roboto"

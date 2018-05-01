@@ -40,11 +40,33 @@
 
 
     <Button
+<<<<<<< HEAD
+=======
+        android:id="@+id/btn_edit"
+        android:layout_width="125dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="1dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/foodlistview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_sort"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Edit" />
+
+    <Button
+>>>>>>> 440d517876c30892f61e83971d3263c4b83bcf18
         android:id="@+id/btn_sort"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginBottom="1dp"
+<<<<<<< HEAD
         android:layout_marginEnd="16dp"
+=======
+        android:layout_marginEnd="4dp"
+>>>>>>> 440d517876c30892f61e83971d3263c4b83bcf18
         android:layout_marginStart="16dp"
         android:layout_marginTop="1dp"
         android:text="Button"

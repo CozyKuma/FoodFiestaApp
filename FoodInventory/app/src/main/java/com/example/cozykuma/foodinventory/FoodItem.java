@@ -122,6 +122,13 @@ public class FoodItem {
                     return o1.getItemCategoryName().compareTo(o2.getItemCategoryName());
                 }
             });
+        } else if (sort == sortTypes.PROGRESS) {
+            Collections.sort(list, new Comparator<FoodItem>() {
+                @Override
+                public int compare(FoodItem o1, FoodItem o2) {
+                    return o1.getAmountLeft() - o2.getAmountLeft();
+                }
+            });
         }
 
 
