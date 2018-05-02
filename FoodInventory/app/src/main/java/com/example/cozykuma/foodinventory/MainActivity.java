@@ -149,8 +149,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
 
-
-
     }
 
     @Override
