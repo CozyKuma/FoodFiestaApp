@@ -22,6 +22,12 @@
         <activity android:name=".ShoppingList" />
         <activity android:name=".AddShoppingItem"></activity>
         <activity android:name=".ItemDetails"></activity>
+        <receiver android:name=".NotificationSystem">
+            <intent-filter>
+                <action android:name="android.intent.action.DATE_CHANGED">
+                </action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

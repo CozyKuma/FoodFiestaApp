@@ -8,4 +8,6 @@
     <string name="nav_settings">Settings</string>
     <string name="nav_list">Shopping List</string>
     <string name="nav_inventory">Inventory</string>
+    <string name="foodInvChannelName">Food Inventory Notification System</string>
+    <string name="foodInvChannelDesc">This channel provides notifications from the food inventory to the user.</string>
 </resources>
