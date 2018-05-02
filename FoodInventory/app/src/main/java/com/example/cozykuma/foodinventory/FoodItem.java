@@ -245,6 +245,8 @@ public class FoodItem {
         return this.amountLeft;
     }
 
+    public void setAmountLeft(int amountLeft) {this.amountLeft = amountLeft;}
+
     public void useAmount(int amountUsed) {
         this.amountLeft = this.amountLeft - amountUsed;
     }
