@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.content.Intent;
@@ -35,6 +37,11 @@ public class ItemDetails extends AppCompatActivity {
     private boolean notifyMe;
     private boolean itemOpen;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private EditText mAmountText;
+    private int percentage;
+    ImageButton mAmountAddBtn;
+    ImageButton mAmountRemovebBtn;
+
 
 
 
@@ -53,6 +60,10 @@ public class ItemDetails extends AppCompatActivity {
         mCancelButton = (Button)findViewById(R.id.cancelItem);
         mCheckBoxNotify = (CheckBox)findViewById(R.id.checkBoxNotify);
         mCheckBoxOpen = (CheckBox)findViewById(R.id.checkBoxOpen);
+        mAmountText = (EditText)findViewById(R.id.amountEditText);
+        mAmountAddBtn = (ImageButton)findViewById(R.id.addAmount);
+        mAmountRemovebBtn = (ImageButton)findViewById(R.id.removeAmount);
+        percentage = 10;
 
         ArrayAdapter<FoodCategory> adapter = new ArrayAdapter<FoodCategory>(getApplicationContext(), android.R.layout.simple_spinner_item, FoodCategory.getCategoryList());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -67,6 +78,12 @@ public class ItemDetails extends AppCompatActivity {
 
         mCheckBoxOpen.setChecked(FoodItem.getListOfItems().get(position).isOpened());
         mCheckBoxNotify.setChecked(FoodItem.getListOfItems().get(position).isNotifyMe());
+
+        mAmountText.setText(String.valueOf(FoodItem.getListOfItems().get(position).getAmountLeft()));
+
+
+
+
 
         mItemDateText.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -95,9 +112,19 @@ public class ItemDetails extends AppCompatActivity {
             }
         };
 
+        mAmountAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addAmount();
+            }
+        });
 
-
-
+        mAmountRemovebBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeAmount();
+            }
+        });
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +151,10 @@ public class ItemDetails extends AppCompatActivity {
         FoodItem.getListOfItems().get(position).setDateExpire((String) mItemDateText.getText().toString());
         FoodItem.getListOfItems().get(position).setOpened(mCheckBoxOpen.isChecked());
         FoodItem.getListOfItems().get(position).setNotifyMe(mCheckBoxNotify.isChecked());
+        if (Integer.parseInt(mAmountText.getText().toString()) > 100){
+            mAmountText.setText("100");
+        }
+        FoodItem.getListOfItems().get(position).setAmountLeft(Integer.parseInt(String.valueOf(mAmountText.getText())));
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intentInv);
     }
@@ -140,5 +171,27 @@ public class ItemDetails extends AppCompatActivity {
             }
         }
         return 0;
+    }
+
+    public void addAmount() {
+        if (FoodItem.getListOfItems().get(position).getAmountLeft() < 100) {
+            FoodItem.getListOfItems().get(position).useAmount(-percentage);
+            mAmountText.setText(String.valueOf(FoodItem.getListOfItems().get(position).getAmountLeft()), TextView.BufferType.EDITABLE);
+        }
+        if (FoodItem.getListOfItems().get(position).getAmountLeft() >= 100){
+            FoodItem.getListOfItems().get(position).setAmountLeft(100);
+            mAmountText.setText("100");
+        }
+    }
+
+    public void removeAmount() {
+        if (FoodItem.getListOfItems().get(position).getAmountLeft() > 0) {
+            FoodItem.getListOfItems().get(position).useAmount(percentage);
+            mAmountText.setText(String.valueOf(FoodItem.getListOfItems().get(position).getAmountLeft()), TextView.BufferType.EDITABLE);
+        }
+        if (FoodItem.getListOfItems().get(position).getAmountLeft() <= 0){
+            FoodItem.getListOfItems().get(position).setAmountLeft(0);
+            mAmountText.setText("0");
+        }
     }
 }
