@@ -85,10 +85,11 @@
 
             <TextView
                 android:id="@+id/progressValue"
-                android:layout_width="10dp"
+                android:layout_width="8dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="25"
                 android:fontFamily="@font/roboto"
+                android:layout_marginLeft="5dp"
                 android:text="ProgressValue"
                 android:textAlignment="viewStart"
                 android:textSize="12sp"
