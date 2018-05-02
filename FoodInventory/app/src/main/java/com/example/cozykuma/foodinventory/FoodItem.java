@@ -1,5 +1,10 @@
 package com.example.cozykuma.foodinventory;
 
+import android.app.Notification;
+import android.content.Context;
+import android.support.v4.app.NotificationCompat;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -37,6 +42,7 @@ public class FoodItem {
     private boolean opened;
     private boolean used;
     private boolean notifyMe;
+    private static boolean notifySetting = true;
     private FoodCategory category;
     private int daysLeft;
     private int amountLeft;
@@ -48,9 +54,8 @@ public class FoodItem {
         this.opened = false;
         this.used = false;
         this.dateAdded = new Date();
-        //System.out.println(dtf.parseDateTime(dateExpire));
         this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
-        this.notifyMe = true;
+        this.notifyMe = notifySetting;
         this.amountLeft = 100;
         countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
@@ -65,9 +70,24 @@ public class FoodItem {
         this.used = false;
         this.dateAdded = new Date();
         this.category = category;
-        //System.out.println(dtf.parseDateTime(dateExpire));
         this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
-        this.notifyMe = true;
+        this.notifyMe = notifySetting;
+        this.amountLeft = 100;
+        countId++;
+        daysLeft = daysBetween(new Date(), this.dateExpire);
+        listOfItems.add(this);
+    }
+
+    FoodItem(String itemName, String dateExpire, FoodCategory category, boolean notify, boolean open) {
+        this.itemName = itemName;
+        this.itemId = countId;
+        this.expired = false;
+        this.opened = open;
+        this.used = false;
+        this.dateAdded = new Date();
+        this.category = category;
+        this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
+        this.notifyMe = notify;
         this.amountLeft = 100;
         countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
@@ -82,7 +102,23 @@ public class FoodItem {
         this.used = false;
         this.dateAdded = new Date();
         this.dateExpire = dateExpire;
-        this.notifyMe = true;
+        this.notifyMe = notifySetting;
+        this.amountLeft = 100;
+        countId++;
+        daysLeft = daysBetween(new Date(), this.dateExpire);
+        listOfItems.add(this);
+    }
+
+    FoodItem(String itemName, FoodCategory category) {
+        this.itemName = itemName;
+        this.category = category;
+        this.itemId = countId;
+        this.expired = false;
+        this.opened = false;
+        this.used = false;
+        this.dateAdded = new Date();
+        this.dateExpire = dtf.parseDateTime(addDatePreset(category)).toDate();
+        this.notifyMe = notifySetting;
         this.amountLeft = 100;
         countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
@@ -131,10 +167,8 @@ public class FoodItem {
             });
         }
 
-
         return list;
     }
-
     public static int daysBetween(Date d1, Date d2) {
         return Days.daysBetween(
                 new org.joda.time.LocalDate(d1.getTime()),
@@ -156,6 +190,8 @@ public class FoodItem {
     public void setCategory(FoodCategory category) {
         this.category = category;
     }
+
+    public void setItemName(String name) {this.itemName = name;}
 
     public int getItemId() {
         return itemId;
@@ -202,7 +238,35 @@ public class FoodItem {
     }
 
     public int getAmountLeft() {
-        return amountLeft;
+        return this.amountLeft;
     }
 
+    public void useAmount(int amountUsed) {
+        this.amountLeft = this.amountLeft - amountUsed;
+    }
+
+    public static boolean getNotifySetting() {
+        return notifySetting;
+    }
+
+    public static void setNotifySetting(boolean bool, Context context) {
+        notifySetting = bool;
+        String toastText;
+        if (notifySetting) {
+            toastText = "Items will now be set to notify you per default.";
+        } else {
+            toastText = "Items will no longer be set to notify you per default.";
+        }
+        Toast toast = Toast.makeText(context, toastText, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    public static String addDatePreset(FoodCategory category) {
+        Date today = new Date();
+        DateTime jodaToday = new DateTime(today);
+        jodaToday = jodaToday.plusDays(category.getDatePreset());
+        String dateString = jodaToday.getDayOfMonth() + "-" + jodaToday.getMonthOfYear() + "-" + jodaToday.getYear();
+
+        return dateString;
+    }
 }
