@@ -18,6 +18,7 @@ import org.joda.time.format.DateTimeFormat;
 /**
  * Created by CozyKuma on 04-04-2018.
  */
+
 @Entity
 public class FoodItem {
 
@@ -47,12 +48,18 @@ public class FoodItem {
 
     @ColumnInfo(name = "date_expire")
     private Date dateExpire;
+
     private Date dateOpened;
     private boolean expired;
     private boolean opened;
     private boolean used;
+
+    @ColumnInfo(name = "notify_setting")
     private boolean notifyMe;
+
     private static boolean notifySetting = true;
+
+    @ColumnInfo(name = "item_category")
     private FoodCategory category;
 
     @ColumnInfo(name = "days_left")
