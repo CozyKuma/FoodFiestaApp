@@ -1,20 +1,12 @@
 package com.example.cozykuma.foodinventory;
 
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.joda.time.*;
 import org.joda.time.format.DateTimeFormat;
@@ -139,7 +131,7 @@ public class FoodItem {
             Collections.sort(list, new Comparator<FoodItem>() {
                 @Override
                 public int compare(FoodItem o1, FoodItem o2) {
-                    return o1.getDatesLeft() - o2.getDatesLeft();
+                    return o1.getDaysLeft() - o2.getDaysLeft();
                 }
             });
         } else if (sort == sortTypes.DATEADDED) {
@@ -218,8 +210,12 @@ public class FoodItem {
         return dateOpened;
     }
 
-    public int getDatesLeft() {
+    public int getDaysLeft() {
         return daysLeft;
+    }
+
+    public void setDaysLeft(int days) {
+        this.daysLeft = days;
     }
 
     public boolean isExpired() {
