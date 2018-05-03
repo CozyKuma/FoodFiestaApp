@@ -1,6 +1,8 @@
 package com.example.cozykuma.foodinventory;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -34,6 +36,7 @@ public class ItemDetails extends AppCompatActivity {
     private CheckBox mCheckBoxNotify;
     private CheckBox mCheckBoxOpen;
     private Button mCancelButton;
+    private Button mRemoveButton;
     private boolean notifyMe;
     private boolean itemOpen;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -58,6 +61,7 @@ public class ItemDetails extends AppCompatActivity {
         mItemDateText = (TextView)findViewById(R.id.dateTextView);
         mButton = (Button)findViewById(R.id.editItemBtn);
         mCancelButton = (Button)findViewById(R.id.cancelItem);
+        mRemoveButton = (Button)findViewById(R.id.removeItem);
         mCheckBoxNotify = (CheckBox)findViewById(R.id.checkBoxNotify);
         mCheckBoxOpen = (CheckBox)findViewById(R.id.checkBoxOpen);
         mAmountText = (EditText)findViewById(R.id.amountEditText);
@@ -140,6 +144,24 @@ public class ItemDetails extends AppCompatActivity {
             }
         });
 
+        mRemoveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder adbRemove = new AlertDialog.Builder(ItemDetails.this);
+                adbRemove.setIcon(R.drawable.ic_remove_black_24dp); //  <---- PLACEHOLDER(?)
+                adbRemove.setTitle("Remove "+FoodItem.getListOfItems().get(position).getItemName()+"?");
+                adbRemove.setMessage("This item will be removed from your Inventory permanently");
+                adbRemove.setNegativeButton("Cancel",null);
+                adbRemove.setPositiveButton("Remove", new AlertDialog.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        remove();
+                    }
+                });
+                adbRemove.show();
+            }
+        });
+
 
 
     }
@@ -160,6 +182,11 @@ public class ItemDetails extends AppCompatActivity {
     }
 
     public void cancel(){
+        finish();
+    }
+
+    public void remove(){
+        FoodItem.getListOfItems().remove(position);
         finish();
     }
 

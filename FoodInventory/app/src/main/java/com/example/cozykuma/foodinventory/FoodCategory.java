@@ -1,9 +1,7 @@
 package com.example.cozykuma.foodinventory;
 
-import android.media.Image;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by CozyKuma on 04-04-2018.
@@ -55,6 +53,7 @@ public class FoodCategory {
     public String getImage() {
         return imgURL;
     }
+
 
     public void setImage(String image) {
         this.imgURL = image;

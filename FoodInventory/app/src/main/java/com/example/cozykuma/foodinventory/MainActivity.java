@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         setContentView(R.layout.activity_main);
 
         //Log.d(TAG, "onCreate: " + "Started.");
-
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -161,9 +160,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent detailsIntent = new Intent(view.getContext(),ItemDetails.class);
-                // Bundle itemBundle = new Bundle();
-                //itemBundle.putSerializable("List", FoodItem.getListOfItems());
-                // detailsIntent.putExtra("List",FoodItem.getListOfItems());
                 detailsIntent.putExtra("Position",i);
                 startActivity(detailsIntent);
             }
@@ -176,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     @Override
     protected void onResume() {
         super.onResume();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -198,4 +195,5 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         FoodCategory vegetable = new FoodCategory("Vegetables", 3, 10, "drawable://" + R.drawable.vegetables128px);
         FoodCategory fruit = new FoodCategory("Fruit", 4, 14, "drawable://" + R.drawable.fruit128px);
     }
+
 }
