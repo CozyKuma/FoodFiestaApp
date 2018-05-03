@@ -38,22 +38,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
- <Button
-
-        android:id="@+id/btn_sort"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="1dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="1dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/foodlistview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Sort" />
-
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="0dp"
@@ -70,6 +54,34 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/navigation"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <Button
+            android:id="@+id/btn_sort"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="175dp"
+            android:layout_marginRight="175dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_sort_black_24dp"
+            android:backgroundTint="@color/navIconColor"
+            android:elevation="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/foodlistview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>

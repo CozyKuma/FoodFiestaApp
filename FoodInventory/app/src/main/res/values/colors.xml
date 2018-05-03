@@ -5,5 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="Button_Highlight_Color">#4fc3f7</color>
     <color name="navStringColor">#ffffff</color>
-    <color name="navIconColor">#FF4FC3F7</color>
+    <color name="navIconColor">#4fc3f7</color>
 </resources>
