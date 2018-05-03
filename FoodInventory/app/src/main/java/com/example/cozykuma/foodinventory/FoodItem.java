@@ -19,7 +19,7 @@ import org.joda.time.format.DateTimeFormat;
  * Created by CozyKuma on 04-04-2018.
  */
 
-@Entity
+//@Entity
 public class FoodItem {
 
     enum sortTypes {
@@ -33,20 +33,20 @@ public class FoodItem {
     private static ArrayList<FoodItem> listOfItems = new ArrayList<FoodItem>();
     private org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy");
 
-    @ColumnInfo(name = "item_name")
+    //@ColumnInfo(name = "item_name")
     private String itemName;
 
     private static int countId = 0;
 
-    @PrimaryKey
+    //@PrimaryKey
     private int itemId;
 
     private static sortTypes sortType = sortTypes.DAYSLEFT;
 
-    @ColumnInfo(name = "date_added")
+    //@ColumnInfo(name = "date_added")
     private Date dateAdded;
 
-    @ColumnInfo(name = "date_expire")
+    //@ColumnInfo(name = "date_expire")
     private Date dateExpire;
 
     private Date dateOpened;
@@ -54,18 +54,18 @@ public class FoodItem {
     private boolean opened;
     private boolean used;
 
-    @ColumnInfo(name = "notify_setting")
+    //@ColumnInfo(name = "notify_setting")
     private boolean notifyMe;
 
     private static boolean notifySetting = true;
 
-    @ColumnInfo(name = "item_category")
+    //@ColumnInfo(name = "item_category")
     private FoodCategory category;
 
-    @ColumnInfo(name = "days_left")
+    //@ColumnInfo(name = "days_left")
     private int daysLeft;
 
-    @ColumnInfo(name = "amount_left")
+    //@ColumnInfo(name = "amount_left")
     private int amountLeft;
 
     FoodItem(String itemName, String dateExpire) {

@@ -2,7 +2,7 @@ package com.example.cozykuma.foodinventory;
 
 import android.app.Application;
 import android.arch.persistence.room.Room;
-
+/*
 public class App extends Application {
 
     private static final String DATABASE_NAME = "FoodItemDatabase";
@@ -15,3 +15,4 @@ public class App extends Application {
         database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME).build();
     }
 }
+*/

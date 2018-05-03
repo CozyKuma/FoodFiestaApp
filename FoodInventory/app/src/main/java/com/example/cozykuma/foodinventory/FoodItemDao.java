@@ -7,7 +7,7 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import java.util.List;
-
+/*
 @Dao
 public interface FoodItemDao {
     @Query("SELECT * FROM fooditem")
@@ -28,3 +28,4 @@ public interface FoodItemDao {
     @Delete
     void delete(FoodItem foodItem);
 }
+*/
