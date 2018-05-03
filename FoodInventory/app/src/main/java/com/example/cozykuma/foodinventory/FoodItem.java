@@ -1,7 +1,9 @@
 package com.example.cozykuma.foodinventory;
 
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.content.Context;
 import android.widget.Toast;
@@ -19,7 +21,7 @@ import org.joda.time.format.DateTimeFormat;
  * Created by CozyKuma on 04-04-2018.
  */
 
-//@Entity
+@Entity(tableName = "foodItems")
 public class FoodItem {
 
     enum sortTypes {
@@ -31,43 +33,56 @@ public class FoodItem {
     }
 
     private static ArrayList<FoodItem> listOfItems = new ArrayList<FoodItem>();
-    private org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy");
 
-    //@ColumnInfo(name = "item_name")
+    @Ignore
+    private static org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy");
+
+    @ColumnInfo(name = "item_name")
     private String itemName;
 
+    @Ignore
     private static int countId = 0;
 
-    //@PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int itemId;
 
+    @Ignore
     private static sortTypes sortType = sortTypes.DAYSLEFT;
 
-    //@ColumnInfo(name = "date_added")
+    @ColumnInfo(name = "date_added")
     private Date dateAdded;
 
-    //@ColumnInfo(name = "date_expire")
+    @ColumnInfo(name = "date_expire")
     private Date dateExpire;
 
+    @Ignore
     private Date dateOpened;
+
+    @Ignore
     private boolean expired;
+
+    @Ignore
     private boolean opened;
+
+    @Ignore
     private boolean used;
 
-    //@ColumnInfo(name = "notify_setting")
+    @ColumnInfo(name = "notify_setting")
     private boolean notifyMe;
 
+    @Ignore
     private static boolean notifySetting = true;
 
-    //@ColumnInfo(name = "item_category")
+    @Embedded
     private FoodCategory category;
 
-    //@ColumnInfo(name = "days_left")
+    @ColumnInfo(name = "days_left")
     private int daysLeft;
 
-    //@ColumnInfo(name = "amount_left")
+    @ColumnInfo(name = "amount_left")
     private int amountLeft;
 
+    @Ignore
     FoodItem(String itemName, String dateExpire) {
         this.itemName = itemName;
         this.itemId = countId;
@@ -81,8 +96,10 @@ public class FoodItem {
         countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
-        }
 
+    }
+
+    @Ignore
     FoodItem(String itemName, String dateExpire, FoodCategory category) {
         this.itemName = itemName;
         this.itemId = countId;
@@ -99,6 +116,23 @@ public class FoodItem {
         listOfItems.add(this);
     }
 
+    FoodItem(String itemName, Date dateExpire, FoodCategory category) {
+        this.itemName = itemName;
+        this.itemId = countId;
+        this.expired = false;
+        this.opened = false;
+        this.used = false;
+        this.dateAdded = new Date();
+        this.category = category;
+        this.dateExpire = dateExpire;
+        this.notifyMe = notifySetting;
+        this.amountLeft = 100;
+        countId++;
+        daysLeft = daysBetween(new Date(), this.dateExpire);
+        listOfItems.add(this);
+    }
+
+    @Ignore
     FoodItem(String itemName, String dateExpire, FoodCategory category, boolean notify, boolean open) {
         this.itemName = itemName;
         this.itemId = countId;
@@ -115,6 +149,7 @@ public class FoodItem {
         listOfItems.add(this);
     }
 
+    @Ignore
     FoodItem(String itemName, Date dateExpire) {
         this.itemName = itemName;
         this.itemId = countId;
@@ -130,6 +165,7 @@ public class FoodItem {
         listOfItems.add(this);
     }
 
+    @Ignore
     FoodItem(String itemName, FoodCategory category) {
         this.itemName = itemName;
         this.category = category;
@@ -196,6 +232,10 @@ public class FoodItem {
                 new org.joda.time.LocalDate(d2.getTime())).getDays();
     }
 
+    public boolean isNotifyMe() {
+        return notifyMe;
+    }
+
     public String getItemName() {
         return itemName;
     }
@@ -215,8 +255,6 @@ public class FoodItem {
     public void setItemName(String name) {this.itemName = name;}
 
     public void setOpened(Boolean opened){this.opened = opened;}
-
-    public void setNotifyMe(Boolean notifyMe){this.notifyMe = notifyMe;}
 
     public int getItemId() {
         return itemId;
@@ -254,16 +292,40 @@ public class FoodItem {
         return used;
     }
 
-    public boolean isNotifyMe() {
-        return notifyMe;
-    }
-
     public static sortTypes getSortType() {
         return sortType;
     }
 
     public static void setSortType(sortTypes st) {
         sortType = st;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
+    public void setDateOpened(Date dateOpened) {
+        this.dateOpened = dateOpened;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
+
+    public void setOpened(boolean opened) {
+        this.opened = opened;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
+
+    public void setNotifyMe(boolean notifyMe) {
+        this.notifyMe = notifyMe;
     }
 
     public int getAmountLeft() {

@@ -7,16 +7,16 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import java.util.List;
-/*
+
 @Dao
 public interface FoodItemDao {
-    @Query("SELECT * FROM fooditem")
+    @Query("SELECT * FROM foodItems")
     List<FoodItem> getAll();
 
-    @Query("SELECT * FROM foodItem WHERE itemId IN (:itemIDs)")
+    @Query("SELECT * FROM foodItems WHERE itemId IN (:itemIDs)")
     List<FoodItem> loadAllByIds(int[] itemIDs);
 
-    @Query("SELECT * FROM fooditem WHERE item_name LIKE :first")
+    @Query("SELECT * FROM foodItems WHERE item_name LIKE :first")
     FoodItem findByName(String first);
 
     @Insert
@@ -28,4 +28,3 @@ public interface FoodItemDao {
     @Delete
     void delete(FoodItem foodItem);
 }
-*/

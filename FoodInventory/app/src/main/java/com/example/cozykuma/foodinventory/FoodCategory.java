@@ -30,6 +30,14 @@ public class FoodCategory {
         foodCategories.add(this);
     }
 
+    public String getImgURL() {
+        return this.imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
+    }
+
     public String getCategoryName() {
         return categoryName;
     }
