@@ -139,7 +139,7 @@ public class FoodItem {
             Collections.sort(list, new Comparator<FoodItem>() {
                 @Override
                 public int compare(FoodItem o1, FoodItem o2) {
-                    return o1.getDatesLeft() - o2.getDatesLeft();
+                    return o1.getDaysLeft() - o2.getDaysLeft();
                 }
             });
         } else if (sort == sortTypes.DATEADDED) {
@@ -218,8 +218,12 @@ public class FoodItem {
         return dateOpened;
     }
 
-    public int getDatesLeft() {
+    public int getDaysLeft() {
         return daysLeft;
+    }
+
+    public void setDaysLeft(int days) {
+        this.daysLeft = days;
     }
 
     public boolean isExpired() {

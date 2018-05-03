@@ -20,10 +20,13 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.content.Intent;
+import android.widget.Toast;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class ItemDetails extends AppCompatActivity {
@@ -77,6 +80,7 @@ public class ItemDetails extends AppCompatActivity {
         mCategoryName.setSelection(getIndex(mCategoryName, FoodItem.getListOfItems().get(position).getCategory().toString()));
         Calendar calToString = Calendar.getInstance();
         calToString.setTime(FoodItem.getListOfItems().get(position).getDateExpire());
+        calToString.add(Calendar.MONTH, 1);
         String dateString = calToString.get(Calendar.DAY_OF_MONTH) + "-" + calToString.get(Calendar.MONTH) + "-" + calToString.get(Calendar.YEAR);
         mItemDateText.setText(dateString);
 
@@ -173,6 +177,7 @@ public class ItemDetails extends AppCompatActivity {
         FoodItem.getListOfItems().get(position).setDateExpire((String) mItemDateText.getText().toString());
         FoodItem.getListOfItems().get(position).setOpened(mCheckBoxOpen.isChecked());
         FoodItem.getListOfItems().get(position).setNotifyMe(mCheckBoxNotify.isChecked());
+        FoodItem.getListOfItems().get(position).setDaysLeft(FoodItem.daysBetween(new Date(), FoodItem.getListOfItems().get(position).getDateExpire()));
         if (Integer.parseInt(mAmountText.getText().toString()) > 100){
             mAmountText.setText("100");
         }
