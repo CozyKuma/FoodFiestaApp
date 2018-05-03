@@ -1,5 +1,8 @@
 package com.example.cozykuma.foodinventory;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -15,7 +18,7 @@ import org.joda.time.format.DateTimeFormat;
 /**
  * Created by CozyKuma on 04-04-2018.
  */
-
+@Entity
 public class FoodItem {
 
     enum sortTypes {
@@ -28,11 +31,21 @@ public class FoodItem {
 
     private static ArrayList<FoodItem> listOfItems = new ArrayList<FoodItem>();
     private org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy");
+
+    @ColumnInfo(name = "item_name")
     private String itemName;
+
     private static int countId = 0;
+
+    @PrimaryKey
     private int itemId;
+
     private static sortTypes sortType = sortTypes.DAYSLEFT;
+
+    @ColumnInfo(name = "date_added")
     private Date dateAdded;
+
+    @ColumnInfo(name = "date_expire")
     private Date dateExpire;
     private Date dateOpened;
     private boolean expired;
@@ -41,7 +54,11 @@ public class FoodItem {
     private boolean notifyMe;
     private static boolean notifySetting = true;
     private FoodCategory category;
+
+    @ColumnInfo(name = "days_left")
     private int daysLeft;
+
+    @ColumnInfo(name = "amount_left")
     private int amountLeft;
 
     FoodItem(String itemName, String dateExpire) {

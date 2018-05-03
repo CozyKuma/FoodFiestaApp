@@ -48,9 +48,6 @@ public class ItemDetails extends AppCompatActivity {
     ImageButton mAmountAddBtn;
     ImageButton mAmountRemovebBtn;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,9 +85,6 @@ public class ItemDetails extends AppCompatActivity {
         mCheckBoxNotify.setChecked(FoodItem.getListOfItems().get(position).isNotifyMe());
 
         mAmountText.setText(String.valueOf(FoodItem.getListOfItems().get(position).getAmountLeft()));
-
-
-
 
 
         mItemDateText.setOnClickListener(new View.OnClickListener() {
@@ -165,9 +159,6 @@ public class ItemDetails extends AppCompatActivity {
                 adbRemove.show();
             }
         });
-
-
-
     }
 
 
