@@ -56,7 +56,7 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
 
         // Set information
         String name = getItem(position).getItemName();
-        int days = getItem(position).getDatesLeft();
+        int days = getItem(position).getDaysLeft();
         FoodCategory category = getItem(position).getCategory();
         String imgURL = getItem(position).getCategory().getImage();
         String daysString = "Expires in \n" + days + " days(s)";

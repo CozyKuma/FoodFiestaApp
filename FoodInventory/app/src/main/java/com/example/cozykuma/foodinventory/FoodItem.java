@@ -1,20 +1,12 @@
 package com.example.cozykuma.foodinventory;
 
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.joda.time.*;
 import org.joda.time.format.DateTimeFormat;
