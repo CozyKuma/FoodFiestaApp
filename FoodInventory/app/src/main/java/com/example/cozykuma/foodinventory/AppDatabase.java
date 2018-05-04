@@ -7,7 +7,7 @@ import android.arch.persistence.room.TypeConverter;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-@Database(entities = {FoodItem.class}, version = 1)
+@Database(entities = {FoodItem.class}, version = 1, exportSchema = false)
 @TypeConverters({DateTypeConverter.class, CategoryTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 

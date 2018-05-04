@@ -169,7 +169,13 @@ public class AddItemActivity extends AppCompatActivity {
         int quantity = Integer.parseInt(quantityText);
 
         for(int i=0; i<quantity; i++) {
-            FoodItem newItem = new FoodItem(itemName, expireDate, category, notifyMe, itemOpen);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    FoodItem newItem = new FoodItem(itemName, expireDate, category, notifyMe, itemOpen);
+                    MainActivity.appDatabase.foodItemDao().insertOne(newItem);
+                }
+            }).start();
         }
 
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);

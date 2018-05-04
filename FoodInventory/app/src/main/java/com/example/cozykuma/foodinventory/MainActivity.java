@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private List<FoodCategory> categoryList;
     private static boolean isFinished = false;
     private FoodListAdapter adapter;
+    static final String DATABASE_NAME = "FoodItemDatabase";
+    static AppDatabase appDatabase;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -70,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //loadDB();
+
         //Log.d(TAG, "onCreate: " + "Started.");
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -83,6 +88,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 startActivity(intent);
             }
         });
+
+        // Initialize Database //
+        appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME)
+                .fallbackToDestructiveMigration()
+                .build();
+        // End Data //
 
         Button sort = (Button) findViewById(R.id.btn_sort);
         sort.setOnClickListener(new View.OnClickListener() {
@@ -169,9 +180,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         mListView.setAdapter(adapter);
         }
 
+
     @Override
     protected void onResume() {
         super.onResume();
+        loadDB();
         adapter.notifyDataSetChanged();
     }
 
@@ -194,6 +207,15 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         FoodCategory meat = new FoodCategory("Meat", 2, 7, "drawable://" + R.drawable.meat128px);
         FoodCategory vegetable = new FoodCategory("Vegetables", 3, 10, "drawable://" + R.drawable.vegetables128px);
         FoodCategory fruit = new FoodCategory("Fruit", 4, 14, "drawable://" + R.drawable.fruit128px);
+    }
+
+    protected void loadDB() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                FoodItem.setListOfItems(FoodItem.convertToArrayList(appDatabase.foodItemDao().getAll()));
+            }
+        }).start();
     }
 
 }

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 import org.joda.time.*;
 import org.joda.time.format.DateTimeFormat;
@@ -280,6 +281,10 @@ public class FoodItem {
         this.daysLeft = days;
     }
 
+    public static void setListOfItems(ArrayList<FoodItem> listOfItems) {
+        FoodItem.listOfItems = listOfItems;
+    }
+
     public boolean isExpired() {
         return expired;
     }
@@ -370,5 +375,18 @@ public class FoodItem {
         String dateString = jodaToday.getDayOfMonth() + "-" + jodaToday.getMonthOfYear() + "-" + jodaToday.getYear();
 
         return dateString;
+    }
+
+    public static ArrayList<FoodItem> convertToArrayList(List<FoodItem> list) {
+        ArrayList<FoodItem> arrayList = new ArrayList<FoodItem>();
+        if(!list.isEmpty()) {
+            for (int i = 0; i < list.size(); i++) {
+                arrayList.add(list.get(i));
+            }
+            return arrayList;
+        } else {
+            return arrayList;
+        }
+
     }
 }

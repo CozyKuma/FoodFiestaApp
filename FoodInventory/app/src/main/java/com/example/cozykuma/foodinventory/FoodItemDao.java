@@ -6,6 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -20,7 +21,13 @@ public interface FoodItemDao {
     FoodItem findByName(String first);
 
     @Insert
+    void insertOne(FoodItem foodItem);
+
+    @Insert
     void insertAll(FoodItem... foodItems);
+
+    @Insert
+    void insertMultiple(ArrayList<FoodItem> foodItemArrayList);
 
     @Update
     void update(FoodItem foodItem);
