@@ -163,12 +163,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
-<<<<<<< HEAD
+
 
     }
-=======
-        }
->>>>>>> 7ff06ff5bbc6806352107c5f7d9d4ec72ae71023
 
     @Override
     protected void onResume() {
