@@ -84,7 +84,10 @@ public class FoodItem {
     private int amountLeft;
 
     @Ignore
-    FoodItem() {}
+    FoodItem() {
+        listOfItems.add(this);
+        amountLeft = 100;
+    }
 
     @Ignore
     FoodItem(String itemName, String dateExpire) {

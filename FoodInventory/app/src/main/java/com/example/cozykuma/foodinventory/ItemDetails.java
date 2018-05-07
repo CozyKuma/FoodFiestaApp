@@ -173,6 +173,23 @@ public class ItemDetails extends AppCompatActivity {
             mAmountText.setText("100");
         }
         FoodItem.getListOfItems().get(position).setAmountLeft(Integer.parseInt(String.valueOf(mAmountText.getText())));
+
+        Thread updateItem = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().update(FoodItem.getListOfItems().get(position));
+            }
+        });
+        updateItem.start();
+
+        try {
+            updateItem.join();
+        }
+        catch (InterruptedException e) {
+            System.out.println("Interruption Occurred");
+            e.printStackTrace();
+        }
+
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intentInv);
     }
@@ -182,7 +199,24 @@ public class ItemDetails extends AppCompatActivity {
     }
 
     public void remove(){
+        Thread removeItem = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().delete(FoodItem.getListOfItems().get(position));
+            }
+        });
+        removeItem.start();
+
+        try {
+            removeItem.join();
+        }
+        catch (InterruptedException e) {
+            System.out.println("Interruption Occurred");
+            e.printStackTrace();
+        }
+
         FoodItem.getListOfItems().remove(position);
+
         finish();
     }
 

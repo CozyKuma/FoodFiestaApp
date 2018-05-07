@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -167,17 +169,30 @@ public class AddItemActivity extends AppCompatActivity {
         itemOpen = mCheckBoxOpen.isChecked();
         String quantityText = quantityView.getEditableText().toString();
         int quantity = Integer.parseInt(quantityText);
+        final ArrayList<FoodItem> quantityList = new ArrayList<>();
 
+        for (int i=0; i<quantity; i++) {
         FoodItem foodItem = new FoodItem();
         foodItem.setItemName(itemName);
         foodItem.setCategory(category);
         foodItem.setDateExpire(expireDate);
+        foodItem.setDaysLeft(FoodItem.daysBetween(new Date(), foodItem.getDateExpire()));
         foodItem.setNotifyMe(notifyMe);
         foodItem.setOpened(itemOpen);
-        foodItem.setDaysLeft(quantity);
 
-        MainActivity.appDatabase.foodItemDao().insertOne(foodItem);
-        Toast.makeText(getApplicationContext(), "Item added successfully", Toast.LENGTH_SHORT).show();
+            quantityList.add(foodItem);
+        }
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().insertMultiple(quantityList);
+                return null;
+            }
+        }.execute();
+
+        //MainActivity.appDatabase.foodItemDao().insertMultiple(quantityList);
+        Toast.makeText(getApplicationContext(), "Item(s) added successfully", Toast.LENGTH_SHORT).show();
 
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intentInv);

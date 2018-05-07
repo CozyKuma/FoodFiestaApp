@@ -73,6 +73,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize Database //
+        appDatabase = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class)
+                .build();
+        // End Data //
+
         //Log.d(TAG, "onCreate: " + "Started.");
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -87,12 +92,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             }
         });
 
-        // Initialize Database //
-        appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME)
-                .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
-                .build();
-        // End Data //
 
         Button sort = (Button) findViewById(R.id.btn_sort);
         sort.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +174,26 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             }
         });
 
+        Thread loadDB = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<FoodItem> itemList = AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().getAll();
+                ArrayList<FoodItem> itemArrayList = new ArrayList<>(itemList.size());
+                itemArrayList.addAll(itemList);
+                FoodItem.setListOfItems(itemArrayList);
+                }
+        });
+
+        loadDB.start();
+
+        try {
+            loadDB.join();
+        }
+        catch (InterruptedException e) {
+            System.out.println("Interrupt Ocurred");
+            e.printStackTrace();
+        }
+
 
         adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
@@ -184,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     @Override
     protected void onResume() {
         super.onResume();
-        loadDB();
         adapter.notifyDataSetChanged();
     }
 
@@ -209,18 +227,4 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         FoodCategory vegetable = new FoodCategory("Vegetables", 3, 10, "drawable://" + R.drawable.vegetables128px);
         FoodCategory fruit = new FoodCategory("Fruit", 4, 14, "drawable://" + R.drawable.fruit128px);
     }
-
-    protected void loadDB() {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                List<FoodItem> itemList = AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().getAll();
-                ArrayList<FoodItem> itemArrayList = new ArrayList<>(itemList.size());
-                itemArrayList.addAll(itemList);
-                FoodItem.setListOfItems(itemArrayList);
-            }
-        });
-    }
-
 }
