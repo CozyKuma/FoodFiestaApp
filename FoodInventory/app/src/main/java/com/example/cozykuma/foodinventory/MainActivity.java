@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private static boolean isFinished = false;
     private FoodListAdapter adapter;
     static final String DATABASE_NAME = "FoodItemDatabase";
-    static AppDatabase appDatabase;
+    public static AppDatabase appDatabase;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         // Initialize Database //
         appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME)
                 .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
                 .build();
         // End Data //
 

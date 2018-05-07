@@ -168,15 +168,16 @@ public class AddItemActivity extends AppCompatActivity {
         String quantityText = quantityView.getEditableText().toString();
         int quantity = Integer.parseInt(quantityText);
 
-        for(int i=0; i<quantity; i++) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    FoodItem newItem = new FoodItem(itemName, expireDate, category, notifyMe, itemOpen);
-                    MainActivity.appDatabase.foodItemDao().insertOne(newItem);
-                }
-            }).start();
-        }
+        FoodItem foodItem = new FoodItem();
+        foodItem.setItemName(itemName);
+        foodItem.setCategory(category);
+        foodItem.setDateExpire(expireDate);
+        foodItem.setNotifyMe(notifyMe);
+        foodItem.setOpened(itemOpen);
+        foodItem.setDaysLeft(quantity);
+
+        MainActivity.appDatabase.foodItemDao().insertOne(foodItem);
+        Toast.makeText(getApplicationContext(), "Item added successfully", Toast.LENGTH_SHORT).show();
 
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intentInv);
