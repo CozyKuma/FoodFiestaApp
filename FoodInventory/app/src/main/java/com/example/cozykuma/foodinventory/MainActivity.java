@@ -73,8 +73,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //loadDB();
-
         //Log.d(TAG, "onCreate: " + "Started.");
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -177,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             }
         });
 
+
         adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
         }
@@ -196,7 +195,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
     @Override
     protected void onDestroy() {
-        AppDatabase.destroyInstance();
         super.onDestroy();
 
         if (isFinishing()) {
@@ -214,6 +212,15 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
     protected void loadDB() {
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                List<FoodItem> itemList = AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().getAll();
+                ArrayList<FoodItem> itemArrayList = new ArrayList<>(itemList.size());
+                itemArrayList.addAll(itemList);
+                FoodItem.setListOfItems(itemArrayList);
+            }
+        });
     }
 
 }
