@@ -80,8 +80,6 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
             holder.category = (TextView) convertView.findViewById(R.id.category);
             holder.progressValue = (TextView) convertView.findViewById(R.id.progressValue);
             holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
-            //holder.icon = (ImageView) convertView.findViewById(R.id.listitem_image);
-            //holder.progress = (ProgressBar) convertView.findViewById(R.id.progress_spinner);
             result = convertView;
 
             convertView.setTag(holder);
@@ -132,4 +130,7 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
         ImageLoader.getInstance().init(config);
         // END - UNIVERSAL IMAGE LOADER SETUP
     }
+
+
+
 }
