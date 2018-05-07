@@ -9,6 +9,8 @@ import android.arch.persistence.room.Update;
 import java.util.ArrayList;
 import java.util.List;
 
+
+// DATA ACCESS OBJECTS
 @Dao
 public interface FoodItemDao {
     @Query("SELECT * FROM foodItems")
@@ -19,6 +21,9 @@ public interface FoodItemDao {
 
     @Query("SELECT * FROM foodItems WHERE item_name LIKE :first")
     FoodItem findByName(String first);
+
+    @Query("DELETE FROM foodItems")
+    void nukeTable();
 
     @Insert
     void insertOne(FoodItem foodItem);

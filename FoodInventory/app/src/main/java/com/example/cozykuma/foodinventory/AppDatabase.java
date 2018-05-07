@@ -11,5 +11,22 @@ import android.content.Context;
 @TypeConverters({DateTypeConverter.class, CategoryTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
+    private static AppDatabase INSTANCE;
+
     public abstract FoodItemDao foodItemDao();
+
+    public static AppDatabase getAppDatabase(Context context) {
+        if(INSTANCE == null) {
+
+            INSTANCE =
+
+            Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "FoodItemDatabase")
+            .build();
+        }
+        return INSTANCE;
+    }
+
+    public static void destroyInstance() {
+        INSTANCE = null;
+    }
 }

@@ -195,7 +195,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
     @Override
     protected void onDestroy() {
+        AppDatabase.destroyInstance();
         super.onDestroy();
+
         if (isFinishing()) {
             isFinished = false;
         }
@@ -210,12 +212,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     }
 
     protected void loadDB() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                FoodItem.setListOfItems(FoodItem.convertToArrayList(appDatabase.foodItemDao().getAll()));
-            }
-        }).start();
+
     }
 
 }

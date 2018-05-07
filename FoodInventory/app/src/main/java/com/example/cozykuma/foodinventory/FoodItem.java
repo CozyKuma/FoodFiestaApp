@@ -41,8 +41,8 @@ public class FoodItem {
     @ColumnInfo(name = "item_name")
     private String itemName;
 
-    @Ignore
-    private static int countId = 0;
+    //@Ignore
+    //private static int countId = 0;
 
     @PrimaryKey(autoGenerate = true)
     private int itemId;
@@ -84,9 +84,12 @@ public class FoodItem {
     private int amountLeft;
 
     @Ignore
+    FoodItem() {}
+
+    @Ignore
     FoodItem(String itemName, String dateExpire) {
         this.itemName = itemName;
-        this.itemId = countId;
+        //this.itemId = countId;
         this.expired = false;
         this.opened = false;
         this.used = false;
@@ -94,7 +97,7 @@ public class FoodItem {
         this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
         this.notifyMe = notifySetting;
         this.amountLeft = 100;
-        countId++;
+        //countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
 
@@ -103,7 +106,7 @@ public class FoodItem {
     @Ignore
     FoodItem(String itemName, String dateExpire, FoodCategory category) {
         this.itemName = itemName;
-        this.itemId = countId;
+        //this.itemId = countId;
         this.expired = false;
         this.opened = false;
         this.used = false;
@@ -112,14 +115,14 @@ public class FoodItem {
         this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
         this.notifyMe = notifySetting;
         this.amountLeft = 100;
-        countId++;
+        //countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
     }
 
     FoodItem(String itemName, Date dateExpire, FoodCategory category) {
         this.itemName = itemName;
-        this.itemId = countId;
+        //this.itemId = countId;
         this.expired = false;
         this.opened = false;
         this.used = false;
@@ -128,7 +131,7 @@ public class FoodItem {
         this.dateExpire = dateExpire;
         this.notifyMe = notifySetting;
         this.amountLeft = 100;
-        countId++;
+        //countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
     }
@@ -136,7 +139,7 @@ public class FoodItem {
     @Ignore
     FoodItem(String itemName, String dateExpire, FoodCategory category, boolean notify, boolean open) {
         this.itemName = itemName;
-        this.itemId = countId;
+        //this.itemId = countId;
         this.expired = false;
         this.opened = open;
         this.used = false;
@@ -145,7 +148,7 @@ public class FoodItem {
         this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
         this.notifyMe = notify;
         this.amountLeft = 100;
-        countId++;
+        //countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
     }
@@ -153,7 +156,7 @@ public class FoodItem {
     @Ignore
     FoodItem(String itemName, Date dateExpire) {
         this.itemName = itemName;
-        this.itemId = countId;
+        //this.itemId = countId;
         this.expired = false;
         this.opened = false;
         this.used = false;
@@ -161,7 +164,7 @@ public class FoodItem {
         this.dateExpire = dateExpire;
         this.notifyMe = notifySetting;
         this.amountLeft = 100;
-        countId++;
+        //countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
     }
@@ -170,7 +173,7 @@ public class FoodItem {
     FoodItem(String itemName, FoodCategory category) {
         this.itemName = itemName;
         this.category = category;
-        this.itemId = countId;
+        //this.itemId = countId;
         this.expired = false;
         this.opened = false;
         this.used = false;
@@ -178,7 +181,7 @@ public class FoodItem {
         this.dateExpire = dtf.parseDateTime(addDatePreset(category)).toDate();
         this.notifyMe = notifySetting;
         this.amountLeft = 100;
-        countId++;
+        //countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
     }
