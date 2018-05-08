@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ShoppingList extends AppCompatActivity {
+public class ShoppingList extends AppCompatActivity{
 
     private ListView mListView;
     public ShoppingListAdapter adapter;
@@ -55,10 +59,32 @@ public class ShoppingList extends AppCompatActivity {
             }
         });
 
+        Button mRemoveItem = (Button) findViewById(R.id.removeItemBtn);
+
+        mRemoveItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShoppingItem.removeCheckedItemsFromList();
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        Button mAddToInv = (Button) findViewById(R.id.addInvBtn);
+
+        mAddToInv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShoppingItem.addItemsToInventory();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         mListView = (ListView) findViewById(R.id.shoppinglist_view);
 
         adapter = new ShoppingListAdapter(this, R.layout.simple_shopping_item1, ShoppingItem.getShoppingList());
         mListView.setAdapter(adapter);
+
     }
 
     @Override

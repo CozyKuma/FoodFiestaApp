@@ -12,8 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ShoppingListAdapter extends ArrayAdapter<ShoppingItem> {
 
@@ -34,7 +36,7 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingItem> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         // Set information
         String name = getItem(position).getItemName();
         boolean checked = getItem(position).isChecked();
@@ -51,15 +53,26 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingItem> {
             holder = new ShoppingListAdapter.ViewHolder();
             holder.name = (TextView) convertView.findViewById(R.id.nameShopItem);
             holder.checkedBox = (CheckBox) convertView.findViewById(R.id.checkBoxShopItem);
-
+            holder.checkedBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean newState = !ShoppingItem.getShoppingList().get(position).isChecked();
+                    ShoppingItem.getShoppingList().get(position).setChecked(newState);
+                }
+            });
+            holder.checkedBox.setChecked(ShoppingItem.getShoppingList().get(position).isChecked());
 
             result = convertView;
+
 
             convertView.setTag(holder);
         } else {
             holder = (ShoppingListAdapter.ViewHolder) convertView.getTag();
             result = convertView;
+
         }
+
+
 
         Animation animation = AnimationUtils.loadAnimation(mContext,
                 (position < lastPosition) ? R.anim.load_down_anim : R.anim.load_up_anim);
@@ -67,9 +80,12 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingItem> {
         result.startAnimation(animation);
         lastPosition = position;
 
-        holder.name.setText(name);
-        holder.checkedBox.setActivated(checked);
+
 
         return convertView;
     }
+    public void update(){
+        notifyDataSetChanged();
+    }
+
 }
