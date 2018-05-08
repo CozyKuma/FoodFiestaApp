@@ -7,13 +7,14 @@ import android.arch.persistence.room.TypeConverter;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-@Database(entities = {FoodItem.class}, version = 1, exportSchema = false)
+@Database(entities = {FoodItem.class, FoodCategory.class}, version = 2)
 @TypeConverters({DateTypeConverter.class, CategoryTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
 
     public abstract FoodItemDao foodItemDao();
+    public abstract FoodCategoryDao foodCategoryDao();
 
     public static AppDatabase getAppDatabase(Context context) {
         if(INSTANCE == null) {
@@ -21,7 +22,8 @@ public abstract class AppDatabase extends RoomDatabase {
             INSTANCE =
 
             Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "FoodItemDatabase")
-            .build();
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
         return INSTANCE;
     }

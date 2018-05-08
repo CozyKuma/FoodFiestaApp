@@ -191,7 +191,6 @@ public class AddItemActivity extends AppCompatActivity {
             }
         }.execute();
 
-        //MainActivity.appDatabase.foodItemDao().insertMultiple(quantityList);
         Toast.makeText(getApplicationContext(), "Item(s) added successfully", Toast.LENGTH_SHORT).show();
 
         Intent intentInv = new Intent(getApplicationContext(), MainActivity.class);

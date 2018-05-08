@@ -1,31 +1,36 @@
 package com.example.cozykuma.foodinventory;
 
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.util.ArrayList;
 
 /**
  * Created by CozyKuma on 04-04-2018.
  */
 
+@Entity(tableName = "foodCategories")
 public class FoodCategory {
 
     private String categoryName;
+
+    @PrimaryKey(autoGenerate = true)
     private int id;
+
     private String imgURL;
     private int datePreset;
     private static ArrayList<FoodCategory> foodCategories = new ArrayList<>();
 
-    public FoodCategory(String categoryName, int id, int datePreset, String image) {
+    public FoodCategory(String categoryName, int datePreset, String image) {
         this.categoryName = categoryName;
-        this.id = id;
         this.imgURL = image;
         this.datePreset = datePreset;
         foodCategories.add(this);
     }
 
-    public FoodCategory(String categoryName, int id,  int datePreset) {
+    public FoodCategory(String categoryName, int datePreset) {
         this.categoryName = categoryName;
-        this.id = id;
         this.datePreset = datePreset;
         foodCategories.add(this);
     }

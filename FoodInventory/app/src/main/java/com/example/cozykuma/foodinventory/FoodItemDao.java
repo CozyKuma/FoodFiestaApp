@@ -6,6 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,9 @@ public interface FoodItemDao {
 
     @Update
     void update(FoodItem foodItem);
+
+    @Update
+    void updateAll(ArrayList<FoodItem> foodItemArrayList);
 
     @Delete
     void delete(FoodItem foodItem);

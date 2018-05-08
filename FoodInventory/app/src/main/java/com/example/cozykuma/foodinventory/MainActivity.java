@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private List<FoodCategory> categoryList;
     private static boolean isFinished = false;
     private FoodListAdapter adapter;
-    static final String DATABASE_NAME = "FoodItemDatabase";
     public static AppDatabase appDatabase;
 
 
@@ -72,11 +71,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Initialize Database //
-        appDatabase = Room.inMemoryDatabaseBuilder(getApplicationContext(), AppDatabase.class)
-                .build();
-        // End Data //
 
         //Log.d(TAG, "onCreate: " + "Started.");
         mTextMessage = (TextView) findViewById(R.id.message);
@@ -181,7 +175,10 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 ArrayList<FoodItem> itemArrayList = new ArrayList<>(itemList.size());
                 itemArrayList.addAll(itemList);
                 FoodItem.setListOfItems(itemArrayList);
-                }
+                AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().updateAll(FoodItem.getListOfItems());
+                AppDatabase.getAppDatabase(getApplicationContext()).foodCategoryDao().insertMultiple(FoodCategory.getCategoryList());
+
+            }
         });
 
         loadDB.start();
@@ -190,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             loadDB.join();
         }
         catch (InterruptedException e) {
-            System.out.println("Interrupt Ocurred");
+            System.out.println("Interrupt Occurred");
             e.printStackTrace();
         }
 
@@ -221,10 +218,10 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     }
 
     protected void createDefaultCategories() {
-        FoodCategory defaultCat = new FoodCategory("Default", 0, 0);
-        FoodCategory milk = new FoodCategory("Milk", 1, 7, "drawable://" + R.drawable.milk128px);
-        FoodCategory meat = new FoodCategory("Meat", 2, 7, "drawable://" + R.drawable.meat128px);
-        FoodCategory vegetable = new FoodCategory("Vegetables", 3, 10, "drawable://" + R.drawable.vegetables128px);
-        FoodCategory fruit = new FoodCategory("Fruit", 4, 14, "drawable://" + R.drawable.fruit128px);
+        FoodCategory defaultCat = new FoodCategory("Default", 0);
+        FoodCategory milk = new FoodCategory("Milk", 7, "drawable://" + R.drawable.milk128px);
+        FoodCategory meat = new FoodCategory("Meat", 7, "drawable://" + R.drawable.meat128px);
+        FoodCategory vegetable = new FoodCategory("Vegetables", 10, "drawable://" + R.drawable.vegetables128px);
+        FoodCategory fruit = new FoodCategory("Fruit", 14, "drawable://" + R.drawable.fruit128px);
     }
 }
