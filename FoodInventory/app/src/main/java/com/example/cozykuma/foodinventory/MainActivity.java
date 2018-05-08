@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 startSearch.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        searchItem = input.getText().toString();
+                        //searchItem = input.getText().toString();
                         dialog.dismiss();
                     }
                 });
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
                 Intent detailsIntent = new Intent(view.getContext(),ItemDetails.class);
                 // Bundle itemBundle = new Bundle();
-                //itemBundle.putSerializable("List", FoodItem.getListOfItems());
+                // itemBundle.putSerializable("List", FoodItem.getListOfItems());
                 // detailsIntent.putExtra("List",FoodItem.getListOfItems());
                 detailsIntent.putExtra("Position",i);
                 startActivity(detailsIntent);
