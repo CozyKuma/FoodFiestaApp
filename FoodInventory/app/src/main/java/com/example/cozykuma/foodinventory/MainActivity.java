@@ -35,7 +35,6 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements Serializable {
 
-    //private static final String TAG = "MainActivity";
     private TextView mTextMessage;
     private ListView mListView;
     private FloatingActionButton mFab;
@@ -151,11 +150,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             }
         });
 
-        if(!isFinished) {
-            createDefaultCategories();
-            isFinished = true;
-        }
-
         mListView = (ListView) findViewById(R.id.foodlistview);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -171,13 +165,19 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         Thread loadDB = new Thread(new Runnable() {
             @Override
             public void run() {
+                // Food Items //
                 List<FoodItem> itemList = AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().getAll();
                 ArrayList<FoodItem> itemArrayList = new ArrayList<>(itemList.size());
                 itemArrayList.addAll(itemList);
                 FoodItem.setListOfItems(itemArrayList);
                 AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().updateAll(FoodItem.getListOfItems());
-                AppDatabase.getAppDatabase(getApplicationContext()).foodCategoryDao().insertMultiple(FoodCategory.getCategoryList());
 
+                // Food Categories //
+                List<FoodCategory> categoryList = AppDatabase.getAppDatabase(getApplicationContext()).foodCategoryDao().getAll();
+                ArrayList<FoodCategory> foodCategoryArrayList = new ArrayList<>(categoryList.size());
+                foodCategoryArrayList.addAll(categoryList);
+                FoodCategory.setCategoryList(foodCategoryArrayList);
+                AppDatabase.getAppDatabase(getApplicationContext()).foodCategoryDao().updateAll(FoodCategory.getCategoryList());
             }
         });
 
@@ -217,11 +217,4 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         }
     }
 
-    protected void createDefaultCategories() {
-        FoodCategory defaultCat = new FoodCategory("Default", 0);
-        FoodCategory milk = new FoodCategory("Milk", 7, "drawable://" + R.drawable.milk128px);
-        FoodCategory meat = new FoodCategory("Meat", 7, "drawable://" + R.drawable.meat128px);
-        FoodCategory vegetable = new FoodCategory("Vegetables", 10, "drawable://" + R.drawable.vegetables128px);
-        FoodCategory fruit = new FoodCategory("Fruit", 14, "drawable://" + R.drawable.fruit128px);
-    }
 }
