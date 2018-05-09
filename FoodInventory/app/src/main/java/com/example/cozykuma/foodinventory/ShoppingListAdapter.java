@@ -65,7 +65,6 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingItem> {
 
             result = convertView;
 
-
             convertView.setTag(holder);
         } else {
             holder = (ShoppingListAdapter.ViewHolder) convertView.getTag();

@@ -87,20 +87,20 @@ public class FoodItem {
     FoodItem() {
         listOfItems.add(this);
         amountLeft = 100;
+        this.category = FoodCategory.getCategoryList().get(0);
     }
 
     @Ignore
     FoodItem(String itemName, String dateExpire) {
         this.itemName = itemName;
-        //this.itemId = countId;
         this.expired = false;
         this.opened = false;
         this.used = false;
+        this.category = FoodCategory.getCategoryList().get(0);
         this.dateAdded = new Date();
         this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
         this.notifyMe = notifySetting;
         this.amountLeft = 100;
-        //countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
 
@@ -109,7 +109,6 @@ public class FoodItem {
     @Ignore
     FoodItem(String itemName, String dateExpire, FoodCategory category) {
         this.itemName = itemName;
-        //this.itemId = countId;
         this.expired = false;
         this.opened = false;
         this.used = false;
@@ -118,7 +117,6 @@ public class FoodItem {
         this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
         this.notifyMe = notifySetting;
         this.amountLeft = 100;
-        //countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
     }
@@ -134,7 +132,6 @@ public class FoodItem {
         this.dateExpire = dateExpire;
         this.notifyMe = notifySetting;
         this.amountLeft = 100;
-        //countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
     }
@@ -142,7 +139,6 @@ public class FoodItem {
     @Ignore
     FoodItem(String itemName, String dateExpire, FoodCategory category, boolean notify, boolean open) {
         this.itemName = itemName;
-        //this.itemId = countId;
         this.expired = false;
         this.opened = open;
         this.used = false;
@@ -151,7 +147,6 @@ public class FoodItem {
         this.dateExpire = dtf.parseDateTime(dateExpire).toDate();
         this.notifyMe = notify;
         this.amountLeft = 100;
-        //countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
     }
@@ -159,15 +154,14 @@ public class FoodItem {
     @Ignore
     FoodItem(String itemName, Date dateExpire) {
         this.itemName = itemName;
-        //this.itemId = countId;
         this.expired = false;
         this.opened = false;
         this.used = false;
+        this.category = FoodCategory.getCategoryList().get(0);
         this.dateAdded = new Date();
         this.dateExpire = dateExpire;
         this.notifyMe = notifySetting;
         this.amountLeft = 100;
-        //countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
     }
@@ -176,7 +170,6 @@ public class FoodItem {
     FoodItem(String itemName, FoodCategory category) {
         this.itemName = itemName;
         this.category = category;
-        //this.itemId = countId;
         this.expired = false;
         this.opened = false;
         this.used = false;
@@ -184,7 +177,6 @@ public class FoodItem {
         this.dateExpire = dtf.parseDateTime(addDatePreset(category)).toDate();
         this.notifyMe = notifySetting;
         this.amountLeft = 100;
-        //countId++;
         daysLeft = daysBetween(new Date(), this.dateExpire);
         listOfItems.add(this);
     }

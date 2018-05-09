@@ -32,6 +32,7 @@ public class FoodCategory {
     public FoodCategory(String categoryName, int datePreset) {
         this.categoryName = categoryName;
         this.datePreset = datePreset;
+        this.imgURL = "";
         foodCategories.add(this);
     }
 

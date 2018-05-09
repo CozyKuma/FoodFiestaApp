@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        System.out.println("Application Started");
+
         //Log.d(TAG, "onCreate: " + "Started.");
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -221,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 ArrayList<FoodCategory> foodCategoryArrayList = new ArrayList<>(categoryList.size());
                 foodCategoryArrayList.addAll(categoryList);
                 FoodCategory.setCategoryList(foodCategoryArrayList);
+                System.out.println("FoodCategoryList set: " + !foodCategoryArrayList.isEmpty());
                 AppDatabase.getAppDatabase(getApplicationContext()).foodCategoryDao().updateAll(FoodCategory.getCategoryList());
             }
         });

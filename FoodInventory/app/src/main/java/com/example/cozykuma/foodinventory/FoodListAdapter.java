@@ -54,6 +54,8 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
 
         setupImageLoader();
 
+        FoodCategory testCat = new FoodCategory("Test", 5);
+
         // Set information
         String name = getItem(position).getItemName();
         int days = getItem(position).getDaysLeft();

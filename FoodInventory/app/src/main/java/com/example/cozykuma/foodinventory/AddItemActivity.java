@@ -183,13 +183,21 @@ public class AddItemActivity extends AppCompatActivity {
             quantityList.add(foodItem);
         }
 
-        new AsyncTask<Void, Void, Void>() {
+        Thread insertItems = new Thread(new Runnable() {
             @Override
-            protected Void doInBackground(Void... voids) {
+            public void run() {
                 AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().insertMultiple(quantityList);
-                return null;
             }
-        }.execute();
+        });
+        insertItems.run();
+
+        try {
+            insertItems.join();
+        }
+        catch (InterruptedException e) {
+            System.out.println("Interrupt Occurred");
+            e.printStackTrace();
+        }
 
         Toast.makeText(getApplicationContext(), "Item(s) added successfully", Toast.LENGTH_SHORT).show();
 
