@@ -170,6 +170,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 ArrayList<FoodItem> itemArrayList = new ArrayList<>(itemList.size());
                 itemArrayList.addAll(itemList);
                 FoodItem.setListOfItems(itemArrayList);
+
+                for (int i=0; i<FoodItem.getListOfItems().size(); i++) {
+                    FoodItem.getListOfItems().get(i).setDaysLeft(FoodItem.daysBetween(new Date(), FoodItem.getListOfItems().get(i).getDateExpire()));
+                }
+
                 AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().updateAll(FoodItem.getListOfItems());
 
                 // Food Categories //
