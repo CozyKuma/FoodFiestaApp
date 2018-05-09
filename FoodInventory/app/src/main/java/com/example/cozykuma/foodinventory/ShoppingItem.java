@@ -1,5 +1,7 @@
 package com.example.cozykuma.foodinventory;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class ShoppingItem {
@@ -16,7 +18,7 @@ public class ShoppingItem {
         this.category = category;
         this.itemId = countId;
         countId++;
-        this.checked = false;
+        this.checked = true;
         shoppingList.add(this);
     }
 
@@ -31,6 +33,8 @@ public class ShoppingItem {
     public int getItemId() {
         return itemId;
     }
+
+    public void setChecked(boolean checked){this.checked = checked; }
 
     public FoodCategory getCategory() {
         return category;
@@ -57,17 +61,26 @@ public class ShoppingItem {
     }
 
     public static void removeCheckedItemsFromList() {
-        for(int i=0; i<shoppingList.size(); i++) {
-            if(shoppingList.get(i).checked) {
+        int size = shoppingList.size()-1;
+        for(int i= size; i>= 0; i--) {
+            {
                 shoppingList.remove(i);
             }
+
         }
     }
 
     public static void addItemsToInventory() {
+        ArrayList<Integer> deleteList = new ArrayList<>();
         for(int i=0; i<shoppingList.size(); i++) {
             if(shoppingList.get(i).checked) {
                 FoodItem newFoodItem = new FoodItem(shoppingList.get(i).itemName, shoppingList.get(i).category);
+            }
+        }
+        int siz = shoppingList.size()-1;
+        for(int i = siz; i >=0; i-- ) {
+            if (shoppingList.get(i).checked) {
+                shoppingList.remove(i);
             }
         }
     }
