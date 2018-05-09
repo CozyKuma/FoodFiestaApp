@@ -24,6 +24,17 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.Activity;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
     private TextView mTextMessage;
     private ListView mListView;
+    private EditText input;
     private FloatingActionButton mFab;
     private List<FoodItem> foodList;
     private List<FoodCategory> categoryList;
@@ -44,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     private FoodListAdapter adapter;
     public static AppDatabase appDatabase;
 
+    private String searchItem;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -150,6 +163,39 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             }
         });
 
+        Button search = (Button) findViewById(R.id.btn_search);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+                View mView = getLayoutInflater().inflate(R.layout.dialogbox_search_select, null);
+                input = (EditText) findViewById(R.id.itemSearch);
+                Button startSearch = (Button) mView.findViewById(R.id.btn_s_search);
+
+
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+
+                startSearch.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //searchItem = input.getText().toString();
+                        dialog.dismiss();
+                    }
+                });
+
+
+            }
+        });
+
+
+
+        if(!isFinished) {
+            createDefaultCategories();
+            isFinished = true;
+        }
+
         mListView = (ListView) findViewById(R.id.foodlistview);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -199,7 +245,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
         adapter = new FoodListAdapter(this, R.layout.simple_food_item1, FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
         mListView.setAdapter(adapter);
-        }
+
+
+    }
 
 
     @Override
