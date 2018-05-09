@@ -16,6 +16,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class ShoppingList extends AppCompatActivity{
 
@@ -67,7 +69,16 @@ public class ShoppingList extends AppCompatActivity{
         mRemoveItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShoppingItem.removeCheckedItemsFromList();
+                final ArrayList<ShoppingItem> removedItems = ShoppingItem.removeCheckedItemsFromList();
+
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        AppDatabase.getAppDatabase(getApplicationContext()).shoppingItemDao().deleteMultiple(removedItems);
+                        return null;
+                    }
+                }.execute();
+
                 adapter.notifyDataSetChanged();
             }
         });
@@ -93,6 +104,29 @@ public class ShoppingList extends AppCompatActivity{
         });
 
         mListView = (ListView) findViewById(R.id.shoppinglist_view);
+
+        Thread loadShoppingItems = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Food Items //
+                List<ShoppingItem> itemList = AppDatabase.getAppDatabase(getApplicationContext()).shoppingItemDao().getAll();
+                ArrayList<ShoppingItem> itemArrayList = new ArrayList<>(itemList.size());
+                itemArrayList.addAll(itemList);
+                ShoppingItem.setShoppingList(itemArrayList);
+
+                AppDatabase.getAppDatabase(getApplicationContext()).shoppingItemDao().updateAll(ShoppingItem.getShoppingList());
+            }
+        });
+
+        loadShoppingItems.start();
+
+        try {
+            loadShoppingItems.join();
+        }
+        catch (InterruptedException e) {
+            System.out.println("Interrupt Occurred");
+            e.printStackTrace();
+        }
 
         adapter = new ShoppingListAdapter(this, R.layout.simple_shopping_item1, ShoppingItem.getShoppingList());
         mListView.setAdapter(adapter);

@@ -1,5 +1,6 @@
 package com.example.cozykuma.foodinventory;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.*;
@@ -84,7 +85,15 @@ public class AddShoppingItem extends AppCompatActivity {
         itemName = mEditTextName.getText().toString();
         category = (FoodCategory) mSpinner.getSelectedItem();
 
-        ShoppingItem newItem = new ShoppingItem(itemName, category);
+        final ShoppingItem newItem = new ShoppingItem(itemName, category);
+
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    AppDatabase.getAppDatabase(getApplicationContext()).shoppingItemDao().insertOne(newItem);
+                    return null;
+                }
+            }.execute();
 
         Intent intentInv = new Intent(getApplicationContext(), ShoppingList.class);
         startActivity(intentInv);

@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 
 import java.util.concurrent.Executors;
 
-@Database(entities = {FoodItem.class, FoodCategory.class}, version = 2)
+@Database(entities = {FoodItem.class, FoodCategory.class, ShoppingItem.class}, version = 2)
 @TypeConverters({DateTypeConverter.class, CategoryTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -19,6 +19,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract FoodItemDao foodItemDao();
     public abstract FoodCategoryDao foodCategoryDao();
+    public abstract ShoppingItemDao shoppingItemDao();
 
     public static AppDatabase getAppDatabase(Context context) {
         if(INSTANCE == null) {
@@ -47,10 +48,10 @@ public abstract class AppDatabase extends RoomDatabase {
                             public void run() {
                                 getAppDatabase(context).foodCategoryDao().insertAll(FoodCategory.createDefaultCategories());
                             }
-                        }); {
-
-                        }
+                        });
                     }
-                }).build();
+                })
+                .fallbackToDestructiveMigration()
+                .build();
     }
 }

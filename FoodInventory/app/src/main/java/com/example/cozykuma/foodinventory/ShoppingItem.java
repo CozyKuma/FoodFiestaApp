@@ -1,5 +1,9 @@
 package com.example.cozykuma.foodinventory;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -7,20 +11,24 @@ import android.util.Log;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+@Entity(tableName = "shoppingItems")
 public class ShoppingItem {
 
+    @ColumnInfo(name = "item_name")
     private String itemName;
-    private static int countId = 0;
+
+    @PrimaryKey(autoGenerate = true)
     private int itemId;
+
+    @Embedded
     private FoodCategory category;
+
     private static ArrayList<ShoppingItem> shoppingList = new ArrayList<ShoppingItem>();
     private boolean checked;
 
     ShoppingItem(String itemName, FoodCategory category) {
         this.itemName = itemName;
         this.category = category;
-        this.itemId = countId;
-        countId++;
         this.checked = true;
         shoppingList.add(this);
     }
@@ -37,6 +45,10 @@ public class ShoppingItem {
         return itemId;
     }
 
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
     public void setChecked(boolean checked){this.checked = checked; }
 
     public FoodCategory getCategory() {
@@ -51,18 +63,24 @@ public class ShoppingItem {
         return shoppingList;
     }
 
+    public static void setShoppingList(ArrayList<ShoppingItem> list) {
+        shoppingList = list;
+    }
+
     public boolean isChecked() {
         return checked;
     }
 
-    public static void removeCheckedItemsFromList() {
+    public static ArrayList<ShoppingItem> removeCheckedItemsFromList() {
+        ArrayList<ShoppingItem> removeItemsList = new ArrayList<>();
         int size = shoppingList.size()-1;
         for(int i= size; i>= 0; i--) {
             {
+                removeItemsList.add(shoppingList.get(i));
                 shoppingList.remove(i);
             }
-
         }
+        return removeItemsList;
     }
 
     public static ArrayList<FoodItem> addItemsToInventory() {
