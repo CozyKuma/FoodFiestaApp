@@ -1,5 +1,6 @@
 package com.example.cozykuma.foodinventory;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class ShoppingList extends AppCompatActivity{
 
@@ -74,7 +77,16 @@ public class ShoppingList extends AppCompatActivity{
         mAddToInv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShoppingItem.addItemsToInventory();
+                final ArrayList<FoodItem> newItemList = ShoppingItem.addItemsToInventory();
+
+                new AsyncTask<Void, Void, Void>() {
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().insertMultiple(newItemList);
+                        return null;
+                    }
+                }.execute();
+
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }

@@ -60,6 +60,7 @@ public class ShoppingListAdapter extends ArrayAdapter<ShoppingItem> {
                     ShoppingItem.getShoppingList().get(position).setChecked(newState);
                 }
             });
+            holder.name.setText(ShoppingItem.getShoppingList().get(position).getItemName());
             holder.checkedBox.setChecked(ShoppingItem.getShoppingList().get(position).isChecked());
 
             result = convertView;
