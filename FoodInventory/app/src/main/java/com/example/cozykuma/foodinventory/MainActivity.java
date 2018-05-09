@@ -189,13 +189,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             }
         });
 
-
-
-        if(!isFinished) {
-            createDefaultCategories();
-            isFinished = true;
-        }
-
         mListView = (ListView) findViewById(R.id.foodlistview);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
