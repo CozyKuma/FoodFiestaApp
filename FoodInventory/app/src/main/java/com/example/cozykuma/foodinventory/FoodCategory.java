@@ -91,9 +91,11 @@ public class FoodCategory {
         return new FoodCategory[]{
                 new FoodCategory("Default", 0),
                 new FoodCategory("Milk", 7, "drawable://" + R.drawable.milk128px),
+                new FoodCategory("Diary", 14),
                 new FoodCategory("Meat", 7, "drawable://" + R.drawable.meat128px),
                 new FoodCategory("Vegetables", 10, "drawable://" + R.drawable.vegetables128px),
                 new FoodCategory("Fruit", 14, "drawable://" + R.drawable.fruit128px),
+                new FoodCategory("Fish", 7)
         };
     }
 }
