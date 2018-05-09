@@ -52,9 +52,7 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        setupImageLoader();
-
-        FoodCategory testCat = new FoodCategory("Test", 5);
+        setupImageLoader(); 
 
         // Set information
         String name = getItem(position).getItemName();

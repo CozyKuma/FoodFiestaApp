@@ -189,7 +189,8 @@ public class AddItemActivity extends AppCompatActivity {
                 AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().insertMultiple(quantityList);
             }
         });
-        insertItems.run();
+
+        insertItems.start();
 
         try {
             insertItems.join();
