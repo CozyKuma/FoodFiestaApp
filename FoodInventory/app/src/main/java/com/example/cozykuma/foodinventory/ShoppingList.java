@@ -136,6 +136,7 @@ public class ShoppingList extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
+        adapter.notifyDataSetChanged();
     }
 
     @Override

@@ -20,10 +20,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddItemActivity" />
+        <activity android:name=".AddItemActivity"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".ShoppingList" />
-        <activity android:name=".AddShoppingItem"></activity>
-        <activity android:name=".ItemDetails"></activity>
+        <activity android:name=".AddShoppingItem"
+            android:screenOrientation="portrait"
+            ></activity>
+        <activity android:name=".ItemDetails"
+            android:screenOrientation="portrait"
+            ></activity>
     </application>
 
 </manifest>
