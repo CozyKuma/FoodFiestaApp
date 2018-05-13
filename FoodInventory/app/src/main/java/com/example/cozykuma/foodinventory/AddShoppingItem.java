@@ -8,6 +8,7 @@ import android.view.*;
 import android.content.Intent;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AddShoppingItem extends AppCompatActivity {
 
@@ -17,6 +18,7 @@ public class AddShoppingItem extends AppCompatActivity {
     private Spinner mSpinner;
     private Button mButton;
     private Button mCancelButton;
+    private List<FoodCategory> dbList;
     private boolean onSelectFlag = false;
 
     @Override
@@ -51,7 +53,30 @@ public class AddShoppingItem extends AppCompatActivity {
         });
 
         // Category Field + Load Content
-        ArrayAdapter<FoodCategory> adapter = new ArrayAdapter<FoodCategory>(getApplicationContext(), android.R.layout.simple_spinner_item, FoodCategory.getCategoryList());
+        Thread getAllThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dbList = MainActivity.appDatabase.foodCategoryDao().getAll();
+            }
+        });
+        getAllThread.start();
+
+        try {
+            getAllThread.join();
+        } catch (InterruptedException e) {
+            System.out.println("Interrupt Occurred");
+            e.printStackTrace();
+        }
+
+        ArrayList<FoodCategory> arrList = new ArrayList<>();
+
+        if(!dbList.isEmpty()) {
+            for (int i = 0; i < dbList.size(); i++) {
+                arrList.add(dbList.get(i));
+            }
+        }
+
+        ArrayAdapter<FoodCategory> adapter = new ArrayAdapter<FoodCategory>(getApplicationContext(), android.R.layout.simple_spinner_item, arrList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mSpinner.setAdapter(adapter);
