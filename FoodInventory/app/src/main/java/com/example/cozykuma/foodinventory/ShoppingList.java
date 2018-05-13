@@ -71,13 +71,21 @@ public class ShoppingList extends AppCompatActivity{
             public void onClick(View v) {
                 final ArrayList<ShoppingItem> removedItems = ShoppingItem.removeCheckedItemsFromList();
 
-                new AsyncTask<Void, Void, Void>() {
+                Thread removeItemsThread = new Thread(new Runnable() {
                     @Override
-                    protected Void doInBackground(Void... voids) {
-                        AppDatabase.getAppDatabase(getApplicationContext()).shoppingItemDao().deleteMultiple(removedItems);
-                        return null;
+                    public void run() {
+                        MainActivity.appDatabase.shoppingItemDao().deleteMultiple(removedItems);
                     }
-                }.execute();
+                });
+                removeItemsThread.start();
+
+                try {
+                    removeItemsThread.join();
+                } catch (InterruptedException e) {
+                    System.out.println("Interrupt Occurred");
+                    e.printStackTrace();
+                }
+
 
                 adapter.notifyDataSetChanged();
             }
@@ -90,13 +98,21 @@ public class ShoppingList extends AppCompatActivity{
             public void onClick(View v) {
                 final ArrayList<FoodItem> newItemList = ShoppingItem.addItemsToInventory();
 
-                new AsyncTask<Void, Void, Void>() {
+                Thread addItemsThread = new Thread(new Runnable() {
                     @Override
-                    protected Void doInBackground(Void... voids) {
-                        AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().insertMultiple(newItemList);
-                        return null;
+                    public void run() {
+                        MainActivity.appDatabase.foodItemDao().insertMultiple(newItemList);
                     }
-                }.execute();
+                });
+
+                addItemsThread.start();
+
+                try {
+                    addItemsThread.join();
+                } catch (InterruptedException e) {
+                    System.out.println("Interrupt Occurred");
+                    e.printStackTrace();
+                }
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
@@ -109,12 +125,12 @@ public class ShoppingList extends AppCompatActivity{
             @Override
             public void run() {
                 // Food Items //
-                List<ShoppingItem> itemList = AppDatabase.getAppDatabase(getApplicationContext()).shoppingItemDao().getAll();
+                List<ShoppingItem> itemList = MainActivity.appDatabase.shoppingItemDao().getAll();
                 ArrayList<ShoppingItem> itemArrayList = new ArrayList<>(itemList.size());
                 itemArrayList.addAll(itemList);
                 ShoppingItem.setShoppingList(itemArrayList);
 
-                AppDatabase.getAppDatabase(getApplicationContext()).shoppingItemDao().updateAll(ShoppingItem.getShoppingList());
+                MainActivity.appDatabase.shoppingItemDao().updateAll(ShoppingItem.getShoppingList());
             }
         });
 

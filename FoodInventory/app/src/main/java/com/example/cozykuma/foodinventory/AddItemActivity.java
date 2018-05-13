@@ -186,7 +186,7 @@ public class AddItemActivity extends AppCompatActivity {
         Thread insertItems = new Thread(new Runnable() {
             @Override
             public void run() {
-                AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().insertMultiple(quantityList);
+                MainActivity.appDatabase.foodItemDao().insertMultiple(quantityList);
             }
         });
 

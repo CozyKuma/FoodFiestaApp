@@ -87,13 +87,21 @@ public class AddShoppingItem extends AppCompatActivity {
 
         final ShoppingItem newItem = new ShoppingItem(itemName, category);
 
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(Void... voids) {
-                    AppDatabase.getAppDatabase(getApplicationContext()).shoppingItemDao().insertOne(newItem);
-                    return null;
-                }
-            }.execute();
+        Thread addItemThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                MainActivity.appDatabase.shoppingItemDao().insertOne(newItem);
+            }
+        });
+
+        addItemThread.start();
+
+        try {
+            addItemThread.join();
+        } catch (InterruptedException e) {
+            System.out.println("Interrupt Occurred");
+            e.printStackTrace();
+        }
 
         Intent intentInv = new Intent(getApplicationContext(), ShoppingList.class);
         startActivity(intentInv);

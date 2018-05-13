@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        appDatabase = AppDatabase.getAppDatabase(getApplicationContext());
+
         System.out.println("Application Started");
 
         //Log.d(TAG, "onCreate: " + "Started.");
@@ -207,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             @Override
             public void run() {
                 // Food Items //
-                List<FoodItem> itemList = AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().getAll();
+                List<FoodItem> itemList = appDatabase.foodItemDao().getAll();
                 ArrayList<FoodItem> itemArrayList = new ArrayList<>(itemList.size());
                 itemArrayList.addAll(itemList);
                 FoodItem.setListOfItems(itemArrayList);
@@ -216,15 +218,15 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     FoodItem.getListOfItems().get(i).setDaysLeft(FoodItem.daysBetween(new Date(), FoodItem.getListOfItems().get(i).getDateExpire()));
                 }
 
-                AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().updateAll(FoodItem.getListOfItems());
+                appDatabase.foodItemDao().updateAll(FoodItem.getListOfItems());
 
                 // Food Categories //
-                List<FoodCategory> categoryList = AppDatabase.getAppDatabase(getApplicationContext()).foodCategoryDao().getAll();
+                List<FoodCategory> categoryList = appDatabase.foodCategoryDao().getAll();
                 ArrayList<FoodCategory> foodCategoryArrayList = new ArrayList<>(categoryList.size());
                 foodCategoryArrayList.addAll(categoryList);
                 FoodCategory.setCategoryList(foodCategoryArrayList);
                 System.out.println("FoodCategoryList set: " + !foodCategoryArrayList.isEmpty());
-                AppDatabase.getAppDatabase(getApplicationContext()).foodCategoryDao().updateAll(FoodCategory.getCategoryList());
+                appDatabase.foodCategoryDao().updateAll(FoodCategory.getCategoryList());
             }
         });
 

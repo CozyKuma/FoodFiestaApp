@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 
 import java.util.concurrent.Executors;
 
-@Database(entities = {FoodItem.class, FoodCategory.class, ShoppingItem.class}, version = 2)
+@Database(entities = {FoodItem.class, FoodCategory.class, ShoppingItem.class}, version = 4)
 @TypeConverters({DateTypeConverter.class, CategoryTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 

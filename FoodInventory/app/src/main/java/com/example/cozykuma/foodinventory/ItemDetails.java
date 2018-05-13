@@ -177,7 +177,7 @@ public class ItemDetails extends AppCompatActivity {
         Thread updateItem = new Thread(new Runnable() {
             @Override
             public void run() {
-                AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().update(FoodItem.getListOfItems().get(position));
+                MainActivity.appDatabase.foodItemDao().update(FoodItem.getListOfItems().get(position));
             }
         });
         updateItem.start();
@@ -202,7 +202,7 @@ public class ItemDetails extends AppCompatActivity {
         Thread removeItem = new Thread(new Runnable() {
             @Override
             public void run() {
-                AppDatabase.getAppDatabase(getApplicationContext()).foodItemDao().delete(FoodItem.getListOfItems().get(position));
+                MainActivity.appDatabase.foodItemDao().delete(FoodItem.getListOfItems().get(position));
             }
         });
         removeItem.start();
