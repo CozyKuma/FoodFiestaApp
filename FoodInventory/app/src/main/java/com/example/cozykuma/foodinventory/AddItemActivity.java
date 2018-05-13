@@ -45,8 +45,6 @@ public class AddItemActivity extends AppCompatActivity {
     private org.joda.time.format.DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MM-yyyy");
     private boolean onSelectFlag = false;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,6 +167,7 @@ public class AddItemActivity extends AppCompatActivity {
         itemOpen = mCheckBoxOpen.isChecked();
         String quantityText = quantityView.getEditableText().toString();
         int quantity = Integer.parseInt(quantityText);
+
         final ArrayList<FoodItem> quantityList = new ArrayList<>();
 
         for (int i=0; i<quantity; i++) {
@@ -194,8 +193,7 @@ public class AddItemActivity extends AppCompatActivity {
 
         try {
             insertItems.join();
-        }
-        catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             System.out.println("Interrupt Occurred");
             e.printStackTrace();
         }

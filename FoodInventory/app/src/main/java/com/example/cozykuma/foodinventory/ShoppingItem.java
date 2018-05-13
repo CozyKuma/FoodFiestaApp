@@ -3,6 +3,7 @@ package com.example.cozykuma.foodinventory;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -26,10 +27,16 @@ public class ShoppingItem {
     private static ArrayList<ShoppingItem> shoppingList = new ArrayList<ShoppingItem>();
     private boolean checked;
 
+    ShoppingItem() {
+        this.category = FoodCategory.getCategoryList().get(0);
+        shoppingList.add(this);
+    }
+
+    @Ignore
     ShoppingItem(String itemName, FoodCategory category) {
         this.itemName = itemName;
         this.category = category;
-        this.checked = true;
+        this.checked = false;
         shoppingList.add(this);
     }
 

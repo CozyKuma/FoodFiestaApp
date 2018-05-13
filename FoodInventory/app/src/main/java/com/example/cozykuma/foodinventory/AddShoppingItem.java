@@ -7,6 +7,8 @@ import android.widget.*;
 import android.view.*;
 import android.content.Intent;
 
+import java.util.ArrayList;
+
 public class AddShoppingItem extends AppCompatActivity {
 
     private String itemName;
@@ -71,21 +73,13 @@ public class AddShoppingItem extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-        public void addItem() {
+    public void addItem() {
         itemName = mEditTextName.getText().toString();
         category = (FoodCategory) mSpinner.getSelectedItem();
 
-        final ShoppingItem newItem = new ShoppingItem(itemName, category);
+        final ShoppingItem newItem = new ShoppingItem();
+        newItem.setItemName(itemName);
+        newItem.setCategory(category);
 
         Thread addItemThread = new Thread(new Runnable() {
             @Override
@@ -102,6 +96,8 @@ public class AddShoppingItem extends AppCompatActivity {
             System.out.println("Interrupt Occurred");
             e.printStackTrace();
         }
+
+        Toast.makeText(getApplicationContext(), "Item added successfully", Toast.LENGTH_SHORT).show();
 
         Intent intentInv = new Intent(getApplicationContext(), ShoppingList.class);
         startActivity(intentInv);

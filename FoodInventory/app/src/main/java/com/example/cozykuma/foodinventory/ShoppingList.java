@@ -160,4 +160,9 @@ public class ShoppingList extends AppCompatActivity{
         super.onPause();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
 }

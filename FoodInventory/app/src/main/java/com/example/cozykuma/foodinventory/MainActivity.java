@@ -255,11 +255,13 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     @Override
     protected void onPause() {
         super.onPause();
+        FoodListAdapter.destroyImageLoader();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        FoodListAdapter.destroyImageLoader();
 
         if (isFinishing()) {
             isFinished = false;

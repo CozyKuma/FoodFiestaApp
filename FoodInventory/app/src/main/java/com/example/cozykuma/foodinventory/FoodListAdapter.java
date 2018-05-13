@@ -31,6 +31,7 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
     private Context mContext;
     private int mResource;
     private int lastPosition = -1;
+    private static ImageLoader imageLoader;
 
     static class ViewHolder {
         TextView name;
@@ -96,7 +97,7 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
 
         int defaultImage = mContext.getResources().getIdentifier("@drawable/default128px", null, mContext.getPackageName());
 
-        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader = ImageLoader.getInstance();
         DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true)
                 .cacheOnDisc(true).resetViewBeforeLoading(true)
                 .showImageForEmptyUri(defaultImage)
@@ -131,6 +132,7 @@ public class FoodListAdapter extends ArrayAdapter<FoodItem> {
         // END - UNIVERSAL IMAGE LOADER SETUP
     }
 
-
-
+    static public void destroyImageLoader() {
+        imageLoader.destroy();
+    }
 }

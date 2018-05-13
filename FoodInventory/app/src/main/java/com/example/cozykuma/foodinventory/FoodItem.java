@@ -85,9 +85,9 @@ public class FoodItem {
 
     @Ignore
     FoodItem() {
-        listOfItems.add(this);
         amountLeft = 100;
         this.category = FoodCategory.getCategoryList().get(0);
+        listOfItems.add(this);
     }
 
     @Ignore
@@ -123,7 +123,6 @@ public class FoodItem {
 
     FoodItem(String itemName, Date dateExpire, FoodCategory category) {
         this.itemName = itemName;
-        //this.itemId = countId;
         this.expired = false;
         this.opened = false;
         this.used = false;
