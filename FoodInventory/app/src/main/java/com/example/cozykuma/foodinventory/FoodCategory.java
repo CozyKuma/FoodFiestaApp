@@ -96,7 +96,7 @@ public class FoodCategory {
                 new FoodCategory("Meat", 7, "drawable://" + R.drawable.meat128px),
                 new FoodCategory("Vegetables", 10, "drawable://" + R.drawable.vegetables128px),
                 new FoodCategory("Fruit", 14, "drawable://" + R.drawable.fruit128px),
-                new FoodCategory("Fish", 7)
+                new FoodCategory("Fish", 7, "drawable://" + R.drawable.fish128px)
         };
     }
 }
