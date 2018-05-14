@@ -83,8 +83,10 @@ public class ShoppingItem {
         int size = shoppingList.size()-1;
         for(int i= size; i>= 0; i--) {
             {
-                removeItemsList.add(shoppingList.get(i));
-                shoppingList.remove(i);
+                if (shoppingList.get(i).checked) {
+                    removeItemsList.add(shoppingList.get(i));
+                    shoppingList.remove(i);
+                }
             }
         }
         return removeItemsList;
