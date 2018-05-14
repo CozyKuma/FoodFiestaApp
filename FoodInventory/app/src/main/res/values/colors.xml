@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#303030</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#4fc3f7</color>
     <color name="Button_Highlight_Color">#4fc3f7</color>
     <color name="navStringColor">#ffffff</color>
     <color name="navIconColor">#4fc3f7</color>
