@@ -12,24 +12,36 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddItemActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".ShoppingList" />
-        <activity android:name=".AddShoppingItem"
-            android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".ItemDetails"
-            android:screenOrientation="portrait"
-            ></activity>
+        <activity
+            android:name=".AddItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ShoppingList"
+            android:screenOrientation="portrait" />
+
+        <receiver android:name=".NotificationSystem">
+            <intent-filter>
+                <action android:name="android.intent.action.DATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".CategoryActivity" />
+        <activity android:name=".AddCategoryActivity" />
+        <activity
+            android:name=".AddShoppingItem"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ItemDetails"
+            android:screenOrientation="portrait" />
+        <activity android:name=".CategoryDetails"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:layout_weight="25"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:weightSum="100">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="75"
+        android:orientation="vertical"
+        android:paddingLeft="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/catImage"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="left|center"
+                android:layout_weight="1"
+                android:baselineAligned="false"
+                app:srcCompat="@mipmap/ic_launcher" />
+
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_weight="75"
+                android:baselineAligned="false"
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
+
+
+                <TextView
+                    android:id="@+id/category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:text="Category"
+                    android:textAlignment="viewStart"
+                    android:textSize="14sp"
+                    android:typeface="normal" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="25"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/days"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="16dp"
+        android:layout_weight="25"
+        android:baselineAligned="false"
+        android:fontFamily="@font/roboto"
+        android:gravity="right|center"
+        android:text="DaysLeft"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:typeface="normal" />
+
+</LinearLayout>
