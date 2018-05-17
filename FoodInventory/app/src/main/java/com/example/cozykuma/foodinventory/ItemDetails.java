@@ -6,11 +6,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -39,6 +42,7 @@ public class ItemDetails extends AppCompatActivity {
     private CheckBox mCheckBoxNotify;
     private CheckBox mCheckBoxOpen;
     private Button mCancelButton;
+    private ConstraintLayout mConstraintLayout;
     private Button mRemoveButton;
     private boolean notifyMe;
     private boolean itemOpen;
@@ -56,6 +60,7 @@ public class ItemDetails extends AppCompatActivity {
 
         position = getIntent().getExtras().getInt("Position");
 
+        mConstraintLayout = (ConstraintLayout) findViewById(R.id.itemDetailConstraint);
         mItemNameText = (TextView) findViewById(R.id.textName);
         mCategoryName = (Spinner)findViewById(R.id.categorySpinner);
         mItemDateText = (TextView)findViewById(R.id.dateTextView);
@@ -86,6 +91,15 @@ public class ItemDetails extends AppCompatActivity {
 
         mAmountText.setText(String.valueOf(FoodItem.getListOfItems().get(position).getAmountLeft()));
 
+
+        // Hide keyboard on touch
+        mConstraintLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                DismissKeyboard(v);
+                return true;
+            }
+        });
 
         mItemDateText.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -267,4 +281,10 @@ public class ItemDetails extends AppCompatActivity {
         super.onDestroy();
     }
 
+    private void DismissKeyboard(View view) {
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
 }

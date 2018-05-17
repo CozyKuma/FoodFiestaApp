@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -35,6 +37,7 @@ public class AddItemActivity extends AppCompatActivity {
     private boolean notifyMe;
     private boolean itemOpen;
     private EditText mEditTextName;
+    private ConstraintLayout mConstraintLayout;
     private TextView mDateView;
     private Spinner mSpinner;
     private Button mButton;
@@ -51,6 +54,7 @@ public class AddItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
 
+        mConstraintLayout = (ConstraintLayout) findViewById(R.id.addItemConstraint);
         mEditTextName = (EditText) findViewById(R.id.textName);
         mDateView = (TextView) findViewById(R.id.dateTextView);
         mSpinner = (Spinner) findViewById(R.id.categorySpinner);
@@ -67,6 +71,15 @@ public class AddItemActivity extends AppCompatActivity {
         } else {
             mCheckBoxNotify.setChecked(false);
         }
+
+        // Hide keyboard on touch
+        mConstraintLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                DismissKeyboard(v);
+                return true;
+            }
+        });
 
         // Add Item Button onClickListener
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -247,7 +260,7 @@ public class AddItemActivity extends AppCompatActivity {
     private void DismissKeyboard(View view) {
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
 }

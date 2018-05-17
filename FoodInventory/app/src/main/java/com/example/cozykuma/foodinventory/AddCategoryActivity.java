@@ -1,9 +1,12 @@
 package com.example.cozykuma.foodinventory;
 
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +19,7 @@ public class AddCategoryActivity extends AppCompatActivity {
     private TextView mDatePreset;
     private EditText mEditName;
     private EditText mEditDatePreset;
+    private ConstraintLayout mConstraintLayout;
     private Button mAddCategory;
     private Button mCancel;
 
@@ -24,6 +28,7 @@ public class AddCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_category);
 
+        mConstraintLayout = (ConstraintLayout) findViewById(R.id.addCatConstraint);
         mName = (TextView) findViewById(R.id.textViewCategory);
         mDatePreset = (TextView) findViewById(R.id.datePresetTitle);
         mEditName = (EditText) findViewById(R.id.textNameCategory);
@@ -45,6 +50,15 @@ public class AddCategoryActivity extends AppCompatActivity {
             }
         });
 
+
+        // Hide keyboard on touch
+        mConstraintLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                DismissKeyboard(v);
+                return true;
+            }
+        });
 
     }
 
@@ -72,5 +86,12 @@ public class AddCategoryActivity extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(),CategoryActivity.class);
         startActivity(intent);
+    }
+
+    private void DismissKeyboard(View view) {
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 }
