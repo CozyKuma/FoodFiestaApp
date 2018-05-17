@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -240,6 +241,13 @@ public class AddItemActivity extends AppCompatActivity {
         int daysToExpire = FoodItem.daysBetween(d1, d2);
         if(daysToExpire > 0) {
             Toast.makeText(getApplicationContext(), "The item will expire in " + daysToExpire + " days.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void DismissKeyboard(View view) {
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
 }
