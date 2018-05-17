@@ -80,6 +80,23 @@ public class CategoryDetails extends AppCompatActivity {
     public void confirm(){
         FoodCategory.getCategoryList().get(position).setCategoryName((mEditName.getText().toString()));
         FoodCategory.getCategoryList().get(position).setDatePreset(Integer.parseInt(mEditDatePreset.getText().toString()));
+
+        Thread updateItem = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                MainActivity.appDatabase.foodCategoryDao().update(FoodCategory.getCategoryList().get(position));
+            }
+        });
+        updateItem.start();
+
+        try {
+            updateItem.join();
+        }
+        catch (InterruptedException e) {
+            System.out.println("Interruption Occurred");
+            e.printStackTrace();
+        }
+
         Intent intent = new Intent(getApplicationContext(),CategoryActivity.class);
         startActivity(intent);
     }

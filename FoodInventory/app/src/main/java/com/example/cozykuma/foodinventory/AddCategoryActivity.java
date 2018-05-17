@@ -51,7 +51,25 @@ public class AddCategoryActivity extends AppCompatActivity {
     public void addCategory(){
         categoryName = mEditName.getText().toString();
         datePreset = Integer.parseInt(mEditDatePreset.getText().toString());
-        FoodCategory newCategory = new FoodCategory(categoryName,datePreset);
+
+        final FoodCategory newCategory = new FoodCategory(categoryName,datePreset);
+
+        Thread addCategoryItem = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                MainActivity.appDatabase.foodCategoryDao().insertOne(newCategory);
+            }
+        });
+
+        addCategoryItem.start();
+
+        try {
+            addCategoryItem.join();
+        } catch (InterruptedException e) {
+            System.out.println("Interrupt Occurred");
+            e.printStackTrace();
+        }
+
         Intent intent = new Intent(getApplicationContext(),CategoryActivity.class);
         startActivity(intent);
     }

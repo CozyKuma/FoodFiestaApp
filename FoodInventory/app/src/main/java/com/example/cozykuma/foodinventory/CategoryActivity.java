@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -19,6 +20,7 @@ public class CategoryActivity extends AppCompatActivity {
     private List<FoodCategory> categoryList;
     private CategoryAdapter adapter;
     private FloatingActionButton mFab;
+    private List<FoodCategory> catList;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -71,7 +73,32 @@ public class CategoryActivity extends AppCompatActivity {
                 startActivity(detailsIntent);
             }
         });
-        adapter = new CategoryAdapter(this, R.layout.simple_category_item1, FoodCategory.getCategoryList());
+
+        Thread getCategories = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                catList = MainActivity.appDatabase.foodCategoryDao().getAll();
+            }
+        });
+        getCategories.start();
+
+        try {
+            getCategories.join();
+        } catch (InterruptedException e) {
+            System.out.println("Interrupt Occurred");
+            e.printStackTrace();
+        }
+
+        ArrayList<FoodCategory> arrCatList = new ArrayList<>();
+
+        if(!catList.isEmpty()) {
+            for (int i = 0; i < catList.size(); i++) {
+                arrCatList.add(catList.get(i));
+            }
+        }
+
+
+        adapter = new CategoryAdapter(this, R.layout.simple_category_item1, arrCatList);
         mListView.setAdapter(adapter);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,5 +110,11 @@ public class CategoryActivity extends AppCompatActivity {
                 startActivity(detailsIntent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 }
