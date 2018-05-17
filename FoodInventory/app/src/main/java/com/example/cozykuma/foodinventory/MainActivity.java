@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     startActivity(intentShoppingList);
                     return true;
                 case R.id.navigation_settings:
+                    Intent intentSettings = new Intent(getApplicationContext(), SettingActivity.class);
+                    startActivity(intentSettings);
                     return true;
             }
             return false;
