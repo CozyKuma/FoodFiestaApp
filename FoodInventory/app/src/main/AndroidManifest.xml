@@ -19,12 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AddItemActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ShoppingList"
-            android:screenOrientation="portrait" />
 
         <receiver android:name=".NotificationSystem">
             <intent-filter>
@@ -32,16 +26,30 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".SettingActivity" />
-        <activity android:name=".CategoryActivity" />
-        <activity android:name=".AddCategoryActivity" />
+        <activity
+            android:name=".AddItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ShoppingList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AddCategoryActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AddShoppingItem"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ItemDetails"
             android:screenOrientation="portrait" />
-        <activity android:name=".CategoryDetails"></activity>
+        <activity
+            android:name=".CategoryDetails"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
