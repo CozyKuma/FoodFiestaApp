@@ -18,12 +18,12 @@
         android:clickable="true"
         android:tint="@android:color/background_light"
         app:backgroundTint="@color/Button_Highlight_Color"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/categorylistview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.934"
+        app:layout_constraintHorizontal_bias="0.975"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.863"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_add_black_24dp" />
 
     <android.support.design.widget.BottomNavigationView
@@ -45,12 +45,14 @@
 
     <ListView
         android:id="@+id/categorylistview"
-        android:layout_width="match_parent"
-        android:layout_height="655dp"
-        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingBottom="65dp"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_shoppinglist"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>
