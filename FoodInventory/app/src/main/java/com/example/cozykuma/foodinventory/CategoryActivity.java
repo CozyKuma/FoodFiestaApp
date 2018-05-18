@@ -17,9 +17,7 @@ import java.util.Locale;
 public class CategoryActivity extends AppCompatActivity {
 
     private ListView mListView;
-    private List<FoodCategory> categoryList;
     private CategoryAdapter adapter;
-    private FloatingActionButton mFab;
     private List<FoodCategory> catList;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -114,7 +112,12 @@ public class CategoryActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        super.onResume();
         adapter.notifyDataSetChanged();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

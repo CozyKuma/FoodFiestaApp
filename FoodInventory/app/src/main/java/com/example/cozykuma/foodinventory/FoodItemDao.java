@@ -23,6 +23,9 @@ public interface FoodItemDao {
     @Query("SELECT * FROM foodItems WHERE item_name LIKE :first")
     FoodItem findByName(String first);
 
+    @Query("SELECT * FROM foodItems WHERE categoryName IN (:category)")
+    List<FoodItem> findByCategoryName(String category);
+
     @Query("DELETE FROM foodItems")
     void nukeTable();
 
@@ -43,4 +46,7 @@ public interface FoodItemDao {
 
     @Delete
     void delete(FoodItem foodItem);
+
+    @Delete
+    void deleteMultiple(ArrayList<FoodItem> foodItemArrayList);
 }

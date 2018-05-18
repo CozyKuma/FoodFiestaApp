@@ -27,4 +27,9 @@ public class CategoryTypeConverter implements Serializable {
 
         return json;
     }
+
+    public static String fromCategory(FoodCategory foodCategory) {
+        String name = foodCategory.getCategoryName();
+        return name;
+    }
 }

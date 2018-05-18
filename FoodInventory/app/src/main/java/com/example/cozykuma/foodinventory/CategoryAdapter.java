@@ -79,8 +79,6 @@ public class CategoryAdapter extends ArrayAdapter<FoodCategory> {
             holder.name = (TextView) convertView.findViewById(R.id.category);
             holder.days = (TextView) convertView.findViewById(R.id.days);
             holder.image = (ImageView) convertView.findViewById(R.id.catImage);
-            //holder.icon = (ImageView) convertView.findViewById(R.id.listitem_image);
-            //holder.progress = (ProgressBar) convertView.findViewById(R.id.progress_spinner);
             result = convertView;
 
             convertView.setTag(holder);

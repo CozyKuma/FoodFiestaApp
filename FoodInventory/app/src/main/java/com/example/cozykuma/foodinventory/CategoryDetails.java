@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CategoryDetails extends AppCompatActivity {
@@ -28,7 +30,7 @@ public class CategoryDetails extends AppCompatActivity {
     private Button mCancel;
     private int position;
     private Button mRemoveButton;
-    // = (TextView) findViewById(R.id.textViewCategory);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,7 @@ public class CategoryDetails extends AppCompatActivity {
         mEditDatePreset = (EditText) findViewById(R.id.datePresetNum);
         mConfirm = (Button) findViewById(R.id.ConfirmCategory);
         mCancel = (Button) findViewById(R.id.cancelCategory);
+        mRemoveButton = (Button) findViewById(R.id.removeCategory);
 
         mEditName.setText(FoodCategory.getCategoryList().get(position).getCategoryName().toString());
         mEditDatePreset.setText(String.valueOf(FoodCategory.getCategoryList().get(position).getDatePreset()));
@@ -70,23 +73,37 @@ public class CategoryDetails extends AppCompatActivity {
             }
         });
 
-       /* mRemoveButton.setOnClickListener(new View.OnClickListener() {
+       mRemoveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder adbRemove = new AlertDialog.Builder(CategoryDetails.this);
                 adbRemove.setIcon(R.drawable.ic_remove_black_24dp); //  <---- PLACEHOLDER(?)
                 adbRemove.setTitle("Remove "+FoodCategory.getCategoryList().get(position).getCategoryName()+"?");
-                adbRemove.setMessage("This Category will be deleted");
+                adbRemove.setMessage("This Category will be deleted with the items within.");
                 adbRemove.setNegativeButton("Cancel",null);
                 adbRemove.setPositiveButton("Remove", new AlertDialog.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        remove();
+                        Thread removeCat = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                remove(FoodCategory.getCategoryList().get(position));
+                            }
+                        });
+                        removeCat.start();
+
+                        try {
+                            removeCat.join();
+                        } catch (InterruptedException e) {
+                            System.out.println("Interrupt Occurred");
+                            e.printStackTrace();
+                        }
+                        finish();
                     }
                 });
                 adbRemove.show();
             }
-        });*/
+        });
 
     }
 
@@ -122,8 +139,25 @@ public class CategoryDetails extends AppCompatActivity {
         }
     }
 
-    /*public void remove(){
+    public void remove(FoodCategory category){
+        ArrayList<FoodItem> itemsInCat = new ArrayList<>();
+        List<FoodItem> itemListCat = MainActivity.appDatabase.foodItemDao().findByCategoryName(category.getCategoryName());
 
+        for(int i=0; i<itemListCat.size(); i++) {
+            itemsInCat.add(itemListCat.get(i));
+        }
 
-    }*/
+        MainActivity.appDatabase.foodItemDao().deleteMultiple(itemsInCat);
+        MainActivity.appDatabase.foodCategoryDao().delete(category);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 }
