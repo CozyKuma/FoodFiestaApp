@@ -267,7 +267,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        FoodListAdapter.destroyImageLoader();
 
         if (isFinishing()) {
             isFinished = false;
