@@ -28,6 +28,8 @@ public class AddCategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_category);
 
+        setTitle("Create Category");
+
         mConstraintLayout = (ConstraintLayout) findViewById(R.id.addCatConstraint);
         mName = (TextView) findViewById(R.id.textViewCategory);
         mDatePreset = (TextView) findViewById(R.id.datePresetTitle);

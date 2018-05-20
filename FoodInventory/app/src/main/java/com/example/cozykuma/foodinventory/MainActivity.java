@@ -125,8 +125,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     @Override
                     public void onClick(View view) {
                         FoodItem.setSortType(FoodItem.sortTypes.NAME);
-                        adapter.notifyDataSetChanged();
+                        FoodItem.setListOfItems(FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
                         dialog.dismiss();
+                        adapter.notifyDataSetChanged();
                     }
                 });
 
@@ -134,8 +135,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     @Override
                     public void onClick(View view) {
                         FoodItem.setSortType(FoodItem.sortTypes.CATEGORY);
-                        adapter.notifyDataSetChanged();
+                        FoodItem.setListOfItems(FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
                         dialog.dismiss();
+                        adapter.notifyDataSetChanged();
                     }
                 });
 
@@ -143,8 +145,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     @Override
                     public void onClick(View view) {
                         FoodItem.setSortType(FoodItem.sortTypes.DAYSLEFT);
-                        adapter.notifyDataSetChanged();
+                        FoodItem.setListOfItems(FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
                         dialog.dismiss();
+                        adapter.notifyDataSetChanged();
                     }
                 });
 
@@ -152,8 +155,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     @Override
                     public void onClick(View view) {
                         FoodItem.setSortType(FoodItem.sortTypes.DATEADDED);
-                        adapter.notifyDataSetChanged();
+                        FoodItem.setListOfItems(FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
                         dialog.dismiss();
+                        adapter.notifyDataSetChanged();
                     }
                 });
 
@@ -161,8 +165,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     @Override
                     public void onClick(View view) {
                         FoodItem.setSortType(FoodItem.sortTypes.PROGRESS);
-                        adapter.notifyDataSetChanged();
+                        FoodItem.setListOfItems(FoodItem.sortList(FoodItem.getSortType(), FoodItem.getListOfItems()));
                         dialog.dismiss();
+                        adapter.notifyDataSetChanged();
                     }
                 });
 

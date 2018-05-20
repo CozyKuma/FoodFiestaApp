@@ -48,6 +48,8 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
+        setTitle("Categories");
+
         android.support.design.widget.BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation_shoppinglist);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 

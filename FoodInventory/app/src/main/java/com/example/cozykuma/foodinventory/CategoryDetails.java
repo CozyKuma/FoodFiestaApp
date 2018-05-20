@@ -38,6 +38,8 @@ public class CategoryDetails extends AppCompatActivity {
 
         position = getIntent().getExtras().getInt("Position");
 
+        setTitle("Category - " + FoodCategory.getCategoryList().get(position).getCategoryName().toString());
+
         mConstraintLayout = (ConstraintLayout) findViewById(R.id.catDetailConstraint);
         mName = (TextView) findViewById(R.id.textViewCategory);
         mDatePreset = (TextView) findViewById(R.id.datePresetTitle);

@@ -54,6 +54,8 @@ public class AddItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
 
+        setTitle("Add Item");
+
         mConstraintLayout = (ConstraintLayout) findViewById(R.id.addItemConstraint);
         mEditTextName = (EditText) findViewById(R.id.textName);
         mDateView = (TextView) findViewById(R.id.dateTextView);

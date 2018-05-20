@@ -57,8 +57,8 @@ public class ItemDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
 
-
         position = getIntent().getExtras().getInt("Position");
+        setTitle("Item Detail - " + FoodItem.getListOfItems().get(position).getItemName());
 
         mConstraintLayout = (ConstraintLayout) findViewById(R.id.itemDetailConstraint);
         mItemNameText = (TextView) findViewById(R.id.textName);

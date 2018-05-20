@@ -29,6 +29,8 @@ public class AddShoppingItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_shopping_item);
 
+        setTitle("Add Shopping Item");
+
         mConstraintLayout = (ConstraintLayout) findViewById(R.id.addShopConstraint);
         mEditTextName = (EditText) findViewById(R.id.textNameShop);
         mSpinner = (Spinner) findViewById(R.id.categorySpinnerShop);
