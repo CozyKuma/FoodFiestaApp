@@ -17,7 +17,7 @@ import java.util.Locale;
 public class CategoryActivity extends AppCompatActivity {
 
     private ListView mListView;
-    private CategoryAdapter adapter;
+    private static CategoryAdapter adapter;
     private List<FoodCategory> catList;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -78,8 +78,14 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void run() {
                 catList = MainActivity.appDatabase.foodCategoryDao().getAll();
+                ArrayList<FoodCategory> arrCatList = new ArrayList<>(catList.size());
+                arrCatList.addAll(catList);
+                FoodCategory.setCategoryList(arrCatList);
+
+                MainActivity.appDatabase.foodCategoryDao().updateAll(FoodCategory.getCategoryList());
             }
         });
+
         getCategories.start();
 
         try {
@@ -89,17 +95,19 @@ public class CategoryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        ArrayList<FoodCategory> arrCatList = new ArrayList<>();
+        /*ArrayList<FoodCategory> arrCatList = new ArrayList<>();
 
         if(!catList.isEmpty()) {
             for (int i = 0; i < catList.size(); i++) {
                 arrCatList.add(catList.get(i));
             }
         }
+        */
 
-
-        adapter = new CategoryAdapter(this, R.layout.simple_category_item1, arrCatList);
+        adapter = new CategoryAdapter(this, R.layout.simple_category_item1, FoodCategory.getCategoryList());
         mListView.setAdapter(adapter);
+
+        notifyCatAdapter();
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -121,5 +129,14 @@ public class CategoryActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    public static void notifyCatAdapter() {
+        adapter.notifyDataSetChanged();
+    }
+
+    public static void removeItemAdapter(int position) {
+        adapter.remove(adapter.getItem(position));
+        adapter.notifyDataSetChanged();
     }
 }

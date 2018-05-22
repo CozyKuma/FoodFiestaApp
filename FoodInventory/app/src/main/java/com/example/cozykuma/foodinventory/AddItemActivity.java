@@ -119,7 +119,7 @@ public class AddItemActivity extends AppCompatActivity {
         });
 
         // Category Field + Load Content
-        ArrayAdapter<FoodCategory> adapter = new ArrayAdapter<FoodCategory>(getApplicationContext(), android.R.layout.simple_spinner_item, FoodCategory.getCategoryList());
+        ArrayAdapter<FoodCategory> adapter = new ArrayAdapter<FoodCategory>(getBaseContext(), android.R.layout.simple_spinner_item, FoodCategory.getCategoryList());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mSpinner.setAdapter(adapter);

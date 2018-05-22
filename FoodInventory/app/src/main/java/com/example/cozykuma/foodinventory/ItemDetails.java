@@ -74,7 +74,7 @@ public class ItemDetails extends AppCompatActivity {
         mAmountRemovebBtn = (ImageButton)findViewById(R.id.removeAmount);
         percentage = 10;
 
-        ArrayAdapter<FoodCategory> adapter = new ArrayAdapter<FoodCategory>(getApplicationContext(), android.R.layout.simple_spinner_item, FoodCategory.getCategoryList());
+        ArrayAdapter<FoodCategory> adapter = new ArrayAdapter<FoodCategory>(getBaseContext(), android.R.layout.simple_spinner_item, FoodCategory.getCategoryList());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mCategoryName.setAdapter(adapter);

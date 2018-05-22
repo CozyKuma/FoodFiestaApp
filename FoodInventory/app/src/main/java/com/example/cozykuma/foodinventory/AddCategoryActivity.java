@@ -86,6 +86,8 @@ public class AddCategoryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        CategoryActivity.notifyCatAdapter();
+
         Intent intent = new Intent(getApplicationContext(),CategoryActivity.class);
         startActivity(intent);
     }

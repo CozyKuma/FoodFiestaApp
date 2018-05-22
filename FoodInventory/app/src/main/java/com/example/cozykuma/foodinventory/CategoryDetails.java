@@ -100,6 +100,7 @@ public class CategoryDetails extends AppCompatActivity {
                             System.out.println("Interrupt Occurred");
                             e.printStackTrace();
                         }
+                        CategoryActivity.removeItemAdapter(position);
                         finish();
                     }
                 });

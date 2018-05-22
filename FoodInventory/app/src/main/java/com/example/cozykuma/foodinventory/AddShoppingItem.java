@@ -91,7 +91,7 @@ public class AddShoppingItem extends AppCompatActivity {
             }
         }
 
-        ArrayAdapter<FoodCategory> adapter = new ArrayAdapter<FoodCategory>(getApplicationContext(), android.R.layout.simple_spinner_item, arrList);
+        ArrayAdapter<FoodCategory> adapter = new ArrayAdapter<FoodCategory>(getBaseContext(), android.R.layout.simple_spinner_item, arrList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mSpinner.setAdapter(adapter);

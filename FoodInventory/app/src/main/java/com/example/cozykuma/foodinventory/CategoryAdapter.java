@@ -60,11 +60,7 @@ public class CategoryAdapter extends ArrayAdapter<FoodCategory> {
         // Set information
         String name = getItem(position).getCategoryName();
         String days = String.valueOf(getItem(position).getDatePreset());
-        //FoodCategory category = getItem(position).getCategory();
         String imgURL = getItem(position).getImage();
-
-
-
 
         // Create the view loading function
         final View result;
